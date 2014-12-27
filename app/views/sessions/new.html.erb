@@ -1,0 +1,47 @@
+<% provide(:title, 'Вход в кабинет (для зарегистрированых пользователей)') %>
+
+<div class="container">
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
+   <div class="well">
+      <h2>Вход в кабинет (для зарегистрированых пользователей)</h2> <br>
+      <div class="row">  
+         <div class="col-md-6">
+            <%= form_for(:session, url: sessions_path) do |f| %>
+  
+            <%= f.label        "Электроный адреc" %>
+            <%= f.text_field   :email, placeholder: "e-mail", class: "form-control" %>
+
+            <%= f.label        "Пароль для входа в личный кабинет" %>
+            <%= f.text_field   :password, type: :password, placeholder: "Пароль", class: "form-control" %>
+            <div class="col-md-8 col-md-offset-2">   
+               <%= f.submit "Вход", class: ["btn btn-lg", "session_submit"] %><br>
+            </div>   
+            <% end %>
+            <div class="col-md-8">   
+               <p><%= link_to "Забыли пароль?", sendpass_path, class: ["ws9", "style5"]  %></p>
+            </div>
+         </div>
+         <div class="col-md-6">
+            <div class="wpmd">
+               <div><font color="#808080" face="Century Gothic" class="ws11">Преимущества для зарегистрированных покупателей</font></div><br>
+               <div class="row"><br>
+                  <div class="col-md-12">
+                     <ul><font color="#808080" face="Century Gothic">
+                        <li class="ws9">Регистрация бесплатная!</li>
+                        <li class="ws9">Вы можете видеть статус заказа и следить за историей покупок</li>
+                        <li class="ws9">Вы можете получать дополнительную информацию о новинках, спецпредложениях и акциях</li>
+                        <li class="ws9">Вы получаете больше бонусов и скидок</li>
+                     </ul>
+                  </div>
+               </div>
+            </div><br>
+            <p><%= link_to " Открыть личный кабинет!", signup_path, class: ["ws14", "style5"] %></p>
+         </div>
+      </div>
+      <br><br><br>
+   </div>     
+</div>
+</div>
+</div>
+

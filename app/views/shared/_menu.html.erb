@@ -1,0 +1,29 @@
+            <div class="span3">
+              <div class="well well-small"> 
+                 <p> Меню: вибір категорії товару </p>
+              </div>   
+              <div class="dropdown">
+                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display: block; position: relative; margin-bottom: 5px; *width: 180px;">
+                        <li class="dropdown-submenu">
+                           <%= link_to "Чоловічий одяг", mens_path %> 
+                           <ul class="dropdown-menu" role="menu">
+                              <% mens_group_all = Kategory.where(lvisible: true) %>
+                              <% @ctxt = "UA" %>
+			                     <% mens_group_all.each do |kat| %> 
+					                   <% if @ctxt = "UA" %>                    
+                                     <li><%= link_to kat.ctxt_ua, "#" %> </li>
+                                  <% else %>   
+                                     <li><%= link_to kat.ctxt_rus, "#" %> </li>
+                                  <% end %>                                     
+                              <% end %>
+                           </ul>
+                        </li>
+                        <li><a tabindex="-1" href="#">Жіночий одяг</a></li>
+                        <li><a tabindex="-1" href="#">Дитячий одяг</a></li>
+                        <li class="divider"></li>
+                        <li><a tabindex="-1" href="#">Доп. ссылка</a></li>
+                     </ul>
+              </div>                  
+               <!--Sidebar content-->
+            </div>
+

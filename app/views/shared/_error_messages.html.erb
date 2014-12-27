@@ -1,0 +1,18 @@
+<% if object.errors.any? %>
+<div id="error_explanation">
+  <div class="alert alert-danger">
+      Количество ошибок:  <%= object.errors.count %>
+  </div>  
+    <ul>
+      <% object.errors.full_messages.each do |msg| %>
+      <%case object.errors.count > 0 %>
+        <% when msg == "Password can't be blank" %>
+          <% msg = "Пароль не может быть пустым" %>
+        <% when msg == "Password is too short (minimum is 6 characters)" %>
+          <% msg = "Пароль слишком короткий (минимум 6 символов)" %>
+      <% end %>
+      <li>* <%= msg %></li>
+      <% end %>  
+    </ul>  
+  </div>
+<% end %>  

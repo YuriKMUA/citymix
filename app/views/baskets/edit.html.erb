@@ -1,0 +1,54 @@
+  <div class="row">
+    <div class="col-md-6 col-md-offset-1">
+      <div class="well">
+         <% deliveries_array = StatusDelivery.all.map { |delivery| [delivery.ctxt, delivery.id] } %>
+         <%= form_for(@basket) do |f| %>
+            <%= render 'shared/error_messages', object: f.object %>
+               <div class="col-md-6">
+                <b>Заказ № <%= @basket.order_id %><br>
+                <%= @basket.user.name %>  <%= @basket.user.last_name %> </b>
+               </div>
+                  <%= image_tag(@basket.avatar_url.to_s, size: "80x100") %>
+            <hr>
+            <table>   
+              <tr>
+                  <td><b> Артикул: </td>
+                  <td> <%= @basket.cartikul %></b></td>
+              </tr>
+              <tr>
+                  <td><b> Название товара: </b></td>
+                  <td> <%= @basket.ctxt %> (<%= @basket.color.ctxt %>)</td>
+             </tr>
+             <tr>
+                  <td><b> Размер: </b></td>
+                  <td><%= @basket.size.ctxt %> </td>
+             </tr>     
+             <tr>     
+                  <td><%= f.label          "Количество:" %></td>
+                  <td><%= f.text_field     :number %> </td>
+             </tr>
+             <tr>
+                  <td><%= f.label        "Цена:" %></td>
+                  <td><%= f.text_field   :nprice %></td>
+             </tr>
+             <tr>     
+                  <td><%= f.label        "Сумма:" %></td>
+                  <td><%= f.text_field   :nsum %></td>
+           </tr>
+           <tr>
+                  <td><b>Текущий статус: </b></td>
+                  <td><b> <%= @basket.status_delivery.ctxt %></b></td>
+           </tr>
+           <tr>
+                  <td> Изменить статус заказа</td>
+                  <td> <%= select_tag(:status, options_for_select(deliveries_array)) %></td> 
+           </tr>
+       </table>
+       <div class="col-md-5 col-md-offset-4">
+         <%= f.submit "Сохранить", class: ["btn btn-default", "col-md-6"] %>
+      </div><br>  
+      <% end %><br>
+    </div>
+  </div>  
+</div>
+

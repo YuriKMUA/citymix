@@ -1,0 +1,30 @@
+<div class="row"><br>
+</div>
+<div class="row">
+   <div class="col-md-2">
+
+   </div>
+   <% n = 0 %>
+   <ul class="thumbnails">
+   <%  @goods.each do |good| %> 
+      <% n+=1 %>  		 
+      <% if n>4 %>
+         <% n = 1 %>
+         </ul> 
+	      </div> 
+	  <div class="row"> 	
+          <div class="col-md-2">
+          </div>		
+          <ul class="thumbnails">
+       <% end %>
+         <li class="col-md-2">
+               <div class="thumbnail">
+                  <%= link_to image_tag(good.cphoto)  %>
+                  <h3><%= good.ctxt %></h3>
+                  <h3><%= good.nprice %> </h3>
+               </div>
+         </li>
+   <% end %>   
+</ul>
+</div>
+

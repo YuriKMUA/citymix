@@ -1,0 +1,9 @@
+<%  unless @users.nil? %>
+   <%= @users.each do |f| %>
+   <ul>
+      <li> <%= link_to f.name, user_path(f) %></li>
+   </ul>
+   <% end %>
+<% else %>
+   <h2> Не знайдено записів, заданих при пошуку </h2>
+<% end %>

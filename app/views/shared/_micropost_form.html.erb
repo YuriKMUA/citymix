@@ -1,0 +1,9 @@
+<%= form_for(@micropost) do |f| %>
+ 
+   <%= render 'shared/error_messages', object: f.object %>
+   <div class="field">
+      <%= f.text_area :content, placeholder: "Внесите свой отзыв..." %>
+   </div>
+   <%= f.submit "Сохранить", class: ["btn btn-default", "col-md-5 col-md-offset-3"] %>
+   
+<% end %>

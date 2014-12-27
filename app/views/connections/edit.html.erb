@@ -1,0 +1,32 @@
+<% sizes_array = Size.all.map { |size| [size.ctxt, size.id] } %>
+<% colors_array = Color.all.map { |color| [color.ctxt, color.id] } %>
+
+<%= form_for @connection do |c| %>
+<div class="row">
+   <div class="col-md-8 col-md-offset-1">
+   <div class="well">
+       <table border="2" bordercolor="#ff00ff" align="center">  
+         <%= render "shared/tr_block" %>
+            <tr align="center">
+                  <td><%= @connection.cartikul %></td>
+                  <td><%= @connection.color.ctxt %></td>
+                  <td></td>   
+
+            </tr>
+            <tr>      
+                  <td align="center"><%= c.text_field :cartikul %></td>
+                  <td><%= c.select(:color, options_for_select(colors_array)) %></td>
+                  <td></td>
+                  <td></td>
+                  <td><%= c.submit "Сохранить", class: ["btn btn-default"] %></td>
+                  <tr>  
+                    <td> <%= image_tag(@connection.avatar_url, size: "60x80") %></td>
+                    <td> <%= c.file_field :avatar %></td>
+                  </tr>
+          </div>  
+       </div>  
+       </table> 
+   </div>
+   </div>
+</div>
+<% end %>

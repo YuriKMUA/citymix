@@ -1,0 +1,77 @@
+<header>
+
+     <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+            <%= form_tag({controller: "products", action: "locate"}, method: "get", class: ["navbar-form", "navbar-left"]) do %>
+               <ul class="nav nav-left">
+                  <li><%= text_field_tag(:artikul, nil, placeholder: "Введите код товара", class: "form-control") %></li>   
+               </ul>
+             <% end %>             
+            <div class="navbar-header nav navbar-right">
+               <ul class="nav navbar-nav">
+                  <li><%= link_to "Регистрация", signup_path unless signed_in? %> </li>
+                  <% if signed_in? %>
+                   <li><%= link_to "Пользователи", users_path if current_user.admin? %></li>
+                   <% if current_user.admin? %>
+                   <li id="fat-menu" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Складские операции<b class="caret"></b></a>
+                     <ul class="dropdown-menu">
+                        <li><%= link_to "Ввод нового товара", new_product_path %></li>
+                        <li class="divider"></li>
+                        <li><%= link_to "Редактирование данных по товару", edit_product_path(1) %></li>
+                        <li class="divider"></li>
+                        <li><%= link_to "Удаление товара",  edit_user_path(current_user) %></li> 
+                        <li class="divider"></li>
+                        <li><%= link_to "Просмотр товаров",      signout_path, method: "delete" %></li>
+                    </ul>
+                   <% end %>  
+                   <li id="fat-menu" class="dropdown">
+                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Account <b class="caret"></b></a>
+                   <ul class="dropdown-menu">
+                        <li class="divider"></li>
+                        <li><%= link_to "Просмотр профиля/заказов", current_user %></li>
+                        <li><%= link_to "Обновить профиль",  edit_user_path(current_user) %></li> 
+                        <li class="divider"></li>
+                        <li><%= link_to "Выход",      signout_path, method: "delete" %></li>
+                   </ul>
+                   <li><%= link_to("Кабинет: " + current_user.name, current_user, class: ["ws11", "cat"]) %></li>
+                   <li><%= link_to "Корзина", baskets_path %></li>    
+                   <li><%= link_to(Basket.where(user_id: current_user.id, order_id: nil).count, baskets_path, id: "kol_bange", class: ["cat", "badge"]) %></li>
+                   <li><%= link_to "Выход", signout_path, method: "delete" %></li>
+                   </ul>
+                  <% else %>
+                       <li><%= link_to"Вход", signin_path, class: "cat" %></li>
+                       <li><%= link_to "Корзина", baskets_path %></li>    
+                       <li><%= link_to(Basket.where(remember_token: cookies[:remember_token]).count, baskets_path, id: "kol_bange", class: ["cat"]) %></li>
+
+            </div>
+                  <% end %>
+               </ul>
+     </div>   
+  </nav>
+
+
+<div class="col-md-8 col-md-offset-3" "wpmd">
+      <%= link_to image_tag("citylogo1.png", class: "logo"), root_path %><%= link_to image_tag("telefon-ico.png", class: ["col-md-offset-2"], width: 32, weight: 32), "#" %><%= link_to("(098)", "#", font: "Century Gotic", class: ["ws12", "cat"]) %><%= link_to(" - 745-85-45", "#", font: "Century Gotic", class: ["ws14", "cat"]) %>
+</div> 
+<div class="col-md-6 col-md-offset-4">
+         <ul class="nav navbar-nav">
+               <% @group_tovs_filter = GroupTov.where(lvisible: true) %>
+               <% @group_tovs_filter.each do |txt| %>
+                       <li id="fat-menu" class="dropdown"> 
+                       <a href="#" class="dropdown-toggle cat" data-toggle="dropdown" style="color: #fff; background: #000; padding-top: 0px;"><%= txt.ctxt  %><b class="caret"></b></a>
+               <% if @group_tovs_filter %>
+                    <ul class="dropdown-menu pull-right" style="filter:alpha(opacity=60); opacity: 0.7; color: #000; background: #000;">
+                       <% kat_all = Kategory.where(lvisible: true, group_tov_id: txt.id) %>
+                       <% kat_all.each do |f| %>
+                         <li> <%= link_to f.ctxt_ua, kategory_group_tov_path(f.id, txt.id), class: ["cat"] %></li>
+                       <% end %>
+                    </ul> 
+                <% end %>         
+            <% end %> 
+        </ul>
+</div>
+<div class="col-md-5 col-md-offset-3">
+   <hr style="margin-left: 110px; height: 3px; width: 735px;">
+</div>   
+</header>
+ 

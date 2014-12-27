@@ -1,0 +1,13 @@
+<h1>Kategories#show_for_menu</h1>
+<p>Find me in app/views/kategories/show_for_menu.html.erb</p>
+
+<% if @goods.any? %>
+   <%= @goods.each do |f| %>
+   <ul>
+      <li> <%= link_to f.ctxt %></li>
+   </ul>
+   <% end %>
+<% else %>
+   <h2> Не знайдено записів, заданих при пошуку </h2>
+<% end %>
+

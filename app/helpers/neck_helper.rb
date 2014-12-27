@@ -1,0 +1,2 @@
+module NeckHelper
+end

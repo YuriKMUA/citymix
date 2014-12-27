@@ -1,0 +1,29 @@
+<div class="row">
+   <div class="col-md-2"></div>
+</div>
+<div class="row">
+   <div class="col-md-2"></div>
+   <% n = 0 %>
+   <% kat_all = Kategory.where(lvisible: true)%>
+   <ul class="thumbnails">
+   <%  kat_all.each do |kat| %> 
+      <% n+=1 %>  		 
+      <% if n>4 %>
+         <% n = 1 %>
+   </ul> 
+	      </div> 
+	  <div class="row"> 	
+          <div class="col-md-2">
+          </div>		
+          <ul class="thumbnails">
+       <% end %>
+         <li class="col-md-2">
+               <div class="thumbnail">
+                  <%= link_to image_tag(kat.name_img), kat.ccatalog  %>
+                  <h3><%= kat.ctxt_ua %></h3>
+               </div>
+         </li>
+   <% end %>   
+</ul>
+</div>
+

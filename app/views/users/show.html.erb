@@ -1,0 +1,35 @@
+<div class="row">
+   <div class="col-md-10 col-md-offset-1">
+      <div class="well">
+         <div class="tabbable">
+            <ul class="nav nav-tabs">
+               <li class="btn btn-lg"><a href="#tab2" data-toggle="tab">Профиль</a></li>
+               <% if current_user.admin  %>
+                  <li class="btn btn-lg active"><a href="#tab1" data-toggle="tab">Заказы</a></li>  
+                  <li class="btn btn-lg"><a href="#tab3" data-toggle="tab">Архив заказов</a></li>  
+               <% else %>   
+                  <li class="btn btn-lg active"><a href="#tab1" data-toggle="tab">Мои заказы</a></li>
+                  <li class="btn btn-lg"><a href="#tab4" data-toggle="tab">Мой персональный счет </a></li>             
+               <% end %>
+            </ul>
+            <div class="tab-content">
+               <div class="tab-pane" id="tab2">
+                  <%= render "edit" %>
+               </div>   
+               <div class="tab-pane active" id="tab1">
+                  <% unless current_user.admin %>
+                     <% @orders = Order.where(user_id: current_user.id) %>               
+                  <% else %>
+                     <% @orders = Order.where(declaration_id: ["", nil] ) %>
+                  <% end %>
+                  <%= render "table_kabinet" %>
+               </div>
+               <div class="tab-pane" id="tab3">
+                    <% @orders = Order.all %>              
+                    <%= render "table_kabinet" %>
+               </div>
+            </div>
+         </div>   
+      </div>
+   </div>
+</div>

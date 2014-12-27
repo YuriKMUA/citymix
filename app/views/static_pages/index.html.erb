@@ -1,0 +1,38 @@
+<%= provide(:title, 'CITYmix - стильная одежда') %>
+
+<div class="container">       
+      <div class="col-md-8 col-md-offset-2">
+            <div id="myCarousel" class="carousel slide" style="margin-top: -20px;" data-ride="carousel">
+                      <!-- Carousel items -->
+                      <ol class="carousel-indicators">
+                           <li class="active" data-target="#myCarousel" data-slide-to="0" ></li>
+                           <li data-target="#myCarousel" data-slide-to="1"></li>
+                           <li data-target="#myCarousel" data-slide-to="2"></li>        
+                      </ol>
+                  <div class="carousel-inner">
+                      <div class="item active">
+                        <%= link_to image_tag("slide.jpg", alt: "Женские новинки"), "#" %>
+                           <!--<img src="reklama.jpg" alt="Proba1" title=""> -->
+                      </div>
+                      <div class="item">
+                           <%= link_to image_tag("slaid2.jpg", alt: "Мужские пиджаки"), "#"  %>
+                      </div>
+                      <div class="item">
+                           <%= link_to image_tag("slide2.jpg", alt: ""), "#" %>                      
+                      </div>
+                  </div>
+                      <!-- Carousel nav -->
+<!--                      <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>  -->
+<!--                      <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a> --> 
+            </div>
+      </div>
+</div>  
+<div class="row" style="margin-left: -40px;">
+         <%= link_to image_tag("menu icon (1).jpg", alt: "", style: ["border: 1px double white;", "width: 250px;", "height: 140px;"], class: "col xs-6 col-md-2 col-md-offset-1"), "#" %>
+         <%= link_to image_tag("menu icon (2).jpg", alt: "", style: ["border: 1px double white;", "width: 250px;", "height: 140px;"], class: "col-xs-6 col-md-2"), "#" %>
+         <%= link_to image_tag("menu icon (3).jpg", alt: "", style: ["border: 1px double white;", "width: 250px;", "height: 140px;"], class: "col-xs-6 col-md-2"), "#" %>
+         <%= link_to image_tag("menu icon (4).jpg", alt: "", style: ["border: 1px double white;", "width: 250px;", "height: 140px;"], class: "col-xs-6 col-md-2"), "#" %>
+</div>
+
+
+

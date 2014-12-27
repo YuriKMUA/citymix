@@ -1,0 +1,16 @@
+<ul>
+   <li><%= radio_button_tag(:payment, "Расчет дисконтной карткой") %>
+       <%= label_tag(:payment, "Расчет дисконтной карткой", class: "ws12") %></li>
+      <span class="ws10" style="color: #c0c0c0;">Вы можете рассчитаться накоплеными балами на персональном счете.</span><br><br>
+    <li><%= radio_button_tag(:payment, "Наличными курьеру") %>
+        <%=label_tag(:payment, "Наличными курьеру", class: "ws12") %></li>
+      <span class="ws10" style="color: #c0c0c0;">Оплата наличными курьеру при получении заказа. Для жителей Киева и Хмельницкого.</span><br><br>
+    <li><%= radio_button_tag(:payment, "Наложеным платежом") %>
+        <%=label_tag(:payment, "Наложеным платежом", class: "ws12") %></li>
+      <span class="ws10" style="color: #c0c0c0;">Расчет на почте при получении заказа. Обратную доставку оплачивает покупатель.</span><br><br>
+    <li><%= radio_button_tag(:payment, "Банковский перевод") %>
+        <%=label_tag(:payment, "Банковский перевод", class: "ws12") %></li>
+      <span class="ws10" style="color: #c0c0c0;">Оплата в отделении банка, в терминале или через интернет.</span><br><br>
+</ul>
+<hr id="hr_line">
+

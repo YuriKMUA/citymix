@@ -1,0 +1,14 @@
+   <% unless @connections.nil?%>
+     <tr align="center">
+        <td width="100"><%= connection.cartikul%> 
+        <td width="100"><%= image_tag(connection.avatar_url, title: connection.color.ctxt, alt: connection.color.ctxt, size: "60x80")%>
+        <td width="100">
+        <td width="100">
+        <% if current_user.admin? %>
+           <td width="100"><%= link_to "Изменить", edit_connection_path(connection.id) %>
+           <td width="100"><%= link_to "Удалить", connection, method: :delete, data: { confirm: "Удалить эту строку?" } %>  
+        <% end%>   
+      </tr>
+   <% else%>
+         <b>Информация еще не внесена </b>
+   <% end %>

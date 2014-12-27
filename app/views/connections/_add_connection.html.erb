@@ -1,0 +1,29 @@
+<% unless @current_product == nil %>
+  <%= form_for @connection do |c| %>
+<div class="row">
+   <div class="col-md-12">
+      <div class="well">
+        <strong style="color: #ff0000;">Идет запись для продукта: </strong><b><%= @current_product.cartikul %> - <%= @current_product.ctxt %> </b>
+            <table>  
+            <tr>
+                  <td><strong style="color: #ff0000;">*</strong><%= c.label "Размер" %>
+                   <%= c.select(:size_id, options_for_select(sizes_array), style: :small) %></td>                 
+                   <td><strong style="color: #ff0000;">*</strong><%= c.label "Цвет" %>
+                   <%= c.select(:color_id, options_for_select(colors_array)) %></td>
+                   <div class="col-md-4">
+                  <td><strong style="color: #ff0000;">*</strong><%= c.label "Количество" %>
+                   <%= c.text_field :number %></div></td>
+                                 <tr>
+               <td>Фото <%= image_tag(@current_product.avatar_url, size: "143x200") if @current_product.avatar? %>
+               <%= c.file_field :avatar %></td>
+               <td><%= c.hidden_field :avatar_cache %></td></tr>
+ <td><%= c.submit "Сохранить", class: ["btn btn-default"] %></td>
+            </tr>   
+            </table>
+          
+      </div>   
+   </div>   
+</div> 
+<% end %>
+<% end %>
+

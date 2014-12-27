@@ -1,0 +1,17 @@
+<% colors_array = Color.all.map { |color| [color.ctxt, color.id] } %>
+ 
+<%= form_for @connection do |c| %>
+<div class="row">
+   <div class="col-md-12">
+            <tr>
+                  <td width="100"></td>
+                  <td width="100"><%= c.select(:color_id, options_for_select(colors_array)) %></td>
+                  <td width="100"></td>                 
+                  <td width="100"></td>
+                  <td width="350" align="center"><%= c.file_field :avatar %></td>
+                  <td width="80"><%= c.submit "Сохранить", class: ["btn btn-default"], style: ["width: 100px;"] %></td>
+            </tr>
+   </div>   
+</div> 
+<% end %>
+

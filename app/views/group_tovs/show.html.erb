@@ -1,0 +1,190 @@
+<% unless $goods.empty? %>
+
+<br>
+   <div class="col-md-10 col-md-offset-3">
+     <ul class="breadcrumb">
+         <li><%= link_to "Главная", root_path, class: "cat" %></li>
+         <li><%= link_to @gr_tov_ctxt.ctxt, mens_path, class: "cat" %></li>
+         <li><%= @kat_ctxt.ctxt_ua + " (" + "Отобрано: " + $goods.count.to_s + ")"  %> </li>
+    </ul>
+    <%= form_tag({ controller: "products", action: "search" }, method: "get") do %>
+         <div class="row">
+               Сортировать 
+               <%= button_tag("по цене", name: :btn_up, class: ["btn", "btn-sm", "glyphicon glyphicon-arrow-up"]) %>
+               <%= button_tag("по цене", name: :btn_down, class: ["btn", "btn-sm", "glyphicon glyphicon-arrow-down"]) %>
+               <%= button_tag("новинки", name: :btn_new, class: ["btn", "btn-sm", "glyphicon glyphicon-check"]) %>
+               <span class="col-md-offset-4"> На странице</span>
+               <div class="btn-group">
+                  <%= button_tag("24", name: :page_per, class: ["btn", "btn-sm", "glyphicon glyphicon-share"], value: 24) %>
+                  <%= button_tag("48", name: :page_per, class: ["btn", "btn-sm", "glyphicon glyphicon-share"], value: 48) %>
+                  <%= button_tag("96", name: :page_per, class: ["btn", "btn-sm", "glyphicon glyphicon-share"], value: 96) %>
+               </div>
+         </div>
+     <% end %>
+       <hr color="black">
+   </div>
+               <ul class="col-xs-8 col-md-3">
+                   <div class="well" style="background: #bbb;">
+                      <strong>Цена</strong><br>
+                    <%= form_tag({ controller: "products", action: "search" }, method: "get") do %>
+                      <%= text_field_tag(:price_min, 0, type: "text", maxlength: 5, placeholder: " цена от", class: ["col-md-5"]) %>
+                      <%= text_field_tag(:price_max, 99000, type: "text", maxlength: 5, placeholder: "цена до", class: ["col-md-5 col-md-offset-1"]) %>
+
+                        <% filter.each do |f| %>
+                           <% @id = f.id %>
+                         <li><strong><%= f.ctxt %></strong></li>
+                         <ul> 
+                          <% @flt = [] %>
+                          <% @n = 0 %>
+                          <% case @id %>
+                              <% when 8 %>
+                                 <ul class="search_block">
+                                 <% check_type.each do |f| %>
+                                    <% @type = "type" + f.id.to_s %>
+                                    <li><%= radio_button_tag(:type, f.id ) %>
+                                        <%= label_tag(@type, f.ctxt) %></li>
+                                    <% @flt[@n] = f.id %>
+                                    <% @n += 1 %>
+                                 <% end %>
+                                 </ul>
+                                 <% $filter_value[2] = @flt if $filter_value[2] == nil %>
+                              <% when 2 %>
+                                 <ul class="search_block">
+                                 <% Brand.where(kategories_id: $filter_value[1]).each do |f| %>
+                                       <% @brand = "brand" + f.id.to_s %>
+                                       <li><%= radio_button_tag(:brand, f.id) %>
+                                           <%= label_tag(@brand, f.ctxt) %></li>
+                                       <% @flt[@n] = f.id %>
+                                       <% @n += 1 %>
+                                 <% end %>
+                                 </ul>
+                                 <% if $filter_value[3] == nil %>
+                                       <% $filter_value[3] = @flt %>
+                                 <% end %>
+                              <% when 3 %>                                 
+                                 <ul class="search_block">
+                                 <% Season.all.each do |f| %>
+                                    <% @season = "season" + f.id.to_s %>
+                                    <li><%= radio_button_tag(:season, f.id) %>
+                                        <%= label_tag(@season, f.ctxt) %></li>
+                                    <% @flt[@n] = f.id %>
+                                    <% @n += 1 %>
+                                 <% end %>
+                                 </ul>
+                                    <% if $filter_value[4] == nil %>
+                                          <% $filter_value[4] = @flt %>
+                                    <% end %>
+                              <% when 4 %>
+                                <ul class="search_block"> 
+                                <% Manufacturer.all.each do |f| %>
+                                    <% if f.id > 0 %>
+                                       <% @manufacturer = "manufacturer" + f.id.to_s %>
+                                       <li><%= radio_button_tag(:manufacturer, f.id) %>
+                                       <%= label_tag(@manufacturer, f.ctxt) %></li>
+                                       <% @flt[@n] = f.id %>
+                                       <% @n += 1 %>
+                                    <% end %>   
+                                 <% end %>
+                                 </ul>
+                                 <% if $filter_value[5] == nil %>
+                                        <% $filter_value[5] = @flt %>
+                                 <% end %>
+                              <% when 5 %>
+                                 <ul class="search_block">
+                                 <% Color.joins(:products).uniq.each do |f| %>
+                                    <% @idc = "idc" + f.id.to_s %>
+                                    <li><%= check_box_tag(@idc, f.id) %>
+                                        <%= label_tag(@idc, f.ctxt) %></li>
+                                         <% @flt[@n] = f.id.to_i %>
+                                         <% @n += 1 %>
+                                   <% end %>
+                                </ul>   
+                                   <% if $filter_value[6] == nil %>
+                                         <% $filter_value[6] = @flt %>
+                                   <% end %>    
+                              <% when 6 %>
+                                 <ul class="search_block">
+                                 <% Neck.all.each do |f| %>
+                                    <% @neck = "neck" + f.id %>
+                                    <li><%= radio_button_tag(:neck, f.id) %>
+                                        <%= label_tag(@neck, f.ctxt) %></li>
+                                         <% @flt[@n] = f.id.to_i %>
+                                         <% @n += 1 %>
+                                   <% end %>
+                                   </ul>
+                                   <% if $filter_value[8] == nil %>
+                                         <% $filter_value[8] = @flt %>
+                                   <% end %>    
+                              <% when 7 %>
+                                 <ul class="search_block">
+
+                                    <% Size.order("ctxt").joins(:connections).uniq.each do |f| %>
+                                       <% @ids = "ids" + f.id.to_s %>
+                                       <li><%= check_box_tag(@ids, f.id) %>
+                                          <%= label_tag(@ids, f.ctxt) %></li>
+                                          <% @flt[@n] = f.id.to_i %>
+                                          <% @n += 1 %>
+                                    <% end %>
+                               
+                                </ul>   
+                                   <% if $filter_value[9] == nil %>
+                                         <% $filter_value[9] = @flt %>
+                                   <% end %>    
+                               <% when 1 %>
+                                 <ul class="search_block">
+                                 <% Fastener.all.each do |f| %>
+                                    <li><%= link_to f.ctxt,  filter_fastener_fastener_path(f) %></li>
+                                 <% end %>
+                                 </ul>
+                          <% end %>
+                          </ul>  
+                        <% end %>
+                              <%= submit_tag("Поиск", style: ["margin-top: 30px;"], class: ["btn btn-default", "col-md-4 col-md-offset-1"]) %>     
+                    <% end %>
+                    <%= form_tag({ controller: "products", action: "cancel" }, method: "get") do %>
+                        <%= submit_tag("Сброс", style: ["margin-top: -30px;"], class: ["btn btn-default", "col-md-4 col-md-offset-6"]) %>                              
+                    <% end %>
+                   </div>    
+               </ul>
+   
+
+   <% n = 0 %>
+   <table border="2" bordercolor="#696969" align="center">
+      <tr>
+   <%  $goods.each do |con| %>
+      <% n += 1 %>
+      <% if n > 3 %>
+          <% n = 0 %>
+          <tr>
+      <% end %>      
+                  <% unless con.avatar_url.nil? %>
+                     <td>
+                        <div class="thumbnails" style="background: #000; hover: #ff00ff;"> 
+                        <%= link_to image_tag(con.avatar_url), product_path(con.id) %>
+                        <div class="caption" style="color: #fff; margin-left: 30px;">
+                           <h5><%= con.product.ctxt %></h5>
+                           <% unless con.product.nprice.to_i == 0 %>
+                              <h4><%= con.product.nprice %> грн. </h4>
+                           <% else%>
+                              <h5 style="color: #ff00ff;">Цену уточняйте у менеджера</h5>
+                           <% end %>
+                           <% if con.product.nold_price.to_i > 0 %> 
+                              <h5 style="text-align: center; text-decoration: line-through; color: #ff0000;"><%= con.product.nold_price %> грн. </h5>
+                           <% else %>
+                              <br>
+                           <% end %>  
+                           <%= link_to "Изменить", edit_product_path(con.product_id) if current_user && current_user.admin? %>
+                        </div>
+                        </div>
+                     </td>   
+              <% end %>   
+              
+      <% if n > 3 %> 
+            <% n = 0 %>
+            </tr>
+      <% end %>      
+   <% end %>   
+   </table>
+<% else %>
+
+<% end %>

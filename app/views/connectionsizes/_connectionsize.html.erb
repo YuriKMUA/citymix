@@ -1,0 +1,14 @@
+   <% unless @connectionsizes.nil?%>
+     <tr align="center">
+        <td width="100"></td> 
+        <td width="100">connectionsize.size.ctxt
+        <td width="100">
+        <td width="100">
+        <% if current_user.admin? %>
+           <td width="100"><%= link_to "Изменить", edit_connectionsize_path(connection.id) %>
+           <td width="100"><%= link_to "Удалить", connectionsize, method: :delete, data: { confirm: "Удалить эту строку?" } %>  
+        <% end%>   
+      </tr>
+   <% else%>
+         <b>Информация еще не внесена </b>
+   <% end %>

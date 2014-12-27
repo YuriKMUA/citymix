@@ -1,0 +1,46 @@
+<%= provide(:title, "Регистрация") %>
+
+<div class="row">
+   <div class="col-md-7 col-md-offset-3">
+      <div class="well">
+      <h2>Открываем персональный кабинет</h2>
+         <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+               <%= form_for(@user) do |f| %>
+               <%= render 'shared/error_messages', object: f.object %>
+            <table>
+               <tr>
+                  <td><strong style="color: #ff0000;">*</strong><%= f.label "Имя" %>
+                       <%= f.text_field   :name %></td>
+                  <td><strong style="color: #ff0000;">*</strong><%= f.label "Фамилия" %>
+                       <%= f.text_field    :last_name %></td>
+              </tr>
+              <tr>
+                  <td><strong style="color: #ff0000;">*</strong><%= f.label "Населенный пункт" %>
+                       <%= f.text_field    :city %></td>
+                  <td> <%= f.label         "Адрес доставки" %>
+                       <%= f.text_field   :adress %></td>
+             </tr>
+             <tr>
+                  <td><strong style="color: #ff0000;">*</strong><%= f.label "Мобильный телефон" %>
+                      <%= f.text_field   :phone %> </td>
+                  <td><strong style="color: #ff0000;">*</strong><%= f.label "Електронный адрес" %>
+                      <%= f.text_field   :email %> </td>
+             </tr>
+             <tr>
+                  <td><strong style="color: #ff0000;">*</strong><%= f.label "Пароль (не менее 6 символов)" %>
+                      <%= f.text_field   :password, type: :password %></td>
+                  <td><strong style="color: #ff0000;">*</strong><%= f.label "Повторите пароль еще раз" %>
+                      <%= f.text_field   :password_confirmation, type: :password %></td>
+             </tr>
+            </table>
+       <strong style="color: #ff0000;">*  Поля, обязательные для заполнения</strong><br>   
+
+               <%= f.submit "Регистрация", class: ["btn btn-default", "col-md-5 col-md-offset-3"] %>
+               <% end %>
+            </div>
+         </div>  
+      </div>
+   </div>   
+</div>   
+</div>   

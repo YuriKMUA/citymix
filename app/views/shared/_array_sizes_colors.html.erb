@@ -1,0 +1,10 @@
+<% necks_array = Neck.all.map { |neck| [neck.ctxt, neck.id] } %>
+<% sizes_array = Size.all.map { |size| [size.ctxt, size.id] } %>
+<% colors_array = Color.all.map { |color| [color.ctxt, color.id] } %>
+<% group_tovs_array = GroupTov.all.map { |group_tov| [group_tov.ctxt, group_tov.id] } %>
+<% kategories_array = Kategory.all.map { |kategory| [kategory.ctxt_ua + ' ' + kategory.group_tov_id.to_s, kategory.id] } %>
+
+<% brands_array = Brand.all.map { |brand| [brand.ctxt, brand.id] } %>
+<% seasons_array = Season.all.map { |season| [season.ctxt, season.id] } %>
+<% manufacturers_array = Manufacturer.all.map { |manufacturer| [manufacturer.ctxt, manufacturer.id] } %>
+<% types_array = Type.all.map { |type| [type.ctxt, type.id] } %>

@@ -1,0 +1,62 @@
+<% provide(:title, "Информация о заказе") %>
+
+<%= form_tag({ controller: "orders", action: "create" }, method: "post") do %>
+<div class="row">
+   <div class="col-md-8 col-md-offset-2">
+      <div class="well">
+         <div class="col-md-8 col-md-offset-3">
+            <%= current_user.name %>, спасибо за Ваш выбор! <br> 
+            Проверьте Ваши данные 
+         </div><br><br>
+         <hr id="hr_line">
+      <table border="2" bordercolor="#900090" align="center">
+         <tr><td>Имя: <%= current_user.name%></td><td>Фамилия: <%= current_user.last_name %></td></tr>
+         <tr><td>Н. пункт: <%= current_user.city%></td><td>Контактный телефон: <%= current_user.phone %></td></tr>
+         <tr><td>Адрес доставки: <%= current_user.adress %></td></tr>
+      </table>
+      <div class="col-md-3 col-md-offset-9">
+         <%= link_to "Изменить", edit_user_path(current_user) %>
+      </div>   
+      <hr id="hr_line">
+      <span class="ws20" style="color: #900090;">Способ доставки</span>
+      <hr>
+      <%= render "dostavka" %>        
+      </div>   
+   </div>
+</div>
+
+<div class="row">
+   <div class="col-md-8 col-md-offset-2">
+      <div class="well">
+         <span class="ws20" style="color: #900090;">Способ оплаты</span>
+      <hr>
+          <%= render "orders/oplata" %>        
+      </div>   
+   </div>
+</div>
+
+<div class="row">
+   <div class="col-md-8 col-md-offset-2">
+      <div class="well">
+         <span class="ws20" style="color: #900090;">Информация о заказе</span>
+      <hr>
+          <%= render "orders/basket" %>        
+      </div>   
+   </div>
+</div>
+
+<div class="row">
+   <div class="col-md-8 col-md-offset-2">
+      <div class="well">
+         <span class="ws20" style="color: #900090;">Комментарий к заказу</span>
+         <hr>
+          <%= text_area_tag(:message) %><br>
+         <div class="row"> 
+            <div class="col-md-4 col-md-offset-4">   
+               <%= submit_tag("Оформить заказ", class: "btn btn-lg") %>
+            </div>
+         </div>   
+      </div>
+   </div>
+</div>
+<% end %>

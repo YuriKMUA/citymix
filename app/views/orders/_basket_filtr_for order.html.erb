@@ -1,0 +1,6 @@
+            <% Basket.all.each do |f| %>         
+              <% f.user_id = current_user.id if f.remember_token == $remember_token %>
+              <% f.save %>
+            <% end %>
+            <% Basket.where(user_id: current_user.id).each do |f| %>
+

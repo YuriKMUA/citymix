@@ -1,0 +1,31 @@
+            <%= render 'shared/error_messages', object: f.object %>
+            <table>
+               <tr>
+                  <td> <%= f.label        "Имя" %>
+                       <%= f.text_field   :name %></td>
+                  <td> <%= f.label         "Фамилия" %>
+                       <%= f.text_field    :last_name %></td>
+              </tr>
+              <tr>
+                  <td> <%= f.label         "Населенный пункт" %>
+                       <%= f.text_field    :city %></td>
+                  <td> <%= f.label         "Адрес доставки" %>
+                       <%= f.text_field   :adress %></td>
+             </tr>
+             <tr>
+                  <td><%= f.label        "Контактный моб. телефон" %>
+                      <%= f.text_field   :phone %> </td>
+                  <td><%= f.label        "Електронна адреса" %>
+                      <%= f.text_field   :email %> </td>
+             </tr>
+             <tr>
+                  <td><%= f.label        "Пароль (не менее 6 символов)" %>
+                      <%= f.text_field   :password, type: :password %></td>
+                  <td><%= f.label        "Повторите пароль еще раз" %>
+                      <%= f.text_field   :password_confirmation, type: :password %></td>
+            </tr>
+       </table>
+       <div class="col-md-4 col-md-offset-4">
+         <%= f.submit "Сохранить", class: "btn btn-lg" %>
+      </div><br>  
+

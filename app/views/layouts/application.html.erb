@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= full_title(yield(:title)) %></title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <%= render "layouts/shim" %>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8">
+   <meta name="description" content="CITYmix - это новый бренд в мире моды. ">
+   <meta name="keywords" content="интернет магазин женской одежды, интернет магазин мужской одежды CITYmix купить одежду в Украине мужская одежда женская одежда">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style type="text/css">
+a.cat:link{color:#FFFFFF;text-decoration: none;}
+a.cat:visited{color:#FFFFFF;text-decoration: none;}
+a.cat:hover{color:#FFFFFF;text-decoration: none;}
+a.cat:active{color:#FFFFFF;text-decoration: none;}
+
+a.blackcat:link{color:#000000;text-decoration: none;}
+a.blackcat:visited{color:#000000;text-decoration: none;}
+a.blackcat:hover{color:#000000;text-decoration: none;}
+a.blackcat:active{color:#000000;text-decoration: none;}
+
+a.footer:link{color:#C0C0C0;text-decoration: none;}
+a.footer:visited{color:#C0C0C0;text-decoration: none;}
+a.footer:hover{color:#FFFFFF;text-decoration: none;}
+a.footer:active{color:#C0C0C0;text-decoration: none;}
+a.delete:link{color:#FF0000;text-decoration: none;}
+a.delete:visited{color:#FF0000;text-decoration: none;}
+a.delete:hover{color:#FF0000;text-decoration: none;}
+a.delete:active{color:#FF0000;text-decoration: none;}
+a.style5:link{color:#333333;text-decoration: none;}
+a.style5:visited{color:#333333;}
+a.style5:hover{color:#D60B68;text-decoration: none;}
+a.style5:active{color:#333333;}
+a.style5activ:link{color:#D60B68;text-decoration: none;}
+a.style5activ:visited{color:#D60B68;text-decoration: none;}
+a.style5activ:hover{color:#D60B68;text-decoration: none;}
+a.style5activ:active{color:#D60B68;text-decoration: none;}
+</style>
+
+</head>
+<body>
+
+   <%= render "layouts/header" %>
+   <div class="container">
+      <% flash.each do |key, value| %>
+            <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>   
+      <%= yield %>
+      <%= render "layouts/footer" %>
+      <%= debug(params) if Rails.env.development? %>
+   </div>
+</body>
+
+</html>

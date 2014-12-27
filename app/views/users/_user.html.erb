@@ -1,0 +1,9 @@
+<li>
+  <%= gravatar_for user %>
+  <%= link_to user.name, user %>
+  <% if current_user.admin? && !current_user?(user) %>
+  <p>
+  <%= link_to '< видалити >', user, method: :delete,
+                              data: { confirm: "Ви впевнені?" } %> </p>
+  <% end %>
+</li>

@@ -1,0 +1,54 @@
+<% provide(:title, @user.name) %>
+
+<% if signed_in? %>
+  <div class="row">
+    <aside class="col-md-6">
+      <section>
+        <br>
+        <h1>
+          <%= gravatar_for @user %>
+          <%= @user.name %>
+        </h1>
+      </section>
+      <section>
+         <%= render 'shared/stats' %>
+      </section>
+
+  
+        <table>
+
+        <tr><th>Ім'я користувача/Назва організації:</th> <th><b><%= @user.name %></b></th></tr>
+        <tr><th>Ел. адреса:</th> <th><b><%= @user.email %></b></th></tr>
+        <% unless @user.edrpou.nil? %>
+            <tr><th>ЄДРПОУ:</th> <th><b><%= @user.edrpou%></b></th></tr>
+        <% end %>    
+        <% unless @user.adress.nil? %>
+            <tr><th>Адреса/Контактний телефон:</th> <th><b><%= @user.adress %></b></th></tr>
+        <% end %>
+        </table> 
+
+        <%= link_to "Редагувати", edit_user_path(current_user) %>
+   </aside>
+
+<% else %>
+
+   <% flash.now[:danger] = "Ви здійснили спробу входу без авторизації" %>
+<% end %>
+ 
+      <div class="col-md-8" >
+         <section>
+            <%= render "follow_form" %>
+         </section>
+      </div>
+
+   <div class="col-md-8">
+      <% if @user.microposts.any? %>
+         <h3> Повідомлень < <%= @user.microposts.count %> > </h3>
+         <ol class="microposts">
+         <%= render @microposts %>
+         </ol>
+         <%= will_paginate @microposts %>
+      <% end %>
+   </div>
+</div>
+  

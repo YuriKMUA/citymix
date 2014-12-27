@@ -1,0 +1,11 @@
+<div class="row">
+   <div class="col-md-8 col-md-offset=2">
+      <div class="well">
+         <span class="ws20" style="color: #ff00ff;">Заказ оформлен</span>
+         <hr>
+         Ваш заказ № <%= @order.id %> от <%= @order.created_at %> успешно создан. <br>
+         Наш менеджер свяжется с Вами в ближайшее время. <br>
+         Статус Вашего заказа можете проследить самостоятельно в <%= link_to "личном кабинете", current_user, class: "btn" %>
+      </div>
+   </div>
+</div>

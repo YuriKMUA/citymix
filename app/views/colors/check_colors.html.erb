@@ -1,0 +1,9 @@
+  <%= form_tag(controller: "products", action: "colors", method: "patch") do  %>
+       <% Color.all.each do |f| %>
+         <ul>
+            <li><%= check_box_tag(f.id) %>
+            <%= label_tag(f.id, f.ctxt) %></li>
+       <% end %>
+         </ul>
+       <%= submit_tag("Выбор", class: "btn btn-sm")%>
+    <% end %>
