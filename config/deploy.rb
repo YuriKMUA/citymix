@@ -83,7 +83,7 @@ set :unicorn_pid, "#{shared_path}/run/unicorn.pid"
 
 namespace :application do
     desc 'Запуск Unicorn'
-    tasc :start do
+    task :start do
         on roles(:app) do
             execute "cd #{release_path} && ~/.rvm/bin/rvm default do bundle exec unicorn_rails -c #{fetch(:unicorn_config)} -E #{fetch(:rails_env)} -D"
         end
@@ -97,22 +97,10 @@ namespace :application do
 end   
 
 namespace :deploy do
-    after :finishing, 'citymix.com.ua:stop'    
-    after :finishing, 'citymix.com.ua:start'    
+    after :finishing, 'application:stop'    
+    after :finishing, 'application:start'    
     after :finishing, :cleanup    
 
 end
 
-  after :publishing, :restart
-
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
-
-end
 

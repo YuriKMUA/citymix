@@ -12,7 +12,7 @@ gem 'carrierwave'
 gem 'dragonfly'
 gem 'yaml_db' , :github => 'jetthoughts/yaml_db', :ref => 'fb4b6bd7e12de3cffa93e0a298a1e5253d7e92ba'
 gem 'mini_magick'
-gem 'mysql2'
+gem 'mysql'
 
 
 # Use sqlite3 as the database for Active Record
