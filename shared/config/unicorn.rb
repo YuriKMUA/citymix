@@ -1,5 +1,5 @@
 # Рабочие директории приложения на сервере
-root       = '/home/yurikmua/citymix'
+root       = '/var/www/yurikmua/data/citymix.com.ua'
 rails_root = "#{root}"
 
 # Файлы, хранящие идентификаторы запущенных Unicorn-процессов

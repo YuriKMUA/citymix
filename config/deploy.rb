@@ -1,21 +1,26 @@
 # config valid only for Capistrano 3.1
 lock '3.2.1'
 
-set :application, 'citymix'
-set :repo_url, 'git@github.com:yuriKMUA/citymix.git'
-set :rails_env, 'production'
 set :username, 'yurikmua'
+set :application, 'citymix.com.ua'
+set :deploy_to, '/var/www/yurikmua/data/#{ fetch(:username) }/#{ fetch(:aplication) }'
 set :linked_dirs, %w{public/upload}
-set :linked_files, %w{config/database.yml}
+
+set :scm, :git
+set :repo_url, 'git@github.com:yuriKMUA/citymix.git'
+set :deploy_via, :remote_cache
+set :branch, 'master'
+
+set :unicorn_config, "#{shared_path}/config/unicorn.rb"
+set :unicorn_pid, "#{shared_path}/run/unicorn.pid"
+set :rails_env, 'production'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app
-set :deploy_to, '/home/#{ fetch(:username) }/#{ fetch(:aplication) }'
 
 # Default value for :scm is :git
-# set :scm, :git
 
 # Default value for :format is :pretty
 # set :format, :pretty
@@ -27,7 +32,7 @@ set :deploy_to, '/home/#{ fetch(:username) }/#{ fetch(:aplication) }'
 # set :pty, true
 
 # Default value for :linked_files is []
-# set :linked_files, %w{config/database.yml}
+ set :linked_files, %w{config/database.yml}
 
 # Default value for linked_dirs is []
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
@@ -38,15 +43,65 @@ set :deploy_to, '/home/#{ fetch(:username) }/#{ fetch(:aplication) }'
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-namespace :deploy do
 
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
-      # execute :touch, release_path.join('tmp/restart.txt')
+namespace :setup do
+    desc 'Загрузка конфигурационных файлов на удаленный сервер'
+    task :upload_config do
+        on roles :all do
+            execute :mkdir, "-p #{shared_path}"
+            ['shared/config', 'shared_run'].each do |f|
+                upload!(f, shared_path, recursive: true)
+            end
+        end
     end
-  end
+end   
+
+namespace :nginx do
+    desc 'Создание симлинка в /etc/nginx/conf.d на nginx.conf приложения'
+    task :append_config do
+        on roles :all do
+            sudo :ln, "-fs #{shared_path}/config/nginx.conf /etc/nginx/conf.d/#{fetch(:applpcation)}.conf"
+        end
+    end
+    desc 'Релоад nginx'
+    task :reload do
+        on role :all do
+            sudo :service, :nginx, :reload
+        end    
+    end    
+    desc 'Рестарт nginx'
+    task :restart do
+        on role :all do
+            sudo :service, :nginx, :restart
+        end    
+    end
+    after :append_config, :restart
+end   
+
+set :unicorn_config, "#{shared_path}/config/unicorn.rb"
+set :unicorn_pid, "#{shared_path}/run/unicorn.pid"
+
+namespace :application do
+    desc 'Запуск Unicorn'
+    tasc :start do
+        on roles(:app) do
+            execute "cd #{release_path} && ~/.rvm/bin/rvm default do bundle exec unicorn_rails -c #{fetch(:unicorn_config)} -E #{fetch(:rails_env)} -D"
+        end
+    end
+    desc 'Завершение Unicorn'
+    task :stop do
+        on roles(:app) do
+            execute "if [ -f #{fetch(:unicorn_pid)} ] && [ -e /proc/$(cat # {fetch(:unicorn_pid)}) ]; then kill -9 'cat #{fetch(:unicorn_pid)}'; fi"
+        end
+    end
+end   
+
+namespace :deploy do
+    after :finishing, 'citymix.com.ua:stop'    
+    after :finishing, 'citymix.com.ua:start'    
+    after :finishing, :cleanup    
+
+end
 
   after :publishing, :restart
 
@@ -61,14 +116,3 @@ namespace :deploy do
 
 end
 
-namespace :setup do
-    desc 'Загрузка конфигурационных файлов на удаленный сервер'
-    task :upload_config do
-        on roles :all do
-            execute :mkdir, "-p #{shared_path}"
-            ['shared/config', 'shared_run'].each do |f|
-                upload!(f, shared_path, recursive: true)
-            end
-        end
-    end
-end    
