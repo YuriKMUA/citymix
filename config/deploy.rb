@@ -3,7 +3,7 @@ lock '3.2.1'
 
 set :username, 'yurikmua'
 set :application, 'citymix.com.ua'
-set :deploy_to, '/var/www/yurikmua/data/#{ fetch(:username) }/#{ fetch(:aplication) }'
+set :deploy_to, '/var/www/yurikmua/data/#{fetch(:username)}/#{fetch(:aplication)}'
 set :linked_dirs, %w{public/upload}
 
 set :scm, :git
@@ -26,7 +26,7 @@ set :rails_env, 'production'
 # set :format, :pretty
 
 # Default value for :log_level is :debug
- set :log_level, :info
+ set :log_level, :debug
 
 # Default value for :pty is false
 # set :pty, true
@@ -42,6 +42,8 @@ set :rails_env, 'production'
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+set :unicorn_config, "#{shared_path}/config/unicorn.rb"
+set :unicorn_pid, "#{shared_path}/run/unicorn.pid"
 
 
 namespace :setup do
@@ -78,8 +80,6 @@ namespace :nginx do
     after :append_config, :restart
 end   
 
-set :unicorn_config, "#{shared_path}/config/unicorn.rb"
-set :unicorn_pid, "#{shared_path}/run/unicorn.pid"
 
 namespace :application do
     desc 'Запуск Unicorn'
@@ -91,7 +91,7 @@ namespace :application do
     desc 'Завершение Unicorn'
     task :stop do
         on roles(:app) do
-            execute "if [ -f #{fetch(:unicorn_pid)} ] && [ -e /proc/$(cat # {fetch(:unicorn_pid)}) ]; then kill -9 'cat #{fetch(:unicorn_pid)}'; fi"
+            execute "if [ -f #{fetch(:unicorn_pid)} ] && [ -e /proc/$(cat #{fetch(:unicorn_pid)}) ]; then kill -9 'cat #{fetch(:unicorn_pid)}'; fi"
         end
     end
 end   

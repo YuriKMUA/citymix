@@ -13,7 +13,7 @@ preload_app true
 timeout 30
 
 # Путь к сокету
-listen "#{root}/shared/run/unicorn.sock", :blacklog => 1024
+listen "#{root}/shared/run/unicorn.sock", :backlog => 1024
 
 #Путь к лог-файлам
 stderr_path "#{rails_root}/log/unicorn_error.log"
@@ -28,18 +28,18 @@ before_exec do |server|
 end
 
 #Инструкции для управления воркерами и состоянием соединения с БД
-before_fork do |server, worker|
+    before_fork do |server, worker|
     defined?(ActiveRecord::Base) and
         ActiveRecord::Base.connection.disconnect!
       if File.exists?(pidfile_old) && server.pid != pidfile_old
         begin
             Process.kill("QUIT", File.read(pidfile_old).to_i)
-        rescue Errno::ENOENT Errno::ESRCH
+        rescue Errno::ENOENT, Errno::ESRCH
         end
       end
-end
+    end
 
-after_fork do |server, worker|
+    after_fork do |server, worker|
     defined?(ActiveRecord::Dase) and
-        ActiveRecord::Base, establish_connection
+        ActiveRecord::Base.establish_connection
 end
