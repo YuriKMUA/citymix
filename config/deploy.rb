@@ -3,7 +3,7 @@ lock '3.2.1'
 
 set :username, 'yurikmua'
 set :application, 'citymix.com.ua'
-set :deploy_to, '/var/www/yurikmua/data/#{fetch(:username)}/#{fetch(:aplication)}'
+set :deploy_to, '/var/www/#{fetch(:username)}/yurikmua/data/#{fetch(:aplication)}'
 set :linked_dirs, %w{public/upload}
 
 set :scm, :git
@@ -45,56 +45,6 @@ set :rails_env, 'production'
 set :unicorn_config, "#{shared_path}/config/unicorn.rb"
 set :unicorn_pid, "#{shared_path}/run/unicorn.pid"
 
-
-namespace :setup do
-    desc 'Загрузка конфигурационных файлов на удаленный сервер'
-    task :upload_config do
-        on roles :all do
-            execute :mkdir, "-p #{shared_path}"
-            ['shared/config', 'shared_run'].each do |f|
-                upload!(f, shared_path, recursive: true)
-            end
-        end
-    end
-end   
-
-namespace :nginx do
-    desc 'Создание симлинка в /etc/nginx/conf.d на nginx.conf приложения'
-    task :append_config do
-        on roles :all do
-            sudo :ln, "-fs #{shared_path}/config/nginx.conf /etc/nginx/conf.d/#{fetch(:applpcation)}.conf"
-        end
-    end
-    desc 'Релоад nginx'
-    task :reload do
-        on role :all do
-            sudo :service, :nginx, :reload
-        end    
-    end    
-    desc 'Рестарт nginx'
-    task :restart do
-        on role :all do
-            sudo :service, :nginx, :restart
-        end    
-    end
-    after :append_config, :restart
-end   
-
-
-namespace :application do
-    desc 'Запуск Unicorn'
-    task :start do
-        on roles(:app) do
-            execute "cd #{release_path} && ~/.rvm/bin/rvm default do bundle exec unicorn_rails -c #{fetch(:unicorn_config)} -E #{fetch(:rails_env)} -D"
-        end
-    end
-    desc 'Завершение Unicorn'
-    task :stop do
-        on roles(:app) do
-            execute "if [ -f #{fetch(:unicorn_pid)} ] && [ -e /proc/$(cat #{fetch(:unicorn_pid)}) ]; then kill -9 'cat #{fetch(:unicorn_pid)}'; fi"
-        end
-    end
-end   
 
 namespace :deploy do
     after :finishing, 'application:stop'    
