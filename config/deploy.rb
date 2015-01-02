@@ -7,7 +7,7 @@ set :deploy_to, '/var/www/#{fetch(:username)}/yurikmua/data/#{fetch(:aplication)
 set :linked_dirs, %w{public/upload}
 
 set :scm, :git
-set :repo_url, 'git@github.com:yuriKMUA/citymix.git'
+set :repo_url, 'git@github.com:yurikmua/citymix.git'
 set :deploy_via, :remote_cache
 set :branch, 'master'
 
