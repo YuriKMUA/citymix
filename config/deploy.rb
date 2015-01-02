@@ -3,7 +3,7 @@ lock '3.2.1'
 
 set :username, 'yurikmua'
 set :application, 'citymix.com.ua'
-set :deploy_to, '/www/#{fetch(:application)}'
+set :deploy_to, '/var/www/yurikmua/data/www/citymix.com.ua'
 set :linked_dirs, %w{public/upload}
 
 set :scm, :git
