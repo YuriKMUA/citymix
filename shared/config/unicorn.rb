@@ -1,6 +1,6 @@
 # Рабочие директории приложения на сервере
 root       = '/var/www/yurikmua/data/citymix.com.ua'
-rails_root = "#{root}/current"
+rails_root = "/var/www/yurikmua/data/citymix.com.ua/current"
 
 # Файлы, хранящие идентификаторы запущенных Unicorn-процессов
 pidfile     = "#{root}/shared/run/unicorn.pid"
@@ -13,18 +13,18 @@ preload_app true
 timeout 30
 
 # Путь к сокету
-listen "#{root}/shared/run/unicorn.sock", :backlog => 1024
+listen "/var/www/yurikmua/data/citymix.com.ua/shared/run/unicorn.sock", :backlog => 1024
 
 #Путь к лог-файлам
-stderr_path "#{rails_root}/log/unicorn_error.log"
-stdout_path "#{rails_root}/log/unicorn.log"
+stderr_path "/var/www/yurikmua/data/citymix.com.ua/current/log/unicorn_error.log"
+stdout_path "/var/www/yurikmua/data/citymix.com.ua/current/log/unicorn.log"
 
 #Установки сборщика мусора
 GC.copy_on_write_friendly = true if GC.respond_to?(:copy_on_write_friendly=)
 
 #Блок инструкций, выполняемых до запуска сервера
 before_exec do |server|
-    ENV["BUNDLE_GEMFILE"] = "#{rails_root}/Gemfile"
+    ENV["BUNDLE_GEMFILE"] = "/var/www/yurikmua/data/citymix.com.ua/current/Gemfile"
 end
 
 #Инструкции для управления воркерами и состоянием соединения с БД
@@ -40,6 +40,6 @@ end
     end
 
     after_fork do |server, worker|
-    defined?(ActiveRecord::Dase) and
+    defined?(ActiveRecord::Base) and
         ActiveRecord::Base.establish_connection
 end
