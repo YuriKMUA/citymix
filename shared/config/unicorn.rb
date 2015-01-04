@@ -3,7 +3,7 @@ root       = '/var/www/yurikmua/data/citymix.com.ua'
 rails_root = "/var/www/yurikmua/data/citymix.com.ua/current"
 
 # Файлы, хранящие идентификаторы запущенных Unicorn-процессов
-pidfile     = "#{root}/shared/run/unicorn.pid"
+pidfile     = "/var/www/yurikmua/data/citymix.com.ua/shared/run/unicorn.pid"
 pidfile_old = pidfile + '.oldbin'
 pid pidfile
 
