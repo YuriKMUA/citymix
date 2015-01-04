@@ -1,6 +1,6 @@
 # Рабочие директории приложения на сервере
 root       = '/var/www/yurikmua/data/citymix.com.ua'
-rails_root = "#{root}"
+rails_root = "#{root}/current"
 
 # Файлы, хранящие идентификаторы запущенных Unicorn-процессов
 pidfile     = "#{root}/shared/run/unicorn.pid"
