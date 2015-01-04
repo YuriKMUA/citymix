@@ -8,8 +8,8 @@ set :scm, :git
 set :repo_url, 'git@github.com:yurikmua/citymix.git'
 set :deploy_via, :remote_cache
 set :branch, 'master'
-set :unicorn_config, "#{shared_path}/config/unicorn.rb"
-set :unicorn_pid, "#{shared_path}/run/unicorn.pid"
+set :unicorn_config, "/var/www/yurikmua/data/www/citymix.com.ua/shared/config/unicorn.rb"
+set :unicorn_pid, "/var/www/yurikmua/data/www/citymix.com.ua/shared/run/unicorn.pid"
 set :rails_env, 'production'
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
@@ -29,8 +29,7 @@ set :linked_files, %w{config/database.yml}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 # Default value for keep_releases is 5
 # set :keep_releases, 5
-set :unicorn_config, "#{shared_path}/config/unicorn.rb"
-set :unicorn_pid, "#{shared_path}/run/unicorn.pid"
+
 namespace :deploy do
 after :finishing, 'application:stop'
 after :finishing, 'application:start'

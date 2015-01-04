@@ -1,5 +1,5 @@
-set :unicorn_config, "#{shared_path}/config/unicorn.rb"
-set :unicorn_pid, "#{shared_path}/run/unicorn.pid"
+#set :unicorn_config, "#{shared_path}/config/unicorn.rb"
+#set :unicorn_pid, "#{shared_path}/run/unicorn.pid"
 
 namespace :application do
     desc 'Запуск Unicorn'
