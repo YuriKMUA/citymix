@@ -31,7 +31,7 @@ set :linked_files, %w{config/database.yml}
 # set :keep_releases, 5
 
 namespace :deploy do
-after :finishing, 'application:stop'
-after :finishing, 'application:start'
-after :finishing, :cleanup
+    after :finishing, 'application:stop'
+    after :finishing, 'application:start'
+    after :finishing, :cleanup
 end
