@@ -21,7 +21,6 @@ test:
 production:
   adapter:  mysql 
   database: citymix
-  encoding: utf-8
   username: yurikmua
   password: 12Okt1963
   host:     localhost
