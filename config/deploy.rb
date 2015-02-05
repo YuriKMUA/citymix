@@ -1,7 +1,7 @@
 # config valid only for Capistrano 3.1
 lock '3.2.1'
 set :username, 'yurikmua'
-set :application, 'citymix.com.ua'
+set :application, 'citymix'
 set :deploy_to, '/var/www/yurikmua/data/www/citymix.com.ua'
 set :linked_dirs, %w{public/upload}
 set :scm, :git
@@ -18,7 +18,7 @@ set :rails_env, 'production'
 # Default value for :format is :pretty
 # set :format, :pretty
 # Default value for :log_level is :debug
-set :log_level, :debug
+set :log_level, :info
 # Default value for :pty is false
 # set :pty, true
 # Default value for :linked_files is []
