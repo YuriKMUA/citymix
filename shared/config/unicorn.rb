@@ -8,7 +8,7 @@ pidfile_old = pidfile + '.oldbin'
 pid pidfile 
 
 #Главные параметры
-worker_processes 1
+worker_processes 4
 preload_app true
 timeout 30
 
