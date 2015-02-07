@@ -5,10 +5,11 @@ rails_root = "/var/www/yurikmua/data/www/citymix.com.ua/current"
 # Файлы, хранящие идентификаторы запущенных Unicorn-процессов
 pidfile     = "/var/www/yurikmua/data/www/citymix.com.ua/shared/run/unicorn.pid"
 pidfile_old = pidfile + '.oldbin'
-pid pidfile 
+pid pidfile
+socket_file ="/var/www/yurikmua/data/www/citymix.com.ua/shared/run/unicorn.sock" 
 
 #Главные параметры
-worker_processes 4
+worker_processes 1
 preload_app true
 timeout 30
 
