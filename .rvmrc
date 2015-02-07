@@ -1,1 +1,1 @@
-rvm use /var/www/yurikmua/data/.rvm/gems/ruby-2.1.3@rails40
+rvm use ruby-2.1.3@rails40
