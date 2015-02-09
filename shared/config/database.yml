@@ -24,6 +24,5 @@ production:
   username: yurikmua
   password: 12Okt1963
   host:     localhost
-  port:     5432
   pool: 5
-  timeout: 5000
+  encoding: utf8 
