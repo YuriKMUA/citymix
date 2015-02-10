@@ -30,4 +30,5 @@ production:
   password: 12Okt1963
   host:     localhost
   pool: 5
-  encoding: utf8 
+  encoding: utf8
+  timeout: 5000

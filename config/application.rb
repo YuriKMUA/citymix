@@ -13,6 +13,8 @@ Bundler.require(:default, Rails.env)
 
 module Citymix
   class Application < Rails::Application
+
+    config.encoding = "utf-8"
  
 #    config.active_record.whitelist_attributes = true 
  # Settings in config/environments/* take precedence over those specified here.
