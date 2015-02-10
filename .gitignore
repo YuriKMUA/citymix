@@ -21,3 +21,5 @@
 .project
 .DS_Store
 .idea
+
+/shared/*
