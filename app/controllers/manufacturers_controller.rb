@@ -8,7 +8,19 @@ class ManufacturersController < ApplicationController
   def edit
   end
 
+  def new
+     @manufacturer = Manufacturer.new   
+  end 
+
   def create
+     @manufacturer = Manufacturer.new(params[:manufacturer])
+      if @manufacturer.save
+         flash.now[:success] = "Сохранено"
+         redirect_to new_product_path
+      else
+         flash.now[:danger] = "Не сохранено. Не внесены данные, отмеченные звездочкой"
+         render "new"
+      end
   end
 
   def products

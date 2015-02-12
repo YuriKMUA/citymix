@@ -3,6 +3,7 @@ Citymix::Application.routes.draw do
    resources :connectionsizes
    resources :connections
    resources :storages
+
    resources :users do
     member do
       get :following

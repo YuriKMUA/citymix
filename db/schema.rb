@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141219135839) do
+ActiveRecord::Schema.define(version: 20150211141812) do
 
   create_table "additional_photos", force: true do |t|
-    t.string   "cartikul"
+    t.string   "cartikul_add"
     t.string   "cphoto"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "kod_id"
   end
 
   create_table "baskets", force: true do |t|
@@ -157,21 +158,21 @@ ActiveRecord::Schema.define(version: 20141219135839) do
     t.string   "cartikul"
     t.string   "ctxt"
     t.text     "ccontent"
-    t.integer  "size_id"
     t.integer  "user_id"
     t.integer  "number"
     t.integer  "nprice"
     t.integer  "nsum"
     t.integer  "color_id"
-    t.integer  "status_id"
-    t.integer  "discount"
-    t.string   "promo_kod"
+    t.integer  "status_delivery_id"
+    t.integer  "oplata"
+    t.string   "dostavka"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "declaration_id"
   end
 
   add_index "orders", ["cartikul"], name: "index_orders_on_cartikul", using: :btree
-  add_index "orders", ["promo_kod"], name: "index_orders_on_promo_kod", using: :btree
+  add_index "orders", ["dostavka"], name: "index_orders_on_dostavka", using: :btree
 
   create_table "product_colors", force: true do |t|
     t.integer  "product_id"

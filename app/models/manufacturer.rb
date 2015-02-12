@@ -1,3 +1,6 @@
 class Manufacturer < ActiveRecord::Base
-    has_many :products
+  attr_accessible :ctxt, :kategories_id
+   
+  validates :ctxt, :kategories_id, presence: true
+   has_many :products
 end
