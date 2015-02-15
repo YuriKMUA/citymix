@@ -33,21 +33,22 @@
                         <li class="divider"></li>
                         <li><%= link_to "Выход",      signout_path, method: "delete" %></li>
                    </ul>
-                   <li><%= link_to("Кабинет: " + current_user.name, current_user, class: ["ws11", "cat"]) %></li>
-                   <li><%= link_to "Корзина", baskets_path %></li>    
-                   <li><%= link_to(Basket.where(user_id: current_user.id, order_id: nil).count, baskets_path, id: "kol_bange", class: ["cat", "badge"]) %></li>
-                   <li><%= link_to "Выход", signout_path, method: "delete" %></li>
+                        <li><%= link_to("Кабинет: " + current_user.name, current_user, class: ["ws11", "cat"]) %></li>
+                        <li><%= link_to "Корзина", baskets_path %></li>    
+                        <li><%= link_to(Basket.where(user_id: current_user.id, order_id: nil).count, baskets_path, id: "kol_bange", class: ["cat", "badge"]) %></li>
+                        <li><%= link_to "Выход", signout_path, method: "delete" %></li>
+                        <li><%= link_to "          ", "#" %></li>
                    </ul>
                   <% else %>
                        <li><%= link_to"Вход", signin_path, class: "cat" %></li>
                        <li><%= link_to "Корзина", baskets_path %></li>    
                        <li><%= link_to(Basket.where(remember_token: cookies[:remember_token]).count, baskets_path, id: "kol_bange", class: ["cat"]) %></li>
+                       <li><%= link_to "          ", "#" %></li>
 
-            </div>
                   <% end %>
                </ul>
-     </div>   
-  </nav>
+            </div>   
+     </nav>
 
 
 <div class="col-md-8 col-md-offset-3" "wpmd">
@@ -66,8 +67,8 @@
                          <li> <%= link_to f.ctxt_ua, kategory_group_tov_path(f.id, txt.id), class: ["cat"] %></li>
                        <% end %>
                     </ul> 
-                <% end %>         
-            <% end %> 
+               <% end %>         
+               <% end %> 
         </ul>
 </div>
 <div class="col-md-5 col-md-offset-3">

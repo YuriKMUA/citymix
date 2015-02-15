@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20150211141812) do
 
   create_table "additional_photos", force: true do |t|
-    t.string   "cartikul_add"
+    t.string   "cartikul"
     t.string   "cphoto"
     t.datetime "created_at"
     t.datetime "updated_at"

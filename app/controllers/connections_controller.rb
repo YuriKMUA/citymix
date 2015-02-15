@@ -13,8 +13,8 @@ class ConnectionsController < ApplicationController
    else   
       flash[:danger] = "Не внесены обязательные для заполнения поля"
    end   
-     redirect_to  edit_product_path($product.id)
-#   redirect_to new_product_path
+#     redirect_to  edit_product_path($product.id)
+   redirect_to new_connectionsize_path
   end
 
   def edit

@@ -25,10 +25,11 @@ class ProductsController < ApplicationController
       if  @product.save 
         flash[:success] = "Товар внесен в базу данных!"
         $product = @product
+      redirect_to new_connection_path  
       else
          flash[:danger] = "Данные не сохранены. Не заполнены обязательные поля, отмеченые звездочкой"
+         render "new"
       end
-      redirect_to new_product_path  
 #   render inline: " <%= @product.group_tov_id %> <%= @product.nprice %>"
 
   end
@@ -98,7 +99,13 @@ class ProductsController < ApplicationController
     filter
 
   end
+  
+  def destroy
+     Product.find(params[:id]).destroy
+     flash[:success] = "Удалено"
+     redirect_to  group_tovs_path($product.id)
 
+  end
   def search
     if params[:price_min].nil? || params[:price_max].nil?
           $filter_value[11] = 0

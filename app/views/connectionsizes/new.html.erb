@@ -1,2 +1,29 @@
-<h1>Connectionsizes#new</h1>
-<p>Find me in app/views/connectionsizes/new.html.erb</p>
+<% sizes_array = Size.all.map { |size| [size.ctxt, size.id] } %>
+ 
+<%= form_for @connectionsize do |c| %>
+<div class="row">
+   <div class="col-md-8 col-md-offset-2">
+        <div class="well">
+            <table>
+               <tr align="center"> 
+                    <td width="100">Цвет</td>
+                    <td width="100">Размер</td>
+                    <td width="80"></td>
+                    <td width="100">Количество</td>
+                    <td width="80"></td>
+                    <td width="250"></td>
+               </tr>
+               <tr>
+                    <td width="100"><%= $connection.color.ctxt unless $connection == nil %></td>
+                    <td width="100"><%= c.select(:size_id, options_for_select(sizes_array), style: "small") %></td>    
+                    <td width="80"></td>
+                    <td width="100"><%= c.text_field :number %></td>
+                    <td width="80" align="center"></td>
+                    <td width="250"><%= c.submit "Сохранить", class: ["btn btn-default"], style: ["width: 200px;"], title: "Сохранить" %></td>
+               </tr>
+            </table>
+        </div>
+   </div>   
+</div> 
+<% end %>
+

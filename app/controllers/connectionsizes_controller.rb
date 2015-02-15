@@ -11,7 +11,7 @@ class ConnectionsizesController < ApplicationController
       else   
          flash[:danger] = "Не внесены обязательные для заполнения поля"
       end   
-   redirect_to new_product_path
+   render "static_pages/vybor"
 
   end
 
@@ -21,8 +21,12 @@ class ConnectionsizesController < ApplicationController
 
   def update
 	@connectionsize = Connectionsize.find(params[:id])		
-        @connectionsize.size_id = params[:connectionsize][:size] unless params[:connectionsize][:size].to_i == 0
-        @connectionsize.number = params[:connectionsize][:number] unless params[:connectionsize][:number].nil?
+    @connectionsize.size_id = params[:connectionsize][:size_id] unless params[:connectionsize][:size_id].to_i == 0
+    @connectionsize.number = params[:connectionsize][:number] unless params[:connectionsize][:number].nil?
+    if @connectionsize.save
+       flash[:success] = "Данные по размеру и количеству присоединены к товару"
+    end   
+    redirect_to  edit_product_path($product.id)
   end
 
   def destroy

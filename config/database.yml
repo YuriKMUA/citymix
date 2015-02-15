@@ -5,7 +5,7 @@
 #   gem 'sqlite3'
 development:
   adapter: mysql2
-  database: citymix
+  database: city
   username: yurikmua
   password: 12Okt1963
   host:    91.234.33.199

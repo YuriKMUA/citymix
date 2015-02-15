@@ -11,7 +11,7 @@
 <% manufacturers_array = Manufacturer.all.map { |manufacturer| [manufacturer.ctxt, manufacturer.id] } %>
 <% types_array = Type.all.map { |type| [type.ctxt, type.id] } %>
 <div class="row">
-   <div class="col-md-8 col-md-offset-3">
+   <div class="col-md-7 col-md-offset-3">
       <div class="well">
 
 
@@ -90,9 +90,9 @@
             <table border="2" bordercolor="#ff00ff" align="center">
                <%= render "shared/tr_block"%>
                <%= render @connections %>
-	       <%= render @connectionsizes %>   	
+	           <%= render @connectionsizes %>   	
             </table>
-      <%= link_to "Внести новые данные", new_connection_path(@current_product) %>
+             <%= link_to "Внести новые данные", new_connection_path(@current_product) %>
 
          </div>
       </div>

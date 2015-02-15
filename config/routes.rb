@@ -3,7 +3,6 @@ Citymix::Application.routes.draw do
    resources :connectionsizes
    resources :connections
    resources :storages
-
    resources :users do
     member do
       get :following
@@ -87,8 +86,8 @@ Citymix::Application.routes.draw do
   match  "/flt_by_kategory", to: "products#flt_by_kategory", via: :get
   match  "/flt_by_group_tov", to: "products#flt_by_group_tov", via: :post
   match  "/sbros_flt", to: "products#sbros_flt", via: :get
-
-
+  match  "/vybor", to: "static_pages#vybor", via: :get 
+#  match  "/con", to: "connectionsizes#destroy", via: :delete
 
  # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -3,14 +3,22 @@
 <%= form_for @connectionsize do |c| %>
 <div class="row">
    <div class="col-md-12">
-            <tr>
-                  <td width="100"></td>
-                  <td width="100"><%= $connection.color.ctxt unless $connection == nil %></td>
-                  <td width="100"><%= c.select(:size_id, options_for_select(sizes_array), style: "small") %></td>                 
-                  <td width="100"><%= c.text_field :number %></td>
-                  <td width="350" align="center"></td>
-                  <td width="80"><%= c.submit "Сохранить", class: ["btn btn-default"], style: ["width: 100px;"] %></td>
-            </tr>
+        <div class="well">
+        <tr align="center"> 
+            <td width="100">Цвет</td>
+            <td width="100">Размер</td>
+            <td width="100">Количество</td>
+            <td width="80"></td>
+            <td width="80"></td>
+        </tr>
+        <tr>
+            <td width="100"><%= $connection.color.ctxt unless $connection == nil %></td>
+            <td width="100"><%= c.select(:size_id, options_for_select(sizes_array), style: "small") %></td>                 
+            <td width="100"><%= c.text_field :number %></td>
+            <td width="350" align="center"></td>
+            <td width="80"><%= c.submit "далее...", class: ["btn btn-default"], style: ["width: 100px;"] %></td>
+        </tr>
+        </div>
    </div>   
 </div> 
 <% end %>

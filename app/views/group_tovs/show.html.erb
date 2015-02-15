@@ -10,14 +10,14 @@
     <%= form_tag({ controller: "products", action: "search" }, method: "get") do %>
          <div class="row">
                Сортировать 
-               <%= button_tag("по цене", name: :btn_up, class: ["btn", "btn-sm", "glyphicon glyphicon-arrow-up"]) %>
-               <%= button_tag("по цене", name: :btn_down, class: ["btn", "btn-sm", "glyphicon glyphicon-arrow-down"]) %>
-               <%= button_tag("новинки", name: :btn_new, class: ["btn", "btn-sm", "glyphicon glyphicon-check"]) %>
+               <%= button_tag("по цене", name: :btn_up, class: ["btn-sm", "glyphicon glyphicon-arrow-up"]) %>
+               <%= button_tag("по цене", name: :btn_down, class: ["btn-sm", "glyphicon glyphicon-arrow-down"]) %>
+               <%= button_tag("новинки", name: :btn_new, class: ["btn-sm", "glyphicon glyphicon-check"]) %>
                <span class="col-md-offset-4"> На странице</span>
                <div class="btn-group">
-                  <%= button_tag("24", name: :page_per, class: ["btn", "btn-sm", "glyphicon glyphicon-share"], value: 24) %>
-                  <%= button_tag("48", name: :page_per, class: ["btn", "btn-sm", "glyphicon glyphicon-share"], value: 48) %>
-                  <%= button_tag("96", name: :page_per, class: ["btn", "btn-sm", "glyphicon glyphicon-share"], value: 96) %>
+                  <%= button_tag("24", name: :page_per, class: ["btn-sm", "glyphicon glyphicon-share"], value: 24) %>
+                  <%= button_tag("48", name: :page_per, class: ["btn-sm", "glyphicon glyphicon-share"], value: 48) %>
+                  <%= button_tag("96", name: :page_per, class: ["btn-sm", "glyphicon glyphicon-share"], value: 96) %>
                </div>
          </div>
      <% end %>
@@ -174,6 +174,7 @@
                               <br>
                            <% end %>  
                            <%= link_to "Изменить", edit_product_path(con.product_id) if current_user && current_user.admin? %>
+                           <%= link_to "Удалить", con.product, method: :delete, data: { confirm: "Будут удалены также все связи. Удалять?"} if current_user && current_user.admin? %>
                         </div>
                         </div>
                      </td>   
