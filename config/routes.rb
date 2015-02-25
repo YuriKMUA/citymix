@@ -61,6 +61,7 @@ Citymix::Application.routes.draw do
          match "/cancel",           to: "products#cancel",  via: :get
          match "/colors",           to: "products#colors",  via: :get
          match "/photo",            to: "products#show_photo_color", via: :get
+         match "size",              to: "products#chooze_size", via: :get
       end
   end
   

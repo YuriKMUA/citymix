@@ -15,9 +15,72 @@
    <div class="container"><br>
       <div class="col-md-6 col-md-2" style="background: #eee;">
          <font size="5" color='#000' face="Times New Roman, Times, serif;"><%= $product.product.ctxt %></font>
-               <font size="6" color="#900090" face="Times New Roman, Times, serif;" style="margin-left: 190px;" ><%= $product.product.nprice %><font size="3"> грн.</font></font><br>
+         <font size="6" color="#900090" face="Times New Roman, Times, serif;" style="margin-left: 190px;" ><%= $product.product.nprice %><font size="3"> грн.</font></font><br>
+         <div class="row">
+            <div class="col-md-offset-1">
+                <font size="2" color='#000' face="Times New Roman, Times, serif;">Код товара <%= $product.product.cartikul %></font>
+            </div>
+         </div>   
+         <%= render "shared/hr_line" %>
+         <table>
+         <%= form_tag({ controller: "baskets", action: "create" }, method: "post") do %>
+            <%= button_tag(" КУПИТЬ", name: :btn_buy, class: ["btn btn-danger", "glyphicon glyphicon-shopping-cart", "col-md-offset-8"]) %><br>
+        <% end %>
+            <tr><td>Бренд:</td><td><%= $product.product.brand.ctxt %></td></tr> 
+            <tr><td>Страна бренда:</td><td><%= $product.product.manufacturer.ctxt %></td></tr>
+            <tr><td>Сезон:</td><td><%= $product.product.season.ctxt %></td></tr>
+            <% unless $product.product.neck_id == nil %>
+                 <tr><td>Вырез горловины:</td><td><%= $product.product.neck.ctxt %></td></tr>
+            <% end %>
+            <% unless $product.product.fastener_id == nil %>
+                 <tr><td>Застежки:</td><td><%= $product.product.fastener.ctxt %></td></tr>
+            <% end %>
+            <tr><td>Цвет:</td><td><%= @show_photo.color.ctxt %></td></tr>
+          </table>
+            Доступные цвета:
+            <div class="row">
+                <div class="col-md-offset-1">
+                    <table>
+                        <tr align="left">
+                            <% @prod.connections.each do |f| %>
+                            <% if @show_photo && @show_photo.id == f.id %>
+                                <% border = "border: 3px solid #ff0000;" %>
+                            <% end %>
+                            <td width="80px;" height="100px;"> <%= link_to image_tag(f.avatar_url.to_s, title: f.color.ctxt, size: "60x80", alt: f.color.ctxt, 
+                                                               style: "#{border}"), photo_product_path(f.id) %></td>
+                            <% end %>  
+                        </tr>                
+                    </table>
+                </div>
+            </div>    
+            <table>
+            <tr>
+            Выбирите размер:
+            <% img = "/uploads/images/kvadrat_lighter.gif" %>
+            <% Connectionsize.where(connection_id: @show_photo.id).each do |c| %>
+                <% if @chooze_size && @chooze_size.id == c.id %>    
+                    <% border = "border: 1px solid #ff0000;" %>
+                <% end %>    
+               <td><%= link_to image_tag(img, alt: c.size.ctxt, onmouseover: "this.src='/uploads/images/kvadrat.gif';", title: c.size.ctxt,
+                        onmouseout: "this.src='/uploads/images/kvadrat_lighter.gif';", style: "#{border}"), size_product_path(c.id) %></td>
+<!--                <td><%= radio_button_tag(:size, c.size.id, type: "hidden", class: "btn") %>  -->
+                <td><span style="margin-left: -35px;"><%= c.size.ctxt %></span></td>
+            <% end %>
+            </tr>
+            </table><br>
+            Дополнительная информация: <br>
+            <%= $product.product.ccontent %>
+                            
+<br> 
 
-            <%= render "shared/hr_line" %>
+                
+      </div>    
+   </div>
+
+</div>
+   <%= render "products/show_photo" %>
+</div>
+
             <div class="row">
                <% @add_photos = $product.additional_photos %>
                <% @add_photos.each do |f| %>
@@ -28,85 +91,4 @@
             </div>
             <%= render "shared/hr_line" %>
          <span style="color: #000;">
-         <table>
-            <tr><td>Производитель:</td><td><%= $product.product.manufacturer.ctxt %></td></tr>
-            <tr><td>Бренд:</td><td><%= $product.product.brand.ctxt %></td></tr> 
-         </table>
-      <%= form_tag({ controller: "baskets", action: "create" }, method: "post") do %>
-         <%= button_tag(" В КОРЗИНУ", name: :btn_buy, class: ["btn btn-danger", "glyphicon glyphicon-shopping-cart", "col-md-offset-8"]) %><br>
-      <%= render "shared/hr_line" %>
-         <div class="tabbable">
-            <ul class="nav nav-tabs">
-               <li class="active"><a href="#tab1" data-toggle="tab">НАЛИЧИЕ</a></li>
-               <li><a href="#tab2" data-toggle="tab">ОПИСАНИЕ</a></li>  
-               <li><a href="#tab3" data-toggle="tab">РАЗМЕРЫ</a></li>
-               <li><a href="#tab4" data-toggle="tab">ОТЗЫВЫ</a></li>
-            </ul>   
-            <div class="tab-content">
-                <div class="tab-pane" id="tab2">
-                     <p><%= $product.product.ccontent %></p>
-                     <p><font size="4">Дополнительная информация:</font></p>
-                     Производитель: <%= $product.product.manufacturer.ctxt %><br>
-                     Сезон: <%= $product.product.season.ctxt %><br>
-                     <% unless $product.product.neck_id == nil %>
-                        Вырез горловины: <%= $product.product.neck.ctxt %><br>
-                     <% end %>
-                     <% unless $product.product.fastener_id == nil %>
-                        Застежки: <%= $product.product.fastener.ctxt %>
-                     <% end %>
-                </div>
-                <div class="tab-pane" id="tab3">
-                     <p> 	Длина рукава 	Ширина спины 	Длина спины
-                           S 	65 	54 	77
-                           M 	66 	55 	78
-                           L 	67 	56 	79
-                           XL 	68 	57 	80
-                           2XL 	69 	58 	81</p>
-                </div>
-                <div class="tab-pane" id="tab4">
-                </div>
-                <div class="tab-pane active" id="tab1"><br>
-                <table border="2" bordercolor="#ff00ff" align="center">
-                    <tr align="center"> 
-                        <td width="100">Артикул</td>
-                        <td width="80">Цвет</td>
-                        <td width="100">Размер</td>
-                        <td width="100">Количество</td>
-                        <td width="80">Выбор</td>
-                         <% if signed_in? && current_user.admin? %>
-                           <td width="80">В наличии</td>
-                         <% end %>    
-                    </tr>    
 
-                 <% @prod.connections.each do |f| %> 
-                    <tr align="center">
-                        <td width="100"><%= f.cartikul %></td>
-                         <td width="80"> <%= link_to image_tag(f.avatar_url.to_s, title: f.color.ctxt, size: "60x80", alt: f.color.ctxt), photo_product_path(f.id) %></td>
-                         <%= text_field_tag(:color, f.color.id, type: "hidden") %>
-                              <% sizes_array = f.connectionsizes.uniq.map { |size_ar| [size_ar.size.ctxt + '-' + size_ar.number.to_s, size_ar.size.id] } %>
-                              <% @size = "size" + f.id.to_s %>
-                              <td width="100"><%= select_tag(@size, options_for_select(sizes_array), class: "btn") %></td>
-                              <%= text_field_tag(:size_id, f.id, type: "hidden") %>
-                          <% numbers_array = (1..10).map { |num| [num.to_s, num ] } %>
-                          <% @num ="num" + f.id.to_s %>
-                         <td width="100"><%= select_tag(@num, options_for_select(numbers_array), class: "btn") %></td> 
-                          <% @check = "check" + f.id.to_s %>
-                         <td align="center"><%= check_box_tag(@check, f.id) %></td>
-                         <% if signed_in? && current_user.admin? %>
-
-
-                         <% end %>   
-
-               <% end %>   
-                          
-                    </tr>
-                 <% end %>
-                </table><br> 
-                </div>
-                
-              </div>    
-         </div>
-      </span>
-   </div>
-   <%= render "products/show_photo" %>
-</div>

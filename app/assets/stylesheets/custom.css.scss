@@ -233,7 +233,7 @@ header {
    width:   70px;
    height:  60px;
    margin-top: 15px;
-   overflow:hidden; 
+   overflow: hidden; 
    &:hover {
       color: #ff00ff;
    }
@@ -496,8 +496,13 @@ div.transbox p {
 }
 
 
-
-
+.active {
+    border: 2px solid #fff;
+    &:hover {
+    background-color: #ff00ff;
+    color: #000;
+    }    
+}
 
 
 
