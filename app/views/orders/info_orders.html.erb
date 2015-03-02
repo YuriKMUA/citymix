@@ -10,9 +10,11 @@
          </div><br><br>
          <hr id="hr_line">
       <table border="2" bordercolor="#900090" align="center">
-         <tr><td>Имя: <%= current_user.name%></td><td>Фамилия: <%= current_user.last_name %></td></tr>
-         <tr><td>Н. пункт: <%= current_user.city%></td><td>Контактный телефон: <%= current_user.phone %></td></tr>
-         <tr><td>Адрес доставки: <%= current_user.adress %></td></tr>
+         <tr><td>Имя:</td><td> <%= current_user.name%></td></tr>
+         <tr><td>Фамилия:</td><td> <%= current_user.last_name %></td></tr>
+         <tr><td>Н. пункт:</td><td> <%= current_user.city%></td></tr>
+         <tr><td>Контактный телефон:</td><td> <%= current_user.phone %></td></tr>
+         <tr><td>Адрес доставки:</td><td> <%= current_user.adress %></td></tr>
       </table>
       <div class="col-md-3 col-md-offset-9">
          <%= link_to "Изменить", edit_user_path(current_user) %>

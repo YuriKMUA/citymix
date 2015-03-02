@@ -60,8 +60,6 @@ Citymix::Application.routes.draw do
          match "/search",           to: "products#search",  via: :get
          match "/cancel",           to: "products#cancel",  via: :get
          match "/colors",           to: "products#colors",  via: :get
-         match "/photo",            to: "products#show_photo_color", via: :get
-         match "size",              to: "products#chooze_size", via: :get
       end
   end
   
@@ -71,11 +69,16 @@ Citymix::Application.routes.draw do
   resources :orders
   resources  :additional_photos
   match "/info_orders", to: "orders#info_orders", via: :get
-  resources :baskets  
+  resources :baskets do
+    member do
+        match "/photo",          to: "baskets#show_photo_color", via: :get
+        match "/size",           to: "baskets#chooze_size", via: :get
+    end
+  end  
   match "/change_numbers", to: "baskets#change_numbers", via: :get
   match "/del_basket_all", to: "baskets#del_basket_all", via: :get
   match "/make_delivery",  to: "baskets#make_delivery",  via: :get 
-  
+
   root                 to: "static_pages#index"
   match '/signup',     to: 'users#new', via: :get 
   match '/signin',     to: 'sessions#new', via: :get

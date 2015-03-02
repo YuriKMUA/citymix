@@ -206,29 +206,6 @@ class ProductsController < ApplicationController
      render "group_tovs/show" 
   end
 
-  def show_photo_color
-     check_type
-     check_kategory
-     check_group_tov
-     filter
-     @show_photo = Connection.find(params[:id])
-     @prod = Product.find($product.product_id)
-     $filter_value[13] = params[:id]
-     render "show" 
-  end
-    
-  def chooze_size
-     check_type
-     check_kategory
-     check_group_tov
-     filter
-     @show_photo = Connection.find($filter_value[13].to_i)
-     @chooze_size = Connectionsize.find(params[:id])
-     @prod = Product.find($product.product_id)
-#     $filter_value[13] = params[:id]
-     render "show"
-  end
-
   def locate
       product = Connection.find_by_cartikul(params[:artikul]) 
        unless product.nil? 

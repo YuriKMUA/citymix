@@ -25,33 +25,37 @@ class BasketsController < ApplicationController
       end
          remember_token = cookies[:remember_token]
     end
-   n = 0
-   $product.connections.each do |f|
-
-      @check = "check" + f.id.to_s
-      if params[@check].to_i == f.id
-         n += 1
-         @num = "num" + f.id.to_s
-         @size = "size" + f.id.to_s
-         unless  $product.nprice == nil  
-            sum = $product.nprice.to_i * params[@num].to_i
-         else
-            sum = 0
-         end
-         @basket = Basket.new(user_id: id_of_user, cartikul: $product.cartikul, ctxt: $product.ctxt, size_id: params[@size], number: params[@num], nprice: $product.nprice, nsum: sum, color_id: f.color_id , avatar: f.avatar, remember_token: remember_token, status_delivery_id: 3)
+         @basket = Basket.new(user_id: id_of_user, cartikul: $product.cartikul, ctxt: $product.product.ctxt, size_id: $filter_value[9], number: 1, nprice: $product.product.nprice,
+         nsum: $product.product.nprice, color_id: $product.color_id , avatar: $product.avatar, remember_token: remember_token, status_delivery_id: 3)
          @basket.save
-      end
-   end
-   if n > 0
-      redirect_to baskets_path
-   else
-      flash.now[:danger] = "Не выбрано ни одного товара. Поставьте отметку в графе 'В корзину' и повторно нажмите кнопку 'КУПИТЬ'"
       check_type
       check_kategory
       check_group_tov
       filter
-      render "products/show"
-   end
+      redirect_to baskets_path
+  end
+
+  def show_photo_color
+     check_type
+     check_kategory
+     check_group_tov
+     filter
+     @show_photo = Connection.find(params[:id])
+     @prod = Product.find($product.product_id)
+     $filter_value[13] = params[:id]
+     render "products/show" 
+  end
+    
+  def chooze_size
+     check_type
+     check_kategory
+     check_group_tov
+     filter
+     @show_photo = Connection.find($filter_value[13].to_i)
+     @chooze_size = Connectionsize.find(params[:id])
+     @prod = Product.find($product.product_id)
+     $filter_value[9] = @chooze_size.size_id
+     render "products/show"
   end
 
   def change_numbers

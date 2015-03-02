@@ -18,14 +18,11 @@
          <font size="6" color="#900090" face="Times New Roman, Times, serif;" style="margin-left: 190px;" ><%= $product.product.nprice %><font size="3"> грн.</font></font><br>
          <div class="row">
             <div class="col-md-offset-1">
-                <font size="2" color='#000' face="Times New Roman, Times, serif;">Код товара <%= $product.product.cartikul %></font>
+                <font size="2" color='#000' face="Times New Roman, Times, serif;">Код товара <%= $product.cartikul %></font>
             </div>
          </div>   
          <%= render "shared/hr_line" %>
          <table>
-         <%= form_tag({ controller: "baskets", action: "create" }, method: "post") do %>
-            <%= button_tag(" КУПИТЬ", name: :btn_buy, class: ["btn btn-danger", "glyphicon glyphicon-shopping-cart", "col-md-offset-8"]) %><br>
-        <% end %>
             <tr><td>Бренд:</td><td><%= $product.product.brand.ctxt %></td></tr> 
             <tr><td>Страна бренда:</td><td><%= $product.product.manufacturer.ctxt %></td></tr>
             <tr><td>Сезон:</td><td><%= $product.product.season.ctxt %></td></tr>
@@ -47,12 +44,13 @@
                                 <% border = "border: 3px solid #ff0000;" %>
                             <% end %>
                             <td width="80px;" height="100px;"> <%= link_to image_tag(f.avatar_url.to_s, title: f.color.ctxt, size: "60x80", alt: f.color.ctxt, 
-                                                               style: "#{border}"), photo_product_path(f.id) %></td>
+                                                               style: "#{border}"), photo_basket_path(f.id) %></td>
                             <% end %>  
                         </tr>                
                     </table>
                 </div>
             </div>    
+        
             <table>
             <tr>
             Выбирите размер:
@@ -62,12 +60,15 @@
                     <% border = "border: 1px solid #ff0000;" %>
                 <% end %>    
                <td><%= link_to image_tag(img, alt: c.size.ctxt, onmouseover: "this.src='/uploads/images/kvadrat.gif';", title: c.size.ctxt,
-                        onmouseout: "this.src='/uploads/images/kvadrat_lighter.gif';", style: "#{border}"), size_product_path(c.id) %></td>
+                        onmouseout: "this.src='/uploads/images/kvadrat_lighter.gif';", style: "#{border}"), size_basket_path(c.id) %></td>
 <!--                <td><%= radio_button_tag(:size, c.size.id, type: "hidden", class: "btn") %>  -->
                 <td><span style="margin-left: -35px;"><%= c.size.ctxt %></span></td>
             <% end %>
             </tr>
             </table><br>
+         <%= form_tag({ controller: "baskets", action: "create" }, method: "post") do %>
+            <%= button_tag(" КУПИТЬ", name: :btn_buy, class: ["btn btn-danger", "col-md-offset-8"], style: ["margin-top: -300px;"]) %>
+         <% end %> 
             Дополнительная информация: <br>
             <%= $product.product.ccontent %>
                             
