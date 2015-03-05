@@ -1,4 +1,6 @@
-@import 'bootstrap';
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
 /* mixins, variables, etc. */
 
 $grayMediumLight: #eaeaea;
@@ -358,8 +360,8 @@ input {
     margin: 0 0 18px 0;
   }
 }
-/*.field_with_dangers {
-  @extend .control-group;
+.field_with_dangers {
+  @extend .form-group; 
   @extend .danger;
 }
 

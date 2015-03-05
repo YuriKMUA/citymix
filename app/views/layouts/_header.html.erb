@@ -8,40 +8,37 @@
              <% end %>             
             <div class="navbar-header nav navbar-right">
                <ul class="nav navbar-nav">
-                  <li><%= link_to "Регистрация", signup_path unless signed_in? %> </li>
+                  <li><%= link_to " Регистрация", signup_path, class: ["glyphicon glyphicon-user"] unless signed_in? %> </li>
                   <% if signed_in? %>
                    <li><%= link_to "Пользователи", users_path if current_user.admin? %></li>
                    <% if current_user.admin? %>
                    <li id="fat-menu" class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Складские операции<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Складские операции<b class="caret"></b></a>
                      <ul class="dropdown-menu">
-                        <li><%= link_to "Ввод нового товара", new_product_path %></li>
+                        <li><%= link_to " Ввод нового товара", new_product_path, class: "glyphicon glyphicon-plus" %></li>
                         <li class="divider"></li>
-                        <li><%= link_to "Редактирование данных по товару", edit_product_path(1) %></li>
-                        <li class="divider"></li>
-                        <li><%= link_to "Удаление товара",  edit_user_path(current_user) %></li> 
-                        <li class="divider"></li>
-                        <li><%= link_to "Просмотр товаров",      signout_path, method: "delete" %></li>
+                        <li><%= link_to " Редактирование данных по товару", edit_product_path(1), class: "glyphicon glyphicon-edit" %></li>
                     </ul>
                    <% end %>  
                    <li id="fat-menu" class="dropdown">
                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Account <b class="caret"></b></a>
                    <ul class="dropdown-menu">
                         <li class="divider"></li>
-                        <li><%= link_to "Просмотр профиля/заказов", current_user %></li>
-                        <li><%= link_to "Обновить профиль",  edit_user_path(current_user) %></li> 
+                        <li><%= link_to " Просмотр профиля/заказов", current_user, class: "glyphicon glyphicon-search" %></li>
+                        <li><%= link_to " Обновить профиль",  edit_user_path(current_user), class: "glyphicon glyphicon-edit" %></li> 
                         <li class="divider"></li>
-                        <li><%= link_to "Выход",      signout_path, method: "delete" %></li>
+                        <li><%= link_to " Выход", signout_path, class: "glyphicon glyphicon-share", method: "delete" %></li>
                    </ul>
-                        <li><%= link_to("Кабинет: " + current_user.name, current_user, class: ["ws11", "cat"]) %></li>
-                        <li><%= link_to "Корзина", baskets_path %></li>    
-                        <li><%= link_to(Basket.where(user_id: current_user.id, order_id: nil).count, baskets_path, id: "kol_bange", class: ["cat", "badge"]) %></li>
-                        <li><%= link_to "Выход", signout_path, method: "delete" %></li>
+                        <li><%= link_to(" Кабинет: " + current_user.name, current_user, class: ["ws11", "cat", "glyphicon glyphicon-user" ]) %></li>
+                        <li><%= link_to " Корзина", baskets_path,  class:  "glyphicon glyphicon-shopping-cart" %></li>    
+                        <li><%= link_to(Basket.where(user_id: current_user.id, order_id: nil).count, baskets_path, id: "kol_bange", 
+                                class: ["cat", "badge"]) %></li>
+                        <li><%= link_to " Выход", signout_path, class: "glyphicon glyphicon-share", method: "delete" %></li>
                         <li><%= link_to "          ", "#" %></li>
                    </ul>
                   <% else %>
-                       <li><%= link_to"Вход", signin_path, class: "cat" %></li>
-                       <li><%= link_to "Корзина", baskets_path %></li>    
+                       <li><%= link_to" Вход", signin_path, class: ["cat", "glyphicon glyphicon-log-in"] %></li>
+                       <li><%= link_to " Корзина", baskets_path,  class: "glyphicon glyphicon-shopping-cart" %></li>    
                        <li><%= link_to(Basket.where(remember_token: cookies[:remember_token]).count, baskets_path, id: "kol_bange", class: ["cat"]) %></li>
                        <li><%= link_to "          ", "#" %></li>
 
@@ -51,8 +48,9 @@
      </nav>
 
 
-<div class="col-md-8 col-md-offset-3" "wpmd">
-      <%= link_to image_tag("citylogo1.png", class: "logo"), root_path %><%= link_to image_tag("telefon-ico.png", class: ["col-md-offset-2"], width: 32, weight: 32), "#" %><%= link_to("(098)", "#", font: "Century Gotic", class: ["ws12", "cat"]) %><%= link_to(" - 745-85-45", "#", font: "Century Gotic", class: ["ws14", "cat"]) %>
+<div class="col-md-8 col-md-offset-3">
+      <%= link_to image_tag("citylogo1.png", class: "logo"), root_path %><%= link_to image_tag("telefon-ico.png", class: ["col-md-offset-2"], width: 32, weight: 32), 
+          "#" %><%= link_to("(098)", "#", font: "Century Gotic", class: ["ws12", "cat"]) %><%= link_to(" - 745-85-45", "#", font: "Century Gotic", class: ["ws14", "cat"]) %>
 </div> 
 <div class="col-md-6 col-md-offset-4">
          <ul class="nav navbar-nav">

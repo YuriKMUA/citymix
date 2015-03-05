@@ -74,7 +74,7 @@
                     <td width="300"><strong>Состояние</strong></td>
                     <td width="700"><%= f.select(:condition_id, options_for_select(conditions_array), class: ["btn btn-default"]) %></td>
                     <td width="300" align="right"><strong>Наличие</strong></td>
-                    <td width="150"><%= f.select(:availability, options_for_select(["есть в наличии", "под заказ"]), class: ["btn btn-default"]) %></td>
+                    <td width="250"><%= f.select(:availability, options_for_select(["есть в наличии", "под заказ"]), class: ["btn btn-default"]) %></td>
                   </tr>
                   <tr>
                     <td width="300"><strong style="color: #ff0000;">* Наименование</strong></td>

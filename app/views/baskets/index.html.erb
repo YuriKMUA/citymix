@@ -69,11 +69,11 @@
          </div>         
          <% end %>
          <div class="row">
-            <div class="col-md-4 col-md-offset-8">
+            <div class="col-md-4 col-md-offset-7">
                <% if signed_in? %>
-                  <%= link_to "Оформить заказ", info_orders_path, class: ["btn btn-lg btn-default", "glyphicon glyphicon-thumbs-up"] if @baskets && @baskets.any? %>
+                  <%= link_to " Оформить заказ", info_orders_path, class: ["btn btn-lg btn-default", "glyphicon glyphicon-thumbs-up"] if @baskets && @baskets.any? %>
                <% else %>
-                  <%= link_to "Оформить заказ", signin_path, class: ["btn btn-lg btn-default", "glyphicon glyphicon-thumbs-up"] if @baskets && @baskets.any? %>
+                  <%= link_to " Оформить заказ", signin_path, class: ["btn btn-lg btn-default", "glyphicon glyphicon-thumbs-up"] if @baskets && @baskets.any? %>
                <% end %>
 
             </div>   

@@ -67,7 +67,7 @@
             </tr>
             </table><br>
          <%= form_tag({ controller: "baskets", action: "create" }, method: "post") do %>
-            <%= button_tag(" КУПИТЬ", name: :btn_buy, class: ["btn btn-danger", "col-md-offset-8"], style: ["margin-top: -300px;"]) %>
+            <%= button_tag(" КУПИТЬ", name: :btn_buy, class: ["btn btn-danger", "col-md-offset-8", "glyphicon glyphicon-shopping-cart"], style: ["margin-top: -300px;"]) %>
          <% end %> 
             Дополнительная информация: <br>
             <%= $product.product.ccontent %>

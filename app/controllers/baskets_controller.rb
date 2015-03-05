@@ -25,14 +25,23 @@ class BasketsController < ApplicationController
       end
          remember_token = cookies[:remember_token]
     end
+      unless $filter_value[9].nil?  
          @basket = Basket.new(user_id: id_of_user, cartikul: $product.cartikul, ctxt: $product.product.ctxt, size_id: $filter_value[9], number: 1, nprice: $product.product.nprice,
          nsum: $product.product.nprice, color_id: $product.color_id , avatar: $product.avatar, remember_token: remember_token, status_delivery_id: 3)
          @basket.save
-      check_type
-      check_kategory
-      check_group_tov
-      filter
-      redirect_to baskets_path
+        check_type
+        check_kategory
+        check_group_tov
+        filter
+        redirect_to baskets_path
+     else
+        flash[:warning] = "Не выбрано размер. Сделайте выбор размера и нажимите кнопку 'КУПИТЬ'"
+         check_type
+        check_kategory
+        check_group_tov
+        filter
+        redirect_to product_path($filter_value[13])
+     end
   end
 
   def show_photo_color
@@ -55,6 +64,7 @@ class BasketsController < ApplicationController
      @chooze_size = Connectionsize.find(params[:id])
      @prod = Product.find($product.product_id)
      $filter_value[9] = @chooze_size.size_id
+     @status = ""
      render "products/show"
   end
 
