@@ -35,7 +35,7 @@ class AdditionalPhotosController < ApplicationController
 
   def destroy
     AdditionalPhoto.find(params[:id]).destroy
-    flesh[:success] = "Удалено"
+    flash[:success] = "Удалено"
     redirect_to edit_product_path($product.id)
   end
 
