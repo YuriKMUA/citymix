@@ -47,7 +47,7 @@
          <% end %>
          </table>
             <div class="row">
-               <%= link_to "Возвратиться к заказам", user_path %>
+               <%= link_to "Возвратиться к заказам", user_path(current_user.id) %>
                <div class="col-md-5 col-md-offset-7">
                   <span class="ws12" style="margin-left: 60px; color: #000;"> Товара на сумму: <%= $sum_in_basket %> грн.  </span><br>
                   <span class="ws12" style="margin-left: 120px; color: #000;"> Доставка: 35 грн.  </span>
