@@ -7,12 +7,12 @@
          <li><%= link_to "Главная", root_path, class: "cat" %></li>
          <li><%= link_to @gr_tov_ctxt.ctxt, mens_path, class: "cat" %></li>
          <li><%= link_to @kat_ctxt.ctxt_ua, kategory_group_tov_path($filter_value[1], $filter_value[0]), class: "cat"  %> </li>
-         <li><%= $product.product.ctxt%></li>
+         <li><%= $product.product.ctxt%> : ID продукта <%= $product.product.id.to_s %></li>
      </ul>
    </div>
 </div>
-<div class="row">
-   <div class="container"><br>
+
+<div class="container"><br>
       <div class="col-md-6 col-md-2" style="background: #eee;">
          <font size="5" color='#000' face="Times New Roman, Times, serif;"><%= $product.product.ctxt %></font>
          <font size="6" color="#900090" face="Times New Roman, Times, serif;" style="margin-left: 190px;" ><%= $product.product.nprice %><font size="3"> грн.</font></font><br>
@@ -32,14 +32,14 @@
             <% unless $product.product.fastener_id == nil %>
                  <tr><td>Застежки:</td><td><%= $product.product.fastener.ctxt %></td></tr>
             <% end %>
-            <tr><td>Цвет:</td><td><%= @show_photo.color.ctxt %></td></tr>
+            <tr><td>Цвет:</td><td><%= $product.color.ctxt %></td></tr>
           </table>
             Доступные цвета:
             <div class="row">
                 <div class="col-md-offset-1">
                     <table>
                         <tr align="left">
-                            <% @prod.connections.each do |f| %>
+                            <% @current_product.connections.each do |f| %>
                             <% if @show_photo && @show_photo.id == f.id %>
                                 <% border = "border: 3px solid #ff0000;" %>
                             <% end %>
@@ -72,24 +72,19 @@
             Дополнительная информация: <br>
             <%= $product.product.ccontent %>
                             
-<br> 
-
-                
+         <br> 
       </div>    
-   </div>
-
+        <%= render "products/show_photo" %>
+</div><br>
+<div class="row">
+    <div class="col-md-offset-1">
+    <% unless @additional_photos.nil? %>
+        <% @additional_photos.each do |f| %>
+               <%= link_to image_tag(f.avatar_url, size: "60x80", alt: "Нет фото"), additional_photo_path(f.id) %>                        
+        <% end %>
+    <% end %>
+    </div>
 </div>
-   <%= render "products/show_photo" %>
-</div>
-
-            <div class="row">
-               <% @add_photos = $product.additional_photos %>
-               <% @add_photos.each do |f| %>
-                  <div class="col-md-2">
-                     <%= link_to image_tag(f.cphoto, size: "60x80", alt: "Нет фото"), additional_photo_path(f.id) %>                        
-                  </div>                  
-               <% end %>
-            </div>
-            <%= render "shared/hr_line" %>
-         <span style="color: #000;">
+<%= render "shared/hr_line" %>
+<span style="color: #000;">
 

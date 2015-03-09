@@ -50,7 +50,8 @@ class BasketsController < ApplicationController
      check_group_tov
      filter
      @show_photo = Connection.find(params[:id])
-     @prod = Product.find($product.product_id)
+     @current_product = Product.find($product.product_id)
+     @additional_photos = @current_product.additional_photos
      $filter_value[13] = params[:id]
      render "products/show" 
   end
@@ -62,7 +63,8 @@ class BasketsController < ApplicationController
      filter
      @show_photo = Connection.find($filter_value[13].to_i)
      @chooze_size = Connectionsize.find(params[:id])
-     @prod = Product.find($product.product_id)
+     @current_product = Product.find($product.product_id)
+     @additional_photos = @current_product.additional_photos
      $filter_value[9] = @chooze_size.size_id
      @status = ""
      render "products/show"

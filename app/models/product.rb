@@ -14,7 +14,7 @@ class Product < ActiveRecord::Base
    belongs_to :neck
    has_many   :sizes, through: :connections
    belongs_to :fastener
-   has_many   :additional_photos, foreign_key: :kod_id  
+   has_many   :additional_photos  
    has_many   :baskets
    belongs_to :group_tov
    belongs_to :condition

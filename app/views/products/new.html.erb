@@ -39,7 +39,10 @@
                     <td width="700"><%= select_tag(:type_id, options_for_select(@types_array), class: ["btn btn-default"]) %></td>
                     <td width="150"></td>
                     <td width="150"><%= link_to("Доб.    тип", new_type_path, class: ["btn btn-default"])%></td>
-              <% end %>    
+              <% end %>
+              art = Product.last.id
+              art +=1
+              art.to_s
           <%= form_for @product, { html: { multipart: true } }  do |f| %>  
                   </tr>
                     <td width="300"><strong style="color: #ff0000;">* Бренд</strong></td>

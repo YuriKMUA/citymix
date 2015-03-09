@@ -1,8 +1,12 @@
 class AdditionalPhoto < ActiveRecord::Base
 
-   attr_accessible :kod_id, :cphoto, :cartikul
+   mount_uploader :avatar, AvatarUploader
+
+   attr_accessible :product_id, :avatar, :cartikul
 
    belongs_to :product
    belongs_to :connection
-
+  
+   validates :avatar, presence: true
+   validates :product_id, presence: true
 end

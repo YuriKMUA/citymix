@@ -7,10 +7,7 @@
         <% sizes_array = connection.connectionsizes.uniq.map { |size_ar| [size_ar.size.ctxt + '-' + size_ar.number.to_s, size_ar.size.id] } %>
         <% @size = "size" + connection.id.to_s %>
         <td width="100"><%= select_tag(@size, options_for_select(sizes_array), class: "btn") %></td>
- 
-
-
-        <td width="100">
+         <td width="100">
         <% if current_user.admin? %>
            <td width="100"><%= link_to "Изменить", edit_connection_path(connection.id) %>
            <td width="100"><%= link_to "Удалить", connection, method: :delete, data: { confirm: "Удалить эту строку?" } %>  

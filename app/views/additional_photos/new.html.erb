@@ -1,2 +1,13 @@
-<h1>AdditionalPhotos#new</h1>
-<p>Find me in app/views/additional_photos/new.html.erb</p>
+<h2>Вносим дополнительные фото к продукту</h2>
+<div class="col-md-6 col-md-offset-3"> 
+    <div class="well">
+        <table>
+        <tr>
+            <%= form_for @additional_photo do |f| %>     
+               <td><%= f.file_field :cphoto %>
+                <%= f.submit "Сохранить", class: ["btn btn-default", "col-md-5", "cat"] %></td>
+            <% end %>
+        </tr> 
+        </table>
+    </div>    
+</div>

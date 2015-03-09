@@ -1,6 +1,5 @@
-<% unless @show_photo == nil %>
    <div class="col-md-6 media-grid">
-      <%= image_tag(@show_photo.avatar_url.to_s, class: ["thumbnail", "fast"], size: "230x320", onmouseout: "this.width=230;this.height=320",
-                                                                          onmouseover: "this.width=620;this.height=780",  alt: "") %>
+        <%= image_tag(@show_photo.avatar_url.to_s, class: ["thumbnail", "fast"], size: "230x320", onmouseout: "this.width=230;this.height=320",
+                        onmouseover: "this.width=440;this.height=620",  alt: "") %>
    </div>
-<% end %>
+

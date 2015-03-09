@@ -63,7 +63,7 @@
                </tr>
                <tr>
                   <td><strong style="color: #ff0000;"></strong><%= f.label "Цена до уценки" %>
-                   <%= f.text_field :nold_price, maxlenth: 5 %></td> 
+                  <%= f.text_field :nold_price, maxlenth: 5 %></td> 
                   <td><strong style="color: #ff0000;">*</strong><%= f.label "Цена закупочная" %>
                   <%= f.text_field :npurchase_price, maxlength: 5  %> </td>
                </tr>
@@ -89,10 +89,16 @@
          <div class="well">
             <table border="2" bordercolor="#ff00ff" align="center">
                <%= render "shared/tr_block"%>
-               <%= render @connections %>
-	           <%= render @connectionsizes %>   	
+               <%= render @connections %>  
             </table>
              <%= link_to "Внести новые данные", new_connection_path(@current_product) %>
-
          </div>
       </div>
+      <div class="row">
+        <div class="well">
+            <table border="2" bordercolor="#ff00ff" align="center">
+                <%= render @additional_photos %>
+            </table>
+            <%= link_to "Внести доп. фото", new_additional_photo_path() %>
+        </div>
+      </div>    

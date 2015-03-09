@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211141812) do
+ActiveRecord::Schema.define(version: 20150309192041) do
 
   create_table "additional_photos", force: true do |t|
     t.string   "cartikul"
-    t.string   "cphoto"
+    t.string   "avatar"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "kod_id"
+    t.integer  "product_id"
   end
 
   create_table "baskets", force: true do |t|
@@ -208,9 +208,9 @@ ActiveRecord::Schema.define(version: 20150211141812) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "availability"
+    t.integer  "country_brand_id"
   end
 
-  add_index "products", ["cartikul"], name: "index_products_on_cartikul", unique: true, using: :btree
   add_index "products", ["cedrpou"], name: "index_products_on_cedrpou", unique: true, using: :btree
 
   create_table "relationships", force: true do |t|

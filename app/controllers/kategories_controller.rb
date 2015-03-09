@@ -15,7 +15,8 @@ class KategoriesController < ApplicationController
 
       if @kategory.save
          flash.now[:success] = "Сохранено"
-         redirect_to new_product_path
+#        redirect_to new_product_path
+         render "products/new"
       else
          flash.now[:danger] = "Не сохранено. Не внесены данные, отмеченные звездочкой"
          render "new"

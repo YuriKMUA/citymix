@@ -1,0 +1,4 @@
+<tr>
+<td> <%= image_tag(additional_photo.cphoto_url.to_s, title: "Photo", size: "60x80") %>
+<%= link_to "Удалить", additional_photo, method: "delete", data: { confirm: "Удалять?"} %></td>
+</tr>

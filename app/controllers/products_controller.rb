@@ -38,22 +38,28 @@ class ProductsController < ApplicationController
   end
 
   def edit
-
-   @current_product = Product.find(params[:id])
-   @current_product = Product.find(params[:ids]) unless params[:ids].nil? 
-   $product = @current_product
-    if @current_product.nil?
-        flash.now[:danger] = "Не верно введен ID товара"
-        @current_product = Product.find(1)
-    end 
-        @connections = @current_product.connections
-        @connections = [] if @connections.nil?
-	if  @connectionsizes.nil?
-		@connectionsizes = [] 
-	else
-		@connectionsizes = @connections.connectionsizes
-	end
-#    check_in(product)     
+    @current_product = Product.find(params[:id])
+    @connections = @current_product.connections
+    @additional_photos = @current_product.additional_photos
+    if   !params[:ids].nil? || params[:ids].to_i > Product.last.id 
+        @current_product = Product.find(params[:ids])  
+        $product = @current_product
+        if @current_product.nil?
+            flash[:danger] = "Не верно введен ID товара"
+            @current_product = Product.find(1)
+        end 
+            @connections = @current_product.connections
+            @connections = [] if @connections.nil?
+            @additional_photos = @current_product.additional_photos
+	    if @connectionsizes.nil?
+		    @connectionsizes = [] 
+	    else
+		    @connectionsizes = @connections.connectionsizes
+	    end
+#    check_in(product)
+    else
+        flash.now[:danger] = "Не верно введен код. Диапазон ввода #{Product.first.id} - #{Product.last.id}"
+    end
    
   end
 
@@ -91,9 +97,11 @@ class ProductsController < ApplicationController
        $filter_value[1] = 0
      end   
     $product = Connection.find(params[:id]) 
-    @prod = Product.find($product.product_id)
     @show_photo = $product
+    @current_product = Product.find($product.product_id)
+    @additional_photos = @current_product.additional_photos
     $filter_value[13] = params[:id]
+   
     check_type  
     check_kategory
     check_group_tov
