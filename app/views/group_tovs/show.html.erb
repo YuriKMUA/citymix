@@ -48,11 +48,11 @@
                                  <% end %>
                                  </ul>
                                  <% $filter_value[2] = @flt if $filter_value[2] == nil %>
-                              <% when 2 %>
+                              <% when 4 %>
                                  <ul class="search_block">
                                  <% Brand.where(kategories_id: $filter_value[1]).each do |f| %>
                                        <% @brand = "brand" + f.id.to_s %>
-                                       <li><%= radio_button_tag(:brand, f.id) %>
+                                       <li><%= radio_button_tag(:brand, f.id, class: ["col-md-1"]) %>
                                            <%= label_tag(@brand, f.ctxt) %></li>
                                        <% @flt[@n] = f.id %>
                                        <% @n += 1 %>
@@ -89,7 +89,7 @@
                                  <% if $filter_value[5] == nil %>
                                         <% $filter_value[5] = @flt %>
                                  <% end %>
-                              <% when 5 %>
+                              <% when 2 %>
                                  <ul class="search_block">
                                  <% Color.joins(:products).uniq.each do |f| %>
                                     <% @idc = "idc" + f.id.to_s %>
@@ -115,7 +115,7 @@
                                    <% if $filter_value[8] == nil %>
                                          <% $filter_value[8] = @flt %>
                                    <% end %>    
-                              <% when 7 %>
+                              <% when 1 %>
                                  <ul class="search_block">
 
                                     <% Size.order("ctxt").joins(:connections).uniq.each do |f| %>

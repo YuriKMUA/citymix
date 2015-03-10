@@ -2,7 +2,7 @@
 <br>
 
 <div class="row">
-   <div class="col-md-6 col-md-offset-1">
+   <div class="col-md-8 col-md-offset-1">
      <ul class="breadcrumb">
          <li><%= link_to "Главная", root_path, class: "cat" %></li>
          <li><%= link_to @gr_tov_ctxt.ctxt, mens_path, class: "cat" %></li>
@@ -25,14 +25,14 @@
          <table>
             <tr><td>Бренд:</td><td><%= $product.product.brand.ctxt %></td></tr> 
             <tr><td>Страна бренда:</td><td><%= $product.product.manufacturer.ctxt %></td></tr>
-            <tr><td>Сезон:</td><td><%= $product.product.season.ctxt %></td></tr>
+            <tr><td>Сезон:</td><td><%= @show_photo.product.season.ctxt %></td></tr>
             <% unless $product.product.neck_id == nil %>
                  <tr><td>Вырез горловины:</td><td><%= $product.product.neck.ctxt %></td></tr>
             <% end %>
             <% unless $product.product.fastener_id == nil %>
                  <tr><td>Застежки:</td><td><%= $product.product.fastener.ctxt %></td></tr>
             <% end %>
-            <tr><td>Цвет:</td><td><%= $product.color.ctxt %></td></tr>
+            <tr><td>Цвет:</td><td><%= @show_photo.color.ctxt %></td></tr>
           </table>
             Доступные цвета:
             <div class="row">
