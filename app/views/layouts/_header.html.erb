@@ -52,7 +52,7 @@
       <%= link_to image_tag("citylogo1.png", class: "logo"), root_path %><%= link_to image_tag("telefon-ico.png", class: ["col-md-offset-2"], width: 32, weight: 32), 
           "#" %><%= link_to("(098)", "#", font: "Century Gotic", class: ["ws12", "cat"]) %><%= link_to(" - 745-85-45", "#", font: "Century Gotic", class: ["ws14", "cat"]) %>
 </div> 
-<div class="col-md-6 col-md-offset-4">
+<div class="col-md-8 col-md-offset-4">
          <ul class="nav navbar-nav">
                <% @group_tovs_filter = GroupTov.where(lvisible: true) %>
                <% @group_tovs_filter.each do |txt| %>
