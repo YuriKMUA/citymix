@@ -10,7 +10,7 @@ class TypesController < ApplicationController
          redirect_to new_product_path
       else
          flash.now[:danger] = "Не сохранено. Не внесены данные, отмеченные звездочкой"
-         render "new"
+         redirect_to new_product_path
       end
   end
 

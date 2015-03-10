@@ -21,7 +21,7 @@
             <%= form_tag("/flt_by_group_tov") do -%>
                <table>
                   <tr>
-                     <td width="300"><strong style="color: #ff0000;">* Група товаров</strong></td>
+                     <td width="300"><strong style="color: #ff0000;">* Категория</strong></td>
                     <td width="700"><%= select_tag(:group_tov_id, options_for_select(@group_tovs_array), class: ["btn btn-default"]) %></td>
                     <td width="150"><%= button_tag("Выбрать", class: ["btn btn-default"]) -%></td>
                     <td width="150"><%= link_to("Доб. группу ", "#", class: ["btn btn-default"])%>
@@ -29,7 +29,7 @@
             <% end %>
             <%= form_tag("/flt_by_kategory", method: "get") do -%>
                   <tr>
-                     <td width="300"><strong style="color: #ff0000;">* Категория</strong></td>
+                     <td width="300"><strong style="color: #ff0000;">* Подкатегория</strong></td>
                     <td width="700"><%= select_tag(:kategories_id, options_for_select(@kategories_array), class: ["btn btn-default"]) %></td>
                     <td width="150"><%= button_tag("Выбрать", class: ["btn btn-default"]) -%></td>
                     <td width="150"><%= link_to("Доб.категор.  ", new_kategory_path, class: ["btn btn-default"])%></td>
@@ -40,9 +40,6 @@
                     <td width="150"></td>
                     <td width="150"><%= link_to("Доб.    тип", new_type_path, class: ["btn btn-default"])%></td>
               <% end %>
-              art = Product.last.id
-              art +=1
-              art.to_s
           <%= form_for @product, { html: { multipart: true } }  do |f| %>  
                   </tr>
                     <td width="300"><strong style="color: #ff0000;">* Бренд</strong></td>
