@@ -1,7 +1,5 @@
 <%= provide(:title, "Ввод бренда товаров") %>
 
-<% kategories_array = Kategory.all.map { |kategory| [kategory.ctxt_rus + ' ' + kategory.ctxt_ua, kategory.id] } %>
-
 <div class="row">
    <div class="col-md-7 col-md-offset-3">
       <div class="well">
@@ -13,8 +11,8 @@
                <tr>
                   <td><strong style="color: #ff0000;">*</strong><%= f.label "Наименование" %>
                        <%= f.text_field   :ctxt %></td>
-                  <td><strong style="color: #ff0000;">*</strong><%= f.label "Категория товаров" %>
-                  <%= f.select(:kategories_id, options_for_select(kategories_array), class: ["btn btn-default"]) %></td>
+                  <td><strong style="color: #ff0000;">*</strong><%= f.label "Страна бренда" %>
+                  <%= f.text_field :country %></td>
               </tr>
              </table>
        <strong style="color: #ff0000;">*  Поля, обязательные для заполнения</strong><br>   

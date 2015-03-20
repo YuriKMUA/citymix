@@ -4,26 +4,39 @@
 <%= form_for @connection do |c| %>
 <div class="row">
    <div class="col-md-8 col-md-offset-1">
+   <h3>Изменение цвета/изображения</h3>
    <div class="well">
        <table border="2" bordercolor="#ff00ff" align="center">  
             <tr align="center">
-                 <b> <td><%= @connection.cartikul %></td>
-                  <td><%= @connection.color.ctxt %></td></b>
+                 <b> <td><%= c.label "Код товара:"%> <%= @connection.cartikul %></td>
+                  <td>Цвет: <%=@connection.color.ctxt %></td></b>
                   <td></td>   
 
             </tr>
-            <tr>      
+            <tr align="center">      
                   <td align="center"><%= c.text_field :cartikul %></td>
-                  <td><%= c.select(:color, options_for_select(colors_array)) %></td>
+                  <td align="center"><%= c.select(:color, options_for_select(colors_array)) %></td>
                   <td></td>
                   <td></td>
-                  <td><%= c.submit "Сохранить", class: ["btn btn-default"] %></td>
-                  <tr>  
-                    <td> <%= image_tag(@connection.avatar_url, size: "60x80") %></td>
-                    <td> <%= c.file_field :avatar %></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                  <td></td>
+           <tr>  
+                  <td align="center"> <%= image_tag(@connection.avatar_url, size: "60x80") %></td>
+                  <td > <%= c.file_field :avatar %></td>
+                  <td></td>
+                  <td></td>
+           </tr>
+       </table>
+       <br>
+       <table border="2" bordercolor="#ff00ff" align="center">
+           <tr>
+                <td align="center"><%= c.label "Дополнительная информация к конкретному товару" %> </td>
+           </tr> 
+           <tr>
+                <td width="600"> <%= c.text_area :content %></td>
+           </tr>
+           <tr>
+                <td align="center"><%= c.submit "Сохранить", class: ["btn btn-default"] %></td>
+           </tr> 
        </table> 
    </div>
    </div>
@@ -31,6 +44,7 @@
 <% end %>
 <div class="row">
    <div class="col-md-8 col-md-offset-1">
+        <h3>Изменение размера/количества</h3>
         <div class="well">
             <table border="2" bordercolor="#ff00ff" align="center"> 
                 <tr align="center">
@@ -54,4 +68,18 @@
             <%= link_to "Внести новые данные", new_connectionsize_path($connection) %>
         </div>
    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-1">
+    <h3>Изменение дополнительных изображений</h3>
+        <div class="well">
+            <% if @additional_photos %>
+            <table border="2" bordercolor="#ff00ff">
+                <%= render @additional_photos %>
+            </table>
+            <% end %>
+            <%= link_to "Внести доп. фото", new_additional_photo_path() %>
+        </div>
+    </div>    
 </div>

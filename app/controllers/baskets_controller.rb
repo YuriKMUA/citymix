@@ -26,14 +26,17 @@ class BasketsController < ApplicationController
          remember_token = cookies[:remember_token]
     end
       unless $filter_value[9].nil?  
-         @basket = Basket.new(user_id: id_of_user, cartikul: $product.cartikul, ctxt: $product.product.ctxt, size_id: $filter_value[9], number: 1, nprice: $product.product.nprice,
-         nsum: $product.product.nprice, color_id: $product.color_id , avatar: $product.avatar, remember_token: remember_token, status_delivery_id: 3)
-         @basket.save
-        check_type
-        check_kategory
-        check_group_tov
-        filter
-        redirect_to baskets_path
+         @basket = Basket.new(user_id: id_of_user, cartikul: $connection.cartikul, ctxt: $product.ctxt, size_id: $filter_value[9], number: 1, nprice: $product.nprice,
+         nsum: $product.nprice, color_id: $connection.color_id , avatar: $connection.avatar, remember_token: remember_token, status_delivery_id: 3)
+        if @basket.save
+            check_type
+            check_kategory
+            check_group_tov
+            filter
+            redirect_to baskets_path
+        else
+            flash[:danger] = "Не записано. Не заполнены необходимые поля"
+        end
      else
         flash[:warning] = "Не выбрано размер. Сделайте выбор размера и нажимите кнопку 'КУПИТЬ'"
          check_type
@@ -50,8 +53,9 @@ class BasketsController < ApplicationController
      check_group_tov
      filter
      @show_photo = Connection.find(params[:id])
-     @current_product = Product.find($product.product_id)
-     @additional_photos = @current_product.additional_photos
+     @show_color = @show_photo
+     @current_product = Product.find($connection.product_id)
+     @additional_photos = @show_photo.additional_photos
      $filter_value[13] = params[:id]
      render "products/show" 
   end
@@ -62,9 +66,10 @@ class BasketsController < ApplicationController
      check_group_tov
      filter
      @show_photo = Connection.find($filter_value[13].to_i)
+     @show_color = @show_photo
      @chooze_size = Connectionsize.find(params[:id])
-     @current_product = Product.find($product.product_id)
-     @additional_photos = @current_product.additional_photos
+     @current_product = Product.find($connection.product_id)
+     @additional_photos = @show_photo.additional_photos
      $filter_value[9] = @chooze_size.size_id
      @status = ""
      render "products/show"

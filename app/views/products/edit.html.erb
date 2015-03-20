@@ -29,7 +29,7 @@
                <table>
                <tr>
                   <td><strong style="color: #ff0000;">*</strong><%= f.label "Артикул" %>
-                       <%= @current_product.cartikul %></td>
+                       <%= f.text_field :cartikul %></td>
                   <td><strong style="color: #ff0000;">*</strong><%= f.label "Наименование товара" %>
                        <%= f.text_field    :ctxt %></td>
                </tr>
@@ -94,11 +94,4 @@
              <%= link_to "Внести новые данные", new_connection_path(@current_product) %>
          </div>
       </div>
-      <div class="row">
-        <div class="well">
-            <table border="2" bordercolor="#ff00ff" align="center">
-                <%= render @additional_photos %>
-            </table>
-            <%= link_to "Внести доп. фото", new_additional_photo_path() %>
-        </div>
-      </div>    
+  

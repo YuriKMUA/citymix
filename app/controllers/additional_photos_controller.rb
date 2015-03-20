@@ -9,11 +9,11 @@ class AdditionalPhotosController < ApplicationController
 
   def create
     @additional_photo = AdditionalPhoto.new(params[:additional_photo])
-    @additional_photo.product_id = $product.id
+    @additional_photo.connection_id = $connection.id
     if @additional_photo.save
         flash.now[:success] = "Дополнительное фото внесено"
-        @current_product = $product
-        redirect_to edit_product_path(@current_product.id)
+#        @current_product = $product
+        redirect_to edit_product_path(@connection.id)
     else
         flash.now[:danger] = "Не выбраны обязательные поля"
         render "new"
@@ -26,10 +26,10 @@ class AdditionalPhotosController < ApplicationController
      check_group_tov
      filter
      filter
-     @current_product = Product.find($product.product_id)
-     @additional_photos = @current_product.additional_photos
-     @show_photo = AdditionalPhoto.find(params[:id])
-#     $filter_value[13] = params[:id]
+     @current_product = Product.find($connection.product_id)
+     @additional_photos = $connection.additional_photos
+     @show_photo = $connection
+     @show_add_photo = AdditionalPhoto.find(params[:id])
      render "products/show" 
   end
 

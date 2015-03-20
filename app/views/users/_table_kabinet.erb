@@ -3,16 +3,17 @@
                         <% if current_user.admin %>
                            <td width="80"><b>№ заказа</b></td>
                         	<td width="200"><b>Создан</b></td>
-                        	<td width="200"><b>Статус заявки</b></td>
-                           <td width="200">Оплата</td>
-                           <td width="200">Доставка</td>
-                           <td width="500"><b>Клиент</b></td>
-                           <td width="700"><b>№ декларации</b></td>
+                        	<td width="180"><b>Статус заявки</b></td>
+                           <td width="180">Оплата</td>
+                           <td width="180">Доставка</td>
+                           <td width="300">Комментарий</td>
+                           <td width="300"><b>Клиент</b></td>
+                           <td width="400"><b>№ декларации</b></td>
                         <%else%>
                            <td width="80"><b>№ заказа</b></td>
                         	<td width="200"><b>Создан</b></td>
 		        	            <td width="300"><b>Статус заявки</b></td>
-                           <td width="700"><b>№ декларации</b></td>
+                           <td width="400"><b>№ декларации</b></td>
 
                         <% end %>
                   </tr>
@@ -22,17 +23,18 @@
                      <%= form_for order, url: { controller: "orders", action: "update" },  method: "patch", html: { class: "nifty_form" } do |d| %>
                      <tr align="center">
 			               <td width="80"><%= link_to order.id, basket_path(order.id) %></td>  
-            		     	<td width="200"><%= order.created_at %></td>
-            		     	<td width="300"><%= order.status_delivery.ctxt %></td>
+            		     	<td width="180"><%= order.created_at %></td>
+            		     	<td width="180"><%= order.status_delivery.ctxt %></td>
                         <% if current_user.admin %>
-                           <td width="200"><%= order.oplata %></td>
-                           <td width="200"> <%= order.dostavka %></td>
-                           <td width="500"><b><%= link_to order.user.name, user_path(order.user_id) %></b></td>
+                           <td width="180"><%= order.oplata %></td>
+                           <td width="180"> <%= order.dostavka %></td>
+                           <td> <%= order.ccontent %></td>
+                           <td width="300"><b><%= link_to order.user.name, user_path(order.user_id) %></b></td>
                            <%= d.text_field :id, type: :hidden %>
-                           <td width="700"><%= d.text_field :declaration_id %>
+                           <td width="400"><%= d.text_field :declaration_id %>
                            <%= d.submit("Сохранить") %></td>
                         <% else %>   
-                           <td width="700"><%= order.declaration_id %>
+                           <td width="400"><%= order.declaration_id %>
                         <% end %>
 
                      <% end %>   

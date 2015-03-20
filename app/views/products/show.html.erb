@@ -1,4 +1,4 @@
-<% provide(:title, $product.product.ctxt) %>
+<% provide(:title, @show_photo.product.ctxt) %>
 <br>
 
 <div class="row">
@@ -7,15 +7,15 @@
          <li><%= link_to "Главная", root_path, class: "cat" %></li>
          <li><%= link_to @gr_tov_ctxt.ctxt, mens_path, class: "cat" %></li>
          <li><%= link_to @kat_ctxt.ctxt_ua, kategory_group_tov_path($filter_value[1], $filter_value[0]), class: "cat"  %> </li>
-         <li><%= $product.product.ctxt%> : ID продукта <%= $product.product.id.to_s %></li>
+         <li><%= @current_product.ctxt%> : ID продукта <%= @current_product.id.to_s %></li>
      </ul>
    </div>
 </div>
 
 <div class="container"><br>
       <div class="col-md-6 col-md-2" style="background: #eee;">
-         <font size="5" color='#000' face="Times New Roman, Times, serif;"><%= $product.product.ctxt %></font>
-         <font size="6" color="#900090" face="Times New Roman, Times, serif;" style="margin-left: 190px;" ><%= $product.product.nprice %><font size="3"> грн.</font></font><br>
+         <font size="5" color='#000' face="Times New Roman, Times, serif;"><%= @show_photo.product.ctxt %></font>
+         <font size="6" color="#900090" face="Times New Roman, Times, serif;" style="margin-left: 190px;" ><%= @current_product.nprice %><font size="3"> грн.</font></font><br>
          <div class="row">
             <div class="col-md-offset-1">
                 <font size="2" color='#000' face="Times New Roman, Times, serif;">Код товара <%= @show_photo.cartikul %></font>
@@ -23,17 +23,41 @@
          </div>   
          <%= render "shared/hr_line" %>
          <table>
-            <tr><td>Бренд:</td><td><%= $product.product.brand.ctxt %></td></tr> 
-            <tr><td>Страна бренда:</td><td><%= $product.product.manufacturer.ctxt %></td></tr>
-            <tr><td>Сезон:</td><td><%= @show_photo.product.season.ctxt %></td></tr>
-            <% unless $product.product.neck_id == nil %>
-                 <tr><td>Вырез горловины:</td><td><%= $product.product.neck.ctxt %></td></tr>
-            <% end %>
-            <% unless $product.product.fastener_id == nil %>
-                 <tr><td>Застежки:</td><td><%= $product.product.fastener.ctxt %></td></tr>
-            <% end %>
-            <tr><td>Цвет:</td><td><%= @show_photo.color.ctxt %></td></tr>
-          </table>
+            <% if @show_color %>
+                <tr><td>Бренд:</td><td><%= @show_color.product.brand.ctxt %></td></tr>
+                <tr><td>Страна бренда:</td><td><%= @show_color.product.brand.country %></td></tr>
+                <tr><td>Страна-изготовитель:</td><td><%= @show_color.product.manufacturer.ctxt %></td></tr>
+                <tr><td>Сезон:</td><td><%= @show_color.product.season.ctxt %></td></tr>
+                <% unless @show_color.product.neck_id == 1 %>
+                     <tr><td>Вырез горловины:</td><td><%= @show_color.product.neck.ctxt %></td></tr>
+                <% end %>
+                <% unless @show_color.product.fastener_id == nil %>
+                     <tr><td>Застежки:</td><td><%= @show_color.product.fastener.ctxt %></td></tr>
+                <% end %>
+                <tr><td>Состояние:</td><td><%= @show_color.product.condition.ctxt %></td></tr>
+                <tr><td>Наличие:</td><td><%= @show_color.product.availability %></td></tr>
+
+                <tr><td>Цвет:</td><td><%= @show_color.color.ctxt %></td></tr>
+                <% $connection = @show_color %>
+            <% else %> 
+                <tr><td>Бренд:</td><td><%= @show_photo.product.brand.ctxt %></td></tr> 
+                <tr><td>Страна бренда:</td><td><%= @show_photo.product.brand.country %></td></tr>
+                <tr><td>Страна-изготовитель:</td><td><%= @show_photo.product.manufacturer.ctxt %></td></tr>
+                <tr><td>Сезон:</td><td><%= @show_photo.product.season.ctxt %></td></tr>
+                <% unless @show_photo.product.neck_id == 1 %>
+                     <tr><td>Вырез горловины:</td><td><%= @show_photo.product.neck.ctxt %></td></tr>
+                <% end %>
+                <% unless @show_photo.product.fastener_id == nil %>
+                     <tr><td>Застежки:</td><td><%= @show_photo.product.fastener.ctxt %></td></tr>
+                <% end %>
+                <tr><td>Состояние:</td><td><%= @show_photo.product.condition.ctxt %></td></tr>
+                <tr><td>Наличие:</td><td><%= @show_photo.product.availability %></td></tr>
+                <tr><td>Цвет:</td><td><%= @show_photo.color.ctxt %></td></tr>
+                <% $connection = @show_photo %>
+            <% end %>    
+                <% $product = @current_product %>
+
+        </table>
             Доступные цвета:
             <div class="row">
                 <div class="col-md-offset-1">
@@ -42,8 +66,8 @@
                             <% @current_product.connections.each do |f| %>
                             <% if @show_photo && @show_photo.id == f.id %>
                                 <% border = "border: 3px solid #ff0000;" %>
-                            <% end %>
-                            <td width="80px;" height="100px;"> <%= link_to image_tag(f.avatar_url.to_s, title: f.color.ctxt, size: "60x80", alt: f.color.ctxt, 
+                            <% end %>    
+                                <td width="80px;" height="100px;"> <%= link_to image_tag(f.avatar_url.to_s, title: f.color.ctxt, size: "60x80", alt: f.color.ctxt, 
                                                                style: "#{border}"), photo_basket_path(f.id) %></td>
                             <% end %>  
                         </tr>                
@@ -67,23 +91,23 @@
             </tr>
             </table><br>
          <%= form_tag({ controller: "baskets", action: "create" }, method: "post") do %>
-            <%= button_tag(" КУПИТЬ", name: :btn_buy, class: ["btn btn-danger", "col-md-offset-8", "glyphicon glyphicon-shopping-cart"], style: ["margin-top: -300px;"]) %>
+            <%= button_tag(" КУПИТЬ", name: :btn_buy, class: ["btn btn-danger", "col-md-offset-8", "glyphicon glyphicon-shopping-cart"], style: ["margin-top: -500px;"]) %>
          <% end %> 
             Дополнительная информация: <br>
-            <%= $product.product.ccontent %>
+            <%= @show_photo.product.ccontent %><br>
+            <%= @show_photo.content %>
                             
          <br> 
       </div>    
         <%= render "products/show_photo" %>
 </div><br>
 <div class="row">
-    <div class="col-md-offset-1">
     <% unless @additional_photos.nil? %>
+        <%= link_to image_tag(@show_photo.avatar_url, size: "120x160"), { controller: "products", action: "show" } %>
         <% @additional_photos.each do |f| %>
-               <%= link_to image_tag(f.avatar_url, size: "60x80", alt: "Нет фото"), additional_photo_path(f.id) %>                        
+               <%= link_to image_tag(f.avatar_url, size: "120x160", alt: "Нет фото"), additional_photo_path(f.id) %>                        
         <% end %>
     <% end %>
-    </div>
 </div>
 <%= render "shared/hr_line" %>
 <span style="color: #000;">

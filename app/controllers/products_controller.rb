@@ -17,7 +17,6 @@ class ProductsController < ApplicationController
       else
          @product.avatar = params[:avatar] 
       end
-#      @product.avatar = Product.open(:file)
       @product.llatest = true
       @product.avatar.url
       @product.avatar.current_path
@@ -38,25 +37,23 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @current_product = Product.find(params[:id])
+    @current_product = Product.find(params[:id]) 
     @connections = @current_product.connections
-    @additional_photos = @current_product.additional_photos
-    if   !params[:ids].nil? || params[:ids].to_i > Product.last.id 
+    params[:ids] = params[:id] if params[:ids].nil? 
+    if  params[:ids].to_i <= Product.last.id
         @current_product = Product.find(params[:ids])  
         $product = @current_product
         if @current_product.nil?
-            flash[:danger] = "Не верно введен ID товара"
-            @current_product = Product.find(1)
+            @current_product = Product.find(Product.first.id)
         end 
             @connections = @current_product.connections
             @connections = [] if @connections.nil?
-            @additional_photos = @current_product.additional_photos
+#            @additional_photos = @current_product.additional_photos
 	    if @connectionsizes.nil?
 		    @connectionsizes = [] 
 	    else
 		    @connectionsizes = @connections.connectionsizes
 	    end
-#    check_in(product)
     else
         flash.now[:danger] = "Не верно введен код. Диапазон ввода #{Product.first.id} - #{Product.last.id}"
     end
@@ -96,10 +93,12 @@ class ProductsController < ApplicationController
        $filter_value[0] = 1
        $filter_value[1] = 0
      end   
-    $product = Connection.find(params[:id]) 
-    @show_photo = $product
-    @current_product = Product.find($product.product_id)
-    @additional_photos = @current_product.additional_photos
+    $filter_value[9] = nil 
+    $connection = Connection.find(params[:id]) 
+    @show_photo = $connection
+    @show_color = @show_photo
+    @current_product = Product.find($connection.product_id)
+    @additional_photos = @show_color.additional_photos
     $filter_value[13] = params[:id]
    
     check_type  
@@ -112,7 +111,7 @@ class ProductsController < ApplicationController
   def destroy
      Product.find(params[:id]).destroy
      flash[:success] = "Удалено"
-     redirect_to  group_tovs_path($product.id)
+     redirect_to  root_path
 
   end
   def search
@@ -229,7 +228,7 @@ class ProductsController < ApplicationController
   def flt_by_group_tov
       @group_tovs_array = GroupTov.where(id: params[:group_tov_id]).map { |group_tov| [group_tov.ctxt, group_tov.id] } 
       @@group_tov_id = params[:group_tov_id]
-      @kategories_array = Kategory.where(group_tov_id: params[:group_tov_id]).map { |kategory| [kategory.ctxt_ua, kategory.id] }  
+      @kategories_array = Kategory.order("ctxt_ua").where(group_tov_id: params[:group_tov_id]).map { |kategory| [kategory.ctxt_ua, kategory.id] }  
       @product = Product.new 
       @connection = @product.connections.build
       @connectionsize = Connection.new
@@ -238,7 +237,7 @@ class ProductsController < ApplicationController
 
   def flt_by_kategory
 #      @group_tovs_array = GroupTov.where(id: params[:ngroup_tov_id]).map { |group_tov| [group_tov.ctxt, group_tov.id] } 
-      @kategories_array = Kategory.where(id: params[:kategories_id]).map { |kategory| [kategory.ctxt_ua, kategory.id] }  
+      @kategories_array = Kategory.order("ctxt_ua").where(id: params[:kategories_id]).map { |kategory| [kategory.ctxt_ua, kategory.id] }  
       @@kategory_id = params[:kategories_id]
       @brands_array = Brand.where(kategories_id: params[:kategories_id]).map { |brand| [brand.ctxt, brand.id] } 
       @types_array = Type.where(kategories_id: params[:kategories_id]).map { |brand| [brand.ctxt, brand.id] } 
@@ -263,7 +262,7 @@ class ProductsController < ApplicationController
 private
 
    def product_params
-      params.require(:product).permit(:ctxt, :type_id, :avatar, :nprice, :nold_price, :cartikul, :kategories_id, :brand_id, :season_id, :manufacturer_id, :neck_id, :fastener_id, :llatest, :created_at, :group_tov_id, :ccontent, :condition_id, :availability, :npurchase_price, connections_attributes: [:number, :color_id, :avatar])
+      params.require(:product).permit(:ctxt, :type_id, :avatar, :nprice, :nold_price, :cartikul, :kategories_id, :brand_id, :season_id, :manufacturer_id, :neck_id, :fastener_id, :llatest, :created_at, :group_tov_id, :ccontent, :condition_id, :availability, :npurchase_price, connections_attributes: [:number, :color_id, :avatar, :content])
    end
 end
 

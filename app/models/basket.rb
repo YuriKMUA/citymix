@@ -9,4 +9,6 @@ class Basket < ActiveRecord::Base
    belongs_to :order
    belongs_to :status_delivery
    belongs_to :user
+
+   validates :ctxt, :size_id,  :color_id, :cartikul, presence: true
 end

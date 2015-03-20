@@ -19,18 +19,21 @@ class ConnectionsController < ApplicationController
 
   def edit
       @connection = Connection.find(params[:id])
+      @additional_photos = @connection.additional_photos
   end
 
   def update
       @connection = Connection.find(params[:id])
       @connection.color_id = params[:connection][:color] unless params[:connection][:color].to_i == 0
-#      @connection.size_id = params[:connection][:size] unless params[:connection][:size].to_i == 0
       @connection.avatar = params[:connection][:avatar] unless params[:connection][:avatar].nil?
-      
+      @connection.content = params[:connection][:content] unless params[:connection][:content].nil?
       if @connection.save
          flash[:success] = 'Изменения сохранены'
+         redirect_to edit_product_path($product.id)
+      else
+         flash.now[:danger] = 'Не сохранено. Не внесены обязательные поля'
+         render "edit"
       end
-      redirect_to edit_product_path($product.id)
   end
 
   def destroy

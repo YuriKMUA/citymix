@@ -1,2 +1,2 @@
-<td> <%= image($product.additional_photo.avatar_url.to_s, title: "Photo", size: "60x80") %>
+<td> <%= image($connection.additional_photo.avatar_url.to_s, title: "Photo", size: "60x80") %>
 <%= link_to "Изменить", edit_additional_photo(params[:id]) %></td>

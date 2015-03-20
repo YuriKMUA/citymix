@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309192041) do
+ActiveRecord::Schema.define(version: 20150318140733) do
 
   create_table "additional_photos", force: true do |t|
     t.string   "cartikul"
     t.string   "avatar"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "product_id"
+    t.integer  "connection_id"
   end
 
   create_table "baskets", force: true do |t|
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20150309192041) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "cartikul"
+    t.text     "content"
   end
 
   create_table "connectionsizes", force: true do |t|

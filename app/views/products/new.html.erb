@@ -4,7 +4,7 @@
 <% sizes_array = Size.all.map { |size| [size.ctxt, size.id] } %>
 <% colors_array = Color.all.map { |color| [color.ctxt, color.id] } %>
 <% @group_tovs_array = GroupTov.all.map { |group_tov| [group_tov.ctxt, group_tov.id] } if @group_tovs_array.nil? %>
-<% @kategories_array = Kategory.all.map { |kategory| [kategory.ctxt_rus + ' ' + kategory.ctxt_ua, kategory.id] } if @kategories_array.nil? %>
+<% @kategories_array = Kategory.order("ctxt_ua").all.map { |kategory| [kategory.ctxt_rus + ' ' + kategory.ctxt_ua, kategory.id] } if @kategories_array.nil? %>
 <% @brands_array = Brand.all.map { |brand| [brand.ctxt, brand.id] } if @brands_array.nil? %>
 <% group_tovs_array = GroupTov.all.map { |group_tov| [group_tov.ctxt, group_tov.id] } %>
 <% kategories_array = Kategory.all.map { |kategory| [kategory.ctxt_rus + ' ' + kategory.ctxt_ua, kategory.id] } %>
@@ -48,15 +48,10 @@
                     <td width="150"><%= link_to("Доб. бренд ", new_brand_path, class: ["btn btn-default"])%></td>
                   </tr>
                   <tr>
-                    <td width="300"><strong>Страна-бренда</strong></td>
-                    <td width="700"><%= select_tag(:country_brand_id, options_for_select(manufacturers_array)) %></td>
-                    <td width="150"></td>
-                    <td width="150"><%= link_to("Доб. страну ", new_manufacturer_path, class: ["btn btn-default"])%></td>
-                  </tr>
-                  <tr>
                     <td width="300"><strong>Страна-изготовитель</strong></td>
                     <td width="700"><%= f.select(:manufacturer_id, options_for_select(manufacturers_array), class: ["btn btn-default"]) %></td>
                     <td width="150"></td>
+                    <td width="150"><%= link_to("Доб. страну ", new_manufacturer_path, class: ["btn btn-default"])%></td>
                   </tr>
                   <tr>
                     <td width="300"><strong style="color: #ff0000;">* Сезон</strong></td>
