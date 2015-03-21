@@ -13,7 +13,7 @@ class AdditionalPhotosController < ApplicationController
     if @additional_photo.save
         flash.now[:success] = "Дополнительное фото внесено"
 #        @current_product = $product
-        redirect_to edit_product_path(@connection.id)
+        redirect_to edit_product_path($product.id)
     else
         flash.now[:danger] = "Не выбраны обязательные поля"
         render "new"
