@@ -165,7 +165,7 @@ ActiveRecord::Schema.define(version: 20150318140733) do
     t.integer  "nsum"
     t.integer  "color_id"
     t.integer  "status_delivery_id"
-    t.integer  "oplata"
+    t.string   "oplata"
     t.string   "dostavka"
     t.datetime "created_at"
     t.datetime "updated_at"
