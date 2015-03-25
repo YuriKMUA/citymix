@@ -1,5 +1,5 @@
-<% sizes_array = Size.all.map { |size| [size.ctxt, size.id] } %>
- 
+<% render "case" %>
+
 <%= form_for @connectionsize do |c| %>
 <div class="row">
    <div class="col-md-8 col-md-offset-2">
@@ -15,7 +15,7 @@
                </tr>
                <tr>
                     <td width="100"><%= $connection.color.ctxt unless $connection == nil %></td>
-                    <td width="100"><%= c.select(:size_id, options_for_select(sizes_array), style: "small") %></td>    
+                    <td width="100"><%= c.select(:size_id, options_for_select(@sizes_array), style: "small") %></td>    
                     <td width="80"></td>
                     <td width="100"><%= c.text_field :number %></td>
                     <td width="80" align="center"></td>

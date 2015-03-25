@@ -1,6 +1,6 @@
 class Brand < ActiveRecord::Base
-  attr_accessible :ctxt, :kategories_id
+  attr_accessible :ctxt, :country
 
-  validates :ctxt, :kategories_id, presence: true
+  validates :ctxt, presence: true
   has_many :products
 end

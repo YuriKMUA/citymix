@@ -38,10 +38,10 @@
                      <%= f.text_area :ccontent %>
                </tr>
                <tr>
-                     <td><strong style="color: #ff0000;">*</strong><%= f.label "Группа товара: " +  @current_product.group_tov.ctxt %> 
+                     <td><strong style="color: #ff0000;">*</strong><%= f.label "Группа : " +  @current_product.group_tov.ctxt %> 
                          <%= f.select(:group_tov_id, options_for_select(group_tovs_array)) %></td>
-                      <td><strong style="color: #ff0000;">*</strong><%= f.label "Категория товара" %>
-                      <%= f.select(:kategories_id, options_for_select(kategories_array)) %></td>
+                      <td><strong style="color: #ff0000;">*</strong><%= f.label "Категория :" + @current_product.kategory.ctxt_ua %>
+                      <%= f.select(:kategory_id, options_for_select(kategories_array)) %></td>
                </tr>  
                <tr>
                    <td><strong style="color: #ff0000;">*</strong><%= f.label "Тип: " + @current_product.type.ctxt %>

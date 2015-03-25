@@ -1,12 +1,10 @@
-<% sizes_array = Size.all.map { |size| [size.ctxt, size.id] } %>
-
+<% render "case" %>
 
 <%= form_for @connectionsize do |c| %>
 <div class="row">
    <div class="col-md-8 col-md-offset-1">
    <div class="well">
        <table border="2" bordercolor="#ff00ff">  
-<!--         <%= render "shared/tr_block" %>  -->
             <tr align="center">
                   <td><%= @connectionsize.size.ctxt %></td>
                   <td></td>
@@ -14,7 +12,7 @@
 
             </tr>
             <tr>      
-                  <td><%= c.select(:size_id, options_for_select(sizes_array)) %></td>
+                  <td><%= c.select(:size_id, options_for_select(@sizes_array)) %></td>
                   <td><%= c.text_field :number %></td>
                   <td><%= c.submit "Сохранить", class: ["btn btn-default"] %></td>
                   <tr>  

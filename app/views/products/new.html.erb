@@ -4,10 +4,10 @@
 <% sizes_array = Size.all.map { |size| [size.ctxt, size.id] } %>
 <% colors_array = Color.all.map { |color| [color.ctxt, color.id] } %>
 <% @group_tovs_array = GroupTov.all.map { |group_tov| [group_tov.ctxt, group_tov.id] } if @group_tovs_array.nil? %>
-<% @kategories_array = Kategory.order("ctxt_ua").all.map { |kategory| [kategory.ctxt_rus + ' ' + kategory.ctxt_ua, kategory.id] } if @kategories_array.nil? %>
-<% @brands_array = Brand.all.map { |brand| [brand.ctxt, brand.id] } if @brands_array.nil? %>
+<% @kategories_array = Kategory.order("ctxt_ua").all.map { |kategory| [kategory.ctxt_ua, kategory.id] } if @kategories_array.nil? %>
+<% @brands_array = Brand.order("ctxt").all.map { |brand| [brand.ctxt, brand.id] } if @brands_array.nil? %>
 <% group_tovs_array = GroupTov.all.map { |group_tov| [group_tov.ctxt, group_tov.id] } %>
-<% kategories_array = Kategory.all.map { |kategory| [kategory.ctxt_rus + ' ' + kategory.ctxt_ua, kategory.id] } %>
+<% kategories_array = Kategory.all.map { |kategory| [kategory.ctxt_ua, kategory.id] } %>
 <% seasons_array = Season.all.map { |season| [season.ctxt, season.id] } %>
 <% manufacturers_array = Manufacturer.all.map { |manufacturer| [manufacturer.ctxt, manufacturer.id] } %>
 <% @types_array = Type.all.map { |type| [type.ctxt, type.id] } if @types_array.nil? %>
@@ -34,13 +34,13 @@
                     <td width="150"><%= button_tag("Выбрать", class: ["btn btn-default"]) -%></td>
                     <td width="150"><%= link_to("Доб.категор.  ", new_kategory_path, class: ["btn btn-default"])%></td>
                   </tr>
+            <% end %>
+          <%= form_for @product, { html: { multipart: true } }  do |f| %>  
                   <tr>
                     <td width="300"><strong style="color: #ff0000;">* Тип</strong></td>
-                    <td width="700"><%= select_tag(:type_id, options_for_select(@types_array), class: ["btn btn-default"]) %></td>
+                    <td width="700"><%= f.select(:type_id, options_for_select(@types_array), class: ["btn btn-default"]) %></td>
                     <td width="150"></td>
                     <td width="150"><%= link_to("Доб.    тип", new_type_path, class: ["btn btn-default"])%></td>
-              <% end %>
-          <%= form_for @product, { html: { multipart: true } }  do |f| %>  
                   </tr>
                     <td width="300"><strong style="color: #ff0000;">* Бренд</strong></td>
                     <td width="700"><%= f.select(:brand_id, options_for_select(@brands_array), class: ["btn btn-default"]) %></td>

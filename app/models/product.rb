@@ -19,11 +19,7 @@ class Product < ActiveRecord::Base
    belongs_to :condition
    belongs_to :kategory
 
-   validates :brand_id,      presence: true
-   validates :kategories_id, presence: true
-   validates :ctxt,          presence: true
-   validates :cartikul,      presence: true
-   validates :group_tov_id,  presence: true
+   validates :brand_id, :kategory_id, :ctxt, :cartikul, :group_tov_id,  :type_id, presence: true
 
    
 end

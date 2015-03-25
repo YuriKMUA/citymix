@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150318140733) do
+ActiveRecord::Schema.define(version: 20150323205540) do
 
   create_table "additional_photos", force: true do |t|
     t.string   "cartikul"
@@ -194,7 +194,7 @@ ActiveRecord::Schema.define(version: 20150318140733) do
     t.string   "cartikul"
     t.boolean  "ldelivery"
     t.integer  "nprice_delivery"
-    t.integer  "kategories_id"
+    t.integer  "kategory_id"
     t.integer  "group_tov_id"
     t.integer  "season_id"
     t.integer  "manufacturer_id"
@@ -235,7 +235,7 @@ ActiveRecord::Schema.define(version: 20150318140733) do
     t.string   "ctxt"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "kategories_id"
+    t.integer  "group_tov_id"
   end
 
   create_table "status_deliveries", force: true do |t|

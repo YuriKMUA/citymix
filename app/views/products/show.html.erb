@@ -38,7 +38,7 @@
                 <tr><td>Наличие:</td><td><%= @show_color.product.availability %></td></tr>
 
                 <tr><td>Цвет:</td><td><%= @show_color.color.ctxt %></td></tr>
-                <% $connection = @show_color %>
+
             <% else %> 
                 <tr><td>Бренд:</td><td><%= @show_photo.product.brand.ctxt %></td></tr> 
                 <tr><td>Страна бренда:</td><td><%= @show_photo.product.brand.country %></td></tr>
@@ -53,9 +53,9 @@
                 <tr><td>Состояние:</td><td><%= @show_photo.product.condition.ctxt %></td></tr>
                 <tr><td>Наличие:</td><td><%= @show_photo.product.availability %></td></tr>
                 <tr><td>Цвет:</td><td><%= @show_photo.color.ctxt %></td></tr>
-                <% $connection = @show_photo %>
+
             <% end %>    
-                <% $product = @current_product %>
+
 
         </table>
             Доступные цвета:
@@ -85,7 +85,6 @@
                 <% end %>    
                <td><%= link_to image_tag(img, alt: c.size.ctxt, onmouseover: "this.src='/uploads/images/kvadrat.gif';", title: c.size.ctxt,
                         onmouseout: "this.src='/uploads/images/kvadrat_lighter.gif';", style: "#{border}"), size_basket_path(c.id) %></td>
-<!--                <td><%= radio_button_tag(:size, c.size.id, type: "hidden", class: "btn") %>  -->
                 <td><span style="margin-left: -35px;"><%= c.size.ctxt %></span></td>
             <% end %>
             </tr>
@@ -102,8 +101,8 @@
         <%= render "products/show_photo" %>
 </div><br>
 <div class="row">
+    <%= link_to image_tag(@show_photo.avatar_url, size: "120x160", title: @current_product.id), product_path(@show_photo.id) %>
     <% unless @additional_photos.nil? %>
-        <%= link_to image_tag(@show_photo.avatar_url, size: "120x160"), { controller: "products", action: "show" } %>
         <% @additional_photos.each do |f| %>
                <%= link_to image_tag(f.avatar_url, size: "120x160", alt: "Нет фото"), additional_photo_path(f.id) %>                        
         <% end %>

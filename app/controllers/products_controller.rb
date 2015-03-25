@@ -9,9 +9,9 @@ class ProductsController < ApplicationController
 
   def create
       @product = Product.new(product_params)
-      @product.kategories_id = @@kategory_id
+      @product.kategory_id = @@kategory_id
       @product.group_tov_id = @@group_tov_id
-      @product.type_id = @@type_id
+#      @product.type_id = @@type_id
       if params[:avatar] 
          @product.avatar = params[:avatar] 
       else
@@ -48,7 +48,6 @@ class ProductsController < ApplicationController
         end 
             @connections = @current_product.connections
             @connections = [] if @connections.nil?
-#            @additional_photos = @current_product.additional_photos
 	    if @connectionsizes.nil?
 		    @connectionsizes = [] 
 	    else
@@ -65,10 +64,10 @@ class ProductsController < ApplicationController
        
        @current_product.llatest = params[:product][:llatest] unless  params[:product][:llatest].to_s == true
        @current_product.lvisible = params[:product][:lvisible] unless  params[:product][:lvisible].to_s == true
-       @current_product.kategories_id = params[:product][:kategories_id] unless params[:product][:kategories_id].to_i == 0
-       @current_product.group_tov_id = params[:product][:group_tov_id] unless  params[:product][:group_tov_id].to_i == 1
-       @current_product.season_id = params[:product][:season_id] unless  params[:product][:season_id].to_i == 1
-       @current_product.condition_id = params[:product][:condition_id] unless  params[:product][:condition_id].to_i == 1
+       @current_product.kategories_id = params[:product][:kategory_id] unless params[:product][:kategory_id].to_i == 0
+       @current_product.group_tov_id = params[:product][:group_tov_id] unless  params[:product][:group_tov_id].to_i == 0
+       @current_product.season_id = params[:product][:season_id] unless  params[:product][:season_id].to_i == 0
+       @current_product.condition_id = params[:product][:condition_id] unless  params[:product][:condition_id].to_i == 0
        @current_product.type_id = params[:product][:type_id] unless  params[:product][:type_id].to_i == 0
        @current_product.brand_id = params[:product][:brand_id] unless  params[:product][:brand_id].to_i == 0
        @current_product.availability = params[:product][:availability] unless  params[:product][:availability] == "в наличии"
@@ -98,6 +97,7 @@ class ProductsController < ApplicationController
     @show_photo = $connection
     @show_color = @show_photo
     @current_product = Product.find($connection.product_id)
+    $product = @current_product
     @additional_photos = @show_color.additional_photos
     $filter_value[13] = params[:id]
    
@@ -239,9 +239,8 @@ class ProductsController < ApplicationController
 #      @group_tovs_array = GroupTov.where(id: params[:ngroup_tov_id]).map { |group_tov| [group_tov.ctxt, group_tov.id] } 
       @kategories_array = Kategory.order("ctxt_ua").where(id: params[:kategories_id]).map { |kategory| [kategory.ctxt_ua, kategory.id] }  
       @@kategory_id = params[:kategories_id]
-      @brands_array = Brand.where(kategories_id: params[:kategories_id]).map { |brand| [brand.ctxt, brand.id] } 
       @types_array = Type.where(kategories_id: params[:kategories_id]).map { |brand| [brand.ctxt, brand.id] } 
-      @@type_id = params[:type_id]
+#      @@type_id = params[:type_id]
       @product = Product.new
       @connection = @product.connections.build
       @connectionsize = Connection.new
@@ -250,7 +249,7 @@ class ProductsController < ApplicationController
   
   def sbros_flt
       @group_tovs_array = GroupTov.all.map { |group_tov| [group_tov.ctxt, group_tov.id] } 
-      @kategories_array = Kategory.all.map { |kategory| [kategory.ctxt_rus + ' ' + kategory.ctxt_ua, kategory.id] }  
+      @kategories_array = Kategory.all.map { |kategory| [kategory.ctxt_ua, kategory.id] }  
       @brands_array = Brand.all.map { |brand| [brand.ctxt, brand.id] } 
       @types_array = Type.all.map { |type| [type.ctxt, type.id] }
       @product = Product.new

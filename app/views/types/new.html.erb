@@ -1,6 +1,6 @@
 <%= provide(:title, "Ввод типа товаров") %>
 
-<% kategories_array = Kategory.all.map { |kategory| [kategory.ctxt_rus + ' ' + kategory.ctxt_ua, kategory.id] } %>
+<% kategories_array = Kategory.all.map { |kategory| [kategory.ctxt_ua, kategory.id] } %>
 
 <div class="row">
    <div class="col-md-7 col-md-offset-3">
