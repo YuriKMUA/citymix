@@ -41,7 +41,7 @@
                                  <ul class="search_block">
                                  <% check_type.each do |f| %>
                                     <% @type = "type" + f.id.to_s %>
-                                    <li><%= radio_button_tag(:type, f.id ) %>
+                                    <li><%= radio_button_tag(:type, f.id, class: "col-md-1") %>
                                         <%= label_tag(@type, f.ctxt) %></li>
                                     <% @flt[@n] = f.id %>
                                     <% @n += 1 %>
@@ -50,31 +50,38 @@
                                  <% $filter_value[2] = @flt if $filter_value[2] == nil %>
                               <% when 4 %>
                                  <ul class="search_block">
-                                 <% Brand.where(kategories_id: $filter_value[1]).each do |f| %>
-                                       <% @brand = "brand" + f.id.to_s %>
-                                       <li><%= radio_button_tag(:brand, f.id, class: ["col-md-1"]) %>
-                                           <%= label_tag(@brand, f.ctxt) %></li>
-                                       <% @flt[@n] = f.id %>
+                                 <% Connection.joins(:product).where(products: { group_tov_id: $filter_value[0], kategory_id: $filter_value[1] }).uniq.each do |f| %>
+                                       <% @flt[@n] = f.product.brand_id.to_i %>
                                        <% @n += 1 %>
+                                 <% end %> 
+                                 <% @flt.uniq.each do |f| %>
+                                 <% @brand = "brand" + f.to_s %>
+                                 <li><div class="col-md-1"><%= radio_button_tag(:brand, f) %></div>
+                                           <% brand = Brand.find(f) %> 
+                                           <%= label_tag(@brand, brand.ctxt) %></li>
                                  <% end %>
                                  </ul>
                                  <% if $filter_value[3] == nil %>
-                                       <% $filter_value[3] = @flt %>
+                                       <% $filter_value[3] = @flt.uniq %>
                                  <% end %>
                               <% when 3 %>                                 
                                  <ul class="search_block">
-                                 <% Season.all.each do |f| %>
-                                    <% @season = "season" + f.id.to_s %>
-                                    <li><%= radio_button_tag(:season, f.id) %>
-                                        <%= label_tag(@season, f.ctxt) %></li>
-                                    <% @flt[@n] = f.id %>
-                                    <% @n += 1 %>
+                                
+                                <% Connection.joins(:product).where(products: { group_tov_id: $filter_value[0], kategory_id: $filter_value[1] }).uniq.each do |f| %>
+                                       <% @flt[@n] = f.product.season_id.to_i %>
+                                       <% @n += 1 %>
+                                 <% end %> 
+                                 <% @flt.uniq.each do |f| %>
+                                 <% @season = "season" + f.to_s %>
+                                 <li><div class="col-md-1"><%= radio_button_tag(:season, f) %></div>
+                                           <% season = Season.find(f) %> 
+                                           <%= label_tag(@season, season.ctxt) %></li>
                                  <% end %>
                                  </ul>
-                                    <% if $filter_value[4] == nil %>
-                                          <% $filter_value[4] = @flt %>
-                                    <% end %>
-                              <% when 4 %>
+                                 <% if $filter_value[4] == nil %>
+                                       <% $filter_value[4] = @flt.uniq %>
+                                 <% end %>
+                                 <% when 4 %>
                                 <ul class="search_block"> 
                                 <% Manufacturer.all.each do |f| %>
                                     <% if f.id > 0 %>
@@ -91,16 +98,19 @@
                                  <% end %>
                               <% when 2 %>
                                  <ul class="search_block">
-                                 <% Color.joins(:products).uniq.each do |f| %>
-                                    <% @idc = "idc" + f.id.to_s %>
-                                    <li><%= check_box_tag(@idc, f.id) %>
-                                        <%= label_tag(@idc, f.ctxt) %></li>
-                                         <% @flt[@n] = f.id.to_i %>
-                                         <% @n += 1 %>
-                                   <% end %>
+                                 <% Connection.joins(:product).where(products: { group_tov_id: $filter_value[0], kategory_id: $filter_value[1] }).uniq.each do |f| %>
+                                    <% @flt[@n] = f.color_id.to_i %>
+                                    <% @n += 1 %>
+                                 <% end %>
+                                    <% @flt.uniq.each do |f| %>
+                                    <% @idc = "idc" + f.to_s %>
+                                    <li><div class="col-md-1"><%= check_box_tag(@idc, f) %></div>
+                                        <% col = Color.find(f)%>
+                                        <%= label_tag(@idc, col.ctxt) %></li>
+                                    <% end %>    
                                 </ul>   
                                    <% if $filter_value[6] == nil %>
-                                         <% $filter_value[6] = @flt %>
+                                         <% $filter_value[6] = @flt.uniq %>
                                    <% end %>    
                               <% when 6 %>
                                  <ul class="search_block">
@@ -117,18 +127,21 @@
                                    <% end %>    
                               <% when 1 %>
                                  <ul class="search_block">
-
-                                    <% Size.order("ctxt").joins(:connections).uniq.each do |f| %>
-                                       <% @ids = "ids" + f.id.to_s %>
-                                       <li><%= check_box_tag(@ids, f.id) %>
-                                          <%= label_tag(@ids, f.ctxt) %></li>
-                                          <% @flt[@n] = f.id.to_i %>
-                                          <% @n += 1 %>
+                                    <% Connection.joins(:product).where(products: { group_tov_id: $filter_value[0], kategory_id: $filter_value[1] }).uniq.each do |f| %>
+                                        <% f.connectionsizes.each do |c| %>
+                                            <% @flt[@n] = c.size_id.to_i %>
+                                            <% @n += 1 %>
+                                        <% end %>
                                     <% end %>
-                               
+                                    <% @flt.uniq.each do |f| %>
+                                    <% @ids = "ids" + f.to_s %>
+                                    <li><div class="col-md-1"><%= check_box_tag(@ids, f) %></div>
+                                        <% size = Size.find(f)%>
+                                        <%= label_tag(@ids, size.ctxt) %></li>
+                                    <% end %>    
                                 </ul>   
                                    <% if $filter_value[9] == nil %>
-                                         <% $filter_value[9] = @flt %>
+                                         <% $filter_value[9] = @flt.uniq %>
                                    <% end %>    
                                <% when 1 %>
                                  <ul class="search_block">
