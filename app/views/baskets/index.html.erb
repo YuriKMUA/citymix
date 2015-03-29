@@ -26,7 +26,12 @@
                   <%= link_to "удалить", f,  method: :delete, data: { confirm: "Удалить из корзины?" }, style: ["color: #f00;"] %></td>
                   <% @kol = "kol" + f.id.to_s %>
                   <td width="80"><%= text_field_tag(@kol, f.number, style: ["width: 50px; height: 33px;"]) %></td>
-                  <td width="190" align="center"><%= f.nprice %> грн.</td>
+                  <% if current_user && current_user.admin? %>
+                    <% @price = "price" + f.id.to_s %>
+                    <td width="190" align="center"><%= text_field_tag(@price, f.nprice, style: ["width: 80px; height: 33px;"]) %> грн.</td>
+                  <% else %>
+                        <td width="190" align="center"><%= f.nprice  unless f.nprice.nil? %> грн.</td>
+                  <% end %>
                   <td width="130"><%= f.nsum %> грн.</td>
                </tr>
                <tr>
@@ -36,7 +41,7 @@
                   <td width="190"><hr id="hr_line"></td>
                   <td width="130"><hr id="hr_line"></td>
                </tr>
-               <% sum_in_basket = sum_in_basket + f.nsum %>
+               <% sum_in_basket = sum_in_basket + f.nsum  unless f.nsum.nil? %>
            <% end %> 
          </table>
          <% else %>

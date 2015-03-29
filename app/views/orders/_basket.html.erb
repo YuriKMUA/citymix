@@ -33,7 +33,7 @@
                   <td width="90"><hr id="hr_line"></td>
                   <td width="130"><hr id="hr_line"></td>
                </tr>
-               <% $sum_in_basket = $sum_in_basket + f.nsum %>
+               <% $sum_in_basket = $sum_in_basket + f.nsum unless f.nsum.nil? %>
             <% end %> 
          </table>
             <div class="row">

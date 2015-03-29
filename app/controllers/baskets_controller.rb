@@ -1,13 +1,17 @@
 class BasketsController < ApplicationController
 
   def index
-      if signed_in?
-         @baskets = Basket.where(user_id: current_user.id, order_id: nil)
-      else
-         unless cookies[:remember_token].nil?
+      if current_user && current_user.admin?
+         @baskets = Basket.where(status_delivery_id: 3)   
+      else 
+        if signed_in?
+             @baskets = Basket.where(user_id: current_user.id, order_id: nil)
+        else
+             unless cookies[:remember_token].nil?
             @baskets = Basket.where(remember_token: cookies[:remember_token])
-         end   
-      end
+            end   
+        end
+      end  
   end
 
   def new
@@ -15,17 +19,17 @@ class BasketsController < ApplicationController
   end
 
   def create
-   if signed_in?
+    if signed_in?
       remember_token = current_user.remember_token
       id_of_user = current_user.id
-   else
+    else
       id_of_user = nil
       if cookies[:remember_token].nil?
          create_remember_token
       end
          remember_token = cookies[:remember_token]
     end
-      unless $filter_value[9].nil?  
+    unless $filter_value[9].nil? || $product.nprice.nil?
          @basket = Basket.new(user_id: id_of_user, cartikul: $connection.cartikul, ctxt: $product.ctxt, size_id: $filter_value[9], number: 1, nprice: $product.nprice,
          nsum: $product.nprice, color_id: $connection.color_id , avatar: $connection.avatar, remember_token: remember_token, status_delivery_id: 3)
         if @basket.save
@@ -37,14 +41,19 @@ class BasketsController < ApplicationController
         else
             flash[:danger] = "Не записано. Не заполнены необходимые поля"
         end
-     else
-        flash[:warning] = "Не выбрано размер. Сделайте выбор размера и нажимите кнопку 'КУПИТЬ'"
-         check_type
+    else
+        if $product.nprice.nil?
+            flash[:warning] = "Перед выбором данного товара уточните цену у менеджера"
+        end
+        if $filter_value[9].nil?
+            flash[:warning] = "Не выбрано размер. Сделайте выбор размера и нажимите кнопку 'КУПИТЬ'"
+        end
+        check_type
         check_kategory
         check_group_tov
         filter
         redirect_to product_path($filter_value[13])
-     end
+    end
   end
 
   def show_photo_color
@@ -83,8 +92,10 @@ class BasketsController < ApplicationController
       end
       @baskets.each do |f|
          @kol = "kol" + f.id.to_s
+         @price = "price" + f.id.to_s
          f.number = params[@kol]
-         f.nsum = f.nprice * params[@kol].to_i
+         f.nprice = params[@price]
+         f.nsum = params[@price].to_i * params[@kol].to_i
          f.save
       end
       render "index"
