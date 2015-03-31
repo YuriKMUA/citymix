@@ -1,6 +1,7 @@
 class ConnectionsizesController < ApplicationController
   def new
       @connectionsize = Connectionsize.new
+      $filter_value = []
       $filter_value[0] = $product.group_tov_id
       $filter_value[1] = $product.kategory_id
   end
