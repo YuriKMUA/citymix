@@ -4,12 +4,12 @@
 <% sizes_array = Size.all.map { |size| [size.ctxt, size.id] } %>
 <% colors_array = Color.all.map { |color| [color.ctxt, color.id] } %>
 <% group_tovs_array = GroupTov.all.map { |group_tov| [group_tov.ctxt, group_tov.id] } %>
-<% kategories_array = Kategory.all.map { |kategory| [kategory.ctxt_ua + ' ' + kategory.group_tov_id.to_s, kategory.id] } %>
+<% kategories_array = Kategory.where(group_tov_id: [nil, @current_product.group_tov_id]).map { |kategory| [kategory.ctxt_ua, kategory.id] } %>
 <% conditions_array = Condition.all.map { |condition| [condition.ctxt, condition.id] } %>
 <% brands_array = Brand.all.map { |brand| [brand.ctxt, brand.id] } %>
 <% seasons_array = Season.all.map { |season| [season.ctxt, season.id] } %>
 <% manufacturers_array = Manufacturer.all.map { |manufacturer| [manufacturer.ctxt, manufacturer.id] } %>
-<% types_array = Type.all.map { |type| [type.ctxt, type.id] } %>
+<% types_array = Type.where(kategories_id: [nil, @current_product.kategory_id]).map { |type| [type.ctxt, type.id] } %>
 <div class="row">
    <div class="col-md-7 col-md-offset-3">
       <div class="well">

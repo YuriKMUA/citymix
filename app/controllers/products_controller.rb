@@ -122,6 +122,7 @@ class ProductsController < ApplicationController
           $filter_value[11] = params[:price_min].to_i
           $filter_value[12] = params[:price_max].to_i
    end
+   $filter_value[2] = params[:type].to_i unless params[:type] == nil
    $filter_value[3] = params[:brand].to_i unless params[:brand] == nil
    $filter_value[4] = params[:season].to_i unless params[:season] == nil
    $filter_value[5] = params[:manufacturer].to_i unless params[:manufacturer] == nil
@@ -156,7 +157,7 @@ class ProductsController < ApplicationController
    end
    $filter_value[9] = @filter_size if n > 0
    # end Size
-     $goods = Connection.joins(:product, :connectionsizes).where(connectionsizes: { size_id: $filter_value[9] }, color_id: $filter_value[6], products: { nprice: ($filter_value[11]..$filter_value[12]), season_id: $filter_value[4], brand_id: $filter_value[3], kategory_id: $filter_value[1], group_tov_id: $filter_value[0] }).uniq.paginate(page: params[:page], per_page: $filter_value[8].to_i)
+     $goods = Connection.joins(:product, :connectionsizes).where(connectionsizes: { size_id: $filter_value[9] }, color_id: $filter_value[6], products: { nprice: ($filter_value[11]..$filter_value[12]), season_id: $filter_value[4], brand_id: $filter_value[3], type_id: $filter_value[2], kategory_id: $filter_value[1], group_tov_id: $filter_value[0] }).uniq.paginate(page: params[:page], per_page: $filter_value[8].to_i)
      $goods = Connection.joins(:product, :connectionsizes).order("products.nprice").where(connectionsizes: { size_id: $filter_value[9] }, color_id: $filter_value[6], products: { nprice: ($filter_value[11]..$filter_value[12]), season_id: $filter_value[4], brand_id: $filter_value[3], kategory_id: $filter_value[1], group_tov_id: $filter_value[0] }).uniq.paginate(page: params[:page], per_page: $filter_value[8].to_i) if params[:btn_up]
      $goods = Connection.joins(:product, :connectionsizes).order("products.nprice DESC").where(connectionsizes: { size_id: $filter_value[9] }, color_id: $filter_value[6], products: { nprice: ($filter_value[11]..$filter_value[12]), season_id: $filter_value[4], brand_id: $filter_value[3], kategory_id: $filter_value[1], group_tov_id: $filter_value[0] }).uniq.paginate(page: params[:page], per_page: $filter_value[8].to_i) if params[:btn_down]
      $goods = Connection.joins(:product, :connectionsizes).where(connectionsizes: { size_id: $filter_value[9] }, color_id: $filter_value[6], products: { llatest: true, season_id: $filter_value[4], brand_id: $filter_value[3], kategory_id: $filter_value[1], group_tov_id: $filter_value[0] }).uniq.paginate(page: params[:page], per_page: $filter_value[8].to_i) if params[:btn_new]

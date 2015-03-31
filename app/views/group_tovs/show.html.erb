@@ -23,7 +23,7 @@
      <% end %>
        <hr color="black">
    </div>
-               <ul class="col-xs-8 col-md-3">
+               <ul class="col-xs-8 col-md-3" style="width: 300px;">
                    <div class="well" style="background: #bbb;">
                       <strong>Цена</strong><br>
                     <%= form_tag({ controller: "products", action: "search" }, method: "get") do %>
@@ -37,11 +37,11 @@
                           <% @flt = [] %>
                           <% @n = 0 %>
                           <% case @id %>
-                              <% when 8 %>
+                              <% when 5 %>
                                  <ul class="search_block">
                                  <% check_type.each do |f| %>
                                     <% @type = "type" + f.id.to_s %>
-                                    <li><%= radio_button_tag(:type, f.id, class: "col-md-1") %>
+                                    <li><div class="col-md-1"><%= radio_button_tag(:type, f.id) %></div>
                                         <%= label_tag(@type, f.ctxt) %></li>
                                     <% @flt[@n] = f.id %>
                                     <% @n += 1 %>
