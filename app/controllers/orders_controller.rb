@@ -18,6 +18,7 @@ class OrdersController < ApplicationController
           f.order_id = @order.id 
           f.save
       end
+      OrderMailer.send_mail(@order).deliver
   end
 
   def update
@@ -35,4 +36,9 @@ class OrdersController < ApplicationController
   def info_orders
       @user = User.new
   end 
+
+  def send_mail
+    OrderMailer.send_mail(@order).deliver
+
+  end
 end

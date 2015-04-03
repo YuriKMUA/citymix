@@ -24,17 +24,19 @@ Citymix::Application.configure do
   
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = { 
-  address:            "smtp.gmail.com",
+  address:            "mail.citymix.com.ua",
   port:               587,
-  domain:             "gmail.com",
-  user_name:          "YuriKMUA",
+  domain:             "citymix.com.ua",
+  user_name:          "manager@citymix.com.ua",
   password:           "12okt1963",
   authentication:     :plain,
-  enable_starttls_auto: true }
+  enable_starttls_auto: false }
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_options = { from: 'yurikmua@gmail.com'}
+  config.action_mailer.default_options = { from: 'manager@citymix.com.ua'}
+
+  config.force_ssl = false
 
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large

@@ -48,7 +48,7 @@ before_filter :admin_user, only: :destroy
     respond_to do |format|
       if @user.save
          sign_in @user
-#         UserMailer.welcome_email(@user).deliver
+         UserMailer.welcome_email(@user).deliver
 
          format.html { render "orders/info_orders" }
  #        format.json { render json: @user, status: :created, location: @user }
