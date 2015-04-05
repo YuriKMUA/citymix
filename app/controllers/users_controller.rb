@@ -83,15 +83,20 @@ before_filter :admin_user, only: :destroy
     end
   end
 
-  def send_pass
+  def change_pass
      @user = User.find_by_email(params[:email])
         if @user
             @user.password = "Zxcvbn"
-            @user.password_confirmation = @pass
-            @user.save
-            UserMailer.send_pass(@user).deliver
-            render  action: "change_pass"   
-         end    
+            @user.password_confirmation = @user.password
+            if @user.save
+                UserMailer.send_pass(@user).deliver
+                flash.now[:success] = "Пароль изменен"
+                render  action: "change_pass"   
+            end
+        else     
+            flash.now[:danger] = "Не верно введен електронный адресс"
+            render "send_pass"
+        end    
   end  
 
  

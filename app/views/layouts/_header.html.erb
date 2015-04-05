@@ -17,7 +17,7 @@
                      <ul class="dropdown-menu">
                         <li><%= link_to " Ввод нового товара", new_product_path, class: "glyphicon glyphicon-plus" %></li>
                         <li class="divider"></li>
-                        <li><%= link_to " Редактирование данных по товару", edit_product_path(Product.first.id), class: "glyphicon glyphicon-edit" %></li>
+                        <li><%= link_to " Редактирование данных по товару", edit_product_path(Product.first.id), class: "glyphicon glyphicon-edit" if Product.first %></li>
                     </ul>
                    <% end %>  
                    <li id="fat-menu" class="dropdown">

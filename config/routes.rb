@@ -87,6 +87,7 @@ Citymix::Application.routes.draw do
   get   "/about",      to: "static_pages#about"
   get   "/mens",       to: "static_pages#men_odezhda"
   match "/sendpass",   to: "users#send_pass", via: :get
+  match "/changepass", to: "users#change_pass", via: :get  
   match  "/flt_by_kategory", to: "products#flt_by_kategory", via: :get
   match  "/flt_by_group_tov", to: "products#flt_by_group_tov", via: :post
   match  "/sbros_flt", to: "products#sbros_flt", via: :get
