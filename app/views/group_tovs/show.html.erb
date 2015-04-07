@@ -151,12 +151,14 @@
                                  </ul>
                           <% end %>
                           </ul>  
-                        <% end %>
-                              <%= submit_tag("Поиск", style: ["margin-top: 30px;"], class: ["btn btn-default", "col-md-4 col-md-offset-1"]) %>     
+                        <% end %><br>
+                   <div class="row">
+                              <%= submit_tag("Поиск",  title: "Поиск товаров по установленным фильтрам",class: ["btn btn-default", "col-md-4 col-md-offset-1"]) %>     
                     <% end %>
                     <%= form_tag({ controller: "products", action: "cancel" }, method: "get") do %>
-                        <%= submit_tag("Сброс", style: ["margin-top: -35px;"], class: ["btn btn-default", "col-md-4 col-md-offset-6"]) %>                              
+                        <%= submit_tag("Сброс", style: ["margin-top: -35px;"], title: "Сброс предустановленных фильтров", class: ["btn btn-default", "col-md-4 col-md-offset-6"]) %>                              
                     <% end %>
+                    </div>
                    </div>    
                </ul>
    
@@ -175,6 +177,9 @@
                         <div class="thumbnails" style="background: #000; hover: #ff00ff;"> 
                         <%= link_to image_tag(con.avatar_url), product_path(con.id) %>
                         <div class="caption" style="color: #fff; margin-left: 30px;">
+                           <% if con.product.lvisible == false %>
+                               <h5 style="color: #ff0000"><blink>Товар скрыт от покупателя</blink></h5> 
+                           <% end %>
                            <h5><%= con.product.ctxt %></h5>
                            <% unless con.product.nprice.to_i == 0 %>
                               <h4><%= con.product.nprice %> грн. </h4>
@@ -185,9 +190,11 @@
                               <h5 style="text-align: center; text-decoration: line-through; color: #ff0000;"><%= con.product.nold_price %> грн. </h5>
                            <% else %>
                               <br>
-                           <% end %>  
-                           <%= link_to "Изменить", edit_product_path(con.product_id) if current_user && current_user.admin? %>
-                           <%= link_to "Удалить", con.product, method: :delete, data: { confirm: "Будут удалены также все связи. Удалять?"} if current_user && current_user.admin? %>
+                           <% end %>
+                           <% if  current_user && current_user.admin? %>
+                                <%= link_to "Изменить", edit_product_path(con.product_id) %>
+                                <%= link_to "Удалить", con.product, method: :delete, data: { confirm: "Будут удалены также все связи. Удалять?"} %>
+                           <% end %>     
                         </div>
                         </div>
                      </td>   
@@ -200,5 +207,11 @@
    <% end %>   
    </table>
 <% else %>
-
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="well">
+                <h4> Извините. Информация временно недоступна. Идет обновление данных </h4>
+            </div>
+        </div>
+    </div>
 <% end %>

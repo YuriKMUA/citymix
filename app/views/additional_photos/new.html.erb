@@ -1,14 +1,15 @@
+<%= form_for @additional_photo do |f| %>     
 <h2>Вносим дополнительные фото к продукту</h2>
-<div class="col-md-6 col-md-offset-3"> 
-    <div class="well">
-        <table>
-        <tr>
-            <%= form_for @additional_photo do |f| %>     
-               <td><%= f.file_field :avatar %>
-                <%= f.submit "Сохранить", class: ["btn btn-default", "col-md-5", "cat"] %></td>
-
-            <% end %>
-        </tr> 
-        </table>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3"> 
+        <div class="well">
+            <table>
+                <tr>
+                    <td><%= f.file_field :avatar %> </td>
+                    <td><%= f.submit "Сохранить", class: ["btn btn-default", "col-md-10"] %></td>
+                </tr> 
+            </table>
+        </div>
     </div>    
 </div>
+<% end %>

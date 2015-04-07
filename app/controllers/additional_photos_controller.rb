@@ -5,6 +5,7 @@ class AdditionalPhotosController < ApplicationController
 
   def new
     @additional_photo = AdditionalPhoto.new
+    render "new"
   end
 
   def create

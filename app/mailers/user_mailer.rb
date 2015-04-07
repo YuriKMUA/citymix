@@ -14,4 +14,13 @@ class UserMailer < ActionMailer::Base
      mail(to: @user.email, subject: "Сброс пароля")
   end
 
+    def send_call_back(mail)
+     @user = User.find_by_admin(true)
+     @url = "citymix.com.ua"
+     @phone = mail[0]
+     @name = mail[1]
+     mail(to: @user.email, subject: "Заказ на обратный звонок #{@phone}")
+  end
+
+
 end

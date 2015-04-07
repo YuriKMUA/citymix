@@ -18,16 +18,16 @@
       <div class="well">
       <h2>Наполнение склада</h2>
          <div class="row">
-            <%= form_tag("/flt_by_group_tov") do -%>
-               <table>
+            <table>
+            <%= form_tag("/flt_by_group_tov") do %>
                   <tr>
-                     <td width="300"><strong style="color: #ff0000;">* Категория</strong></td>
+                    <td width="300"><strong style="color: #ff0000;">* Категория</strong></td>
                     <td width="700"><%= select_tag(:group_tov_id, options_for_select(@group_tovs_array), class: ["btn btn-default"]) %></td>
-                    <td width="150"><%= button_tag("Выбрать", class: ["btn btn-default"]) -%></td>
+                    <td width="150"><%= button_tag("Выбрать", class: ["btn btn-default"]) %></td>
                     <td width="150"><%= link_to("Доб. группу ", "#", class: ["btn btn-default"])%>
                   </tr>
             <% end %>
-            <%= form_tag("/flt_by_kategory", method: "get") do -%>
+            <%= form_tag("/flt_by_kategory", method: "get") do %>
                   <tr>
                      <td width="300"><strong style="color: #ff0000;">* Подкатегория</strong></td>
                     <td width="700"><%= select_tag(:kategories_id, options_for_select(@kategories_array), class: ["btn btn-default"]) %></td>

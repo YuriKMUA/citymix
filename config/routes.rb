@@ -92,6 +92,8 @@ Citymix::Application.routes.draw do
   match  "/flt_by_group_tov", to: "products#flt_by_group_tov", via: :post
   match  "/sbros_flt", to: "products#sbros_flt", via: :get
   match  "/vybor", to: "static_pages#vybor", via: :get 
+  match  "/call_back", to: "users#call_back", via: :get  
+  match  "/send_call_back", to: "users#send_call_back", via: :get  
 #  match  "/con", to: "connectionsizes#destroy", via: :delete
 
  # The priority is based upon order of creation: first created -> highest priority.

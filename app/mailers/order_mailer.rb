@@ -14,4 +14,5 @@ class OrderMailer < ActionMailer::Base
      mail(to: @user.email, subject: "Новый заказ № #{@order.id}")
   end
 
+ 
 end

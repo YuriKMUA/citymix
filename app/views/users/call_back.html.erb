@@ -1,0 +1,16 @@
+<div class="row">
+<h3><div class="col-md-offset-4">Заказ обратной связи</div></h3>
+    <div class="col-md-8 col-md-offset-2">
+        <div class="well">
+            <strong> Обратный звонок осуществляется только в пределах Украины.<br> 
+                     Укажите номер телефона для обратной связи </strong> <br>
+            <div class="row">
+            <%= form_tag("/send_call_back", method: "get") do  %>
+                <%= text_field_tag(:name, nil, placeholder: "Введите Ваше имя, отчество", class: ["col-md-5"]) %>
+                <%= text_field_tag(:phone, nil, placeholder: "Введети № телефона", class: ["col-md-3"])%>
+                <%= submit_tag("Заказать обратный звонок", class: ["btn btn-default", "col-md-4"]) %>
+            <% end %>
+            </div>
+        </div>
+    </div>
+</div>

@@ -16,7 +16,7 @@
 
 
          <h2>Редактирование
-         <%= form_tag({controller: "products", action: "edit"}, method: "get", class: "navbar-form") do %>
+         <%= form_tag({ controller: "products", action: "edit" }, method: "get", class: "navbar-form") do %>
               <%= text_field_tag(:ids, nil, placeholder: "Введите ID товара", class: "form-control") %>  
          <% end %>   </h2>        
 
@@ -71,13 +71,13 @@
                     <td><strong style="color: #ff0000;"></strong><%= f.label "Состояние: " + @current_product.condition.ctxt %>  
                     <%= f.select(:condition_id, options_for_select(conditions_array), class: ["btn btn-default"]) %></td>
                     <td><strong style="color: #ff0000;"></strong><%= f.label "Наличие: " + @current_product.availability %>
-                    <%= f.select(:availability, options_for_select(["есть в наличии", "под заказ"]), class: ["btn btn-default"]) %></td>
+                    <%= f.select(:availability, options_for_select(["--", "есть в наличии", "под заказ"]), class: ["btn btn-default"]) %></td>
                </tr>
                <tr>
                     <td><strong style="color: #ff0000;"></strong><%= f.label "Новинка: " + @current_product.llatest.to_s %>  
-                    <%= f.select(:llatest, options_for_select([true, false]), class: ["btn btn-default"]) %></td>
+                    <%= f.select(:llatest, options_for_select(["--", true, false]), class: ["btn btn-default"]) %></td>
                     <td><strong style="color: #ff0000;"></strong><%= f.label "Показать/скрыть: " + @current_product.lvisible.to_s %>
-                    <%= f.select(:lvisible, options_for_select([true, false]), class: ["btn btn-default"]) %></td>
+                    <%= f.select(:lvisible, options_for_select(["--", true, false]), class: ["btn btn-default"]) %></td>
                </tr>
                </table>   
                   <%= f.submit "Сохранить", class: ["btn btn-default", "col-md-5 col-md-offset-3"]  %>

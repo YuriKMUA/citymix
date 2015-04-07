@@ -65,7 +65,7 @@
                 <% end %>
             </table>  
             <% $connection = @connection %>
-            <%= link_to "Внести новые данные", new_connectionsize_path($connection) %>
+            <%= link_to "Внести новые данные", new_connectionsize_path %>
         </div>
    </div>
 </div>
@@ -79,7 +79,7 @@
                 <%= render @additional_photos %>
             </table>
             <% end %>
-            <%= link_to "Внести доп. фото", new_additional_photo_path() %>
+            <%= link_to "Внести доп. фото", new_additional_photo_path %>
         </div>
     </div>    
 </div>

@@ -62,15 +62,15 @@ class ProductsController < ApplicationController
   def update
        @current_product = Product.find(params[:id])
        
-       @current_product.llatest = params[:product][:llatest] unless  params[:product][:llatest].to_s == true
-       @current_product.lvisible = params[:product][:lvisible] unless  params[:product][:lvisible].to_s == true
+       @current_product.llatest = params[:product][:llatest] unless  params[:product][:llatest].to_s == "--"
+       @current_product.lvisible = params[:product][:lvisible] unless  params[:product][:lvisible].to_s == "--"
        @current_product.kategories_id = params[:product][:kategory_id] unless params[:product][:kategory_id].to_i == 0
        @current_product.group_tov_id = params[:product][:group_tov_id] unless  params[:product][:group_tov_id].to_i == 0
        @current_product.season_id = params[:product][:season_id] unless  params[:product][:season_id].to_i == 0
        @current_product.condition_id = params[:product][:condition_id] unless  params[:product][:condition_id].to_i == 0
        @current_product.type_id = params[:product][:type_id] unless  params[:product][:type_id].to_i == 0
        @current_product.brand_id = params[:product][:brand_id] unless  params[:product][:brand_id].to_i == 0
-       @current_product.availability = params[:product][:availability] unless  params[:product][:availability] == "в наличии"
+       @current_product.availability = params[:product][:availability] unless  params[:product][:availability] == "--"
        @current_product.manufacturer_id = params[:product][:manufacturer_id] unless  params[:product][:manufacturer_id].to_i == 0 
        @current_product.nprice = params[:product][:nprice] 
        @current_product.nold_price = params[:product][:nold_price] 

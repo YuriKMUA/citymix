@@ -98,7 +98,22 @@ before_filter :admin_user, only: :destroy
             render "send_pass"
         end    
   end  
+  
+  def call_back
+  end 
 
+  def send_call_back
+    @user = User.find_by_admin(true)
+    @phone = params[:phone]
+    @name = params[:name]
+    @mail = []
+    @mail[0] = params[:phone]
+    @mail[1] = params[:name]
+    @url = "citymix.com.ua"
+    UserMailer.send_call_back(@mail).deliver
+    flash[:info] = "Запрос об обратной связи направлен менеджерам сайта citymix.com.ua. В ближайшее время ожидайте звонка."
+    redirect_to root_path
+  end
  
   private
 
