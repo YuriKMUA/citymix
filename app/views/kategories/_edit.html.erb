@@ -1,0 +1,31 @@
+<% group_tovs_array = GroupTov.all.map { |group_tov| [group_tov.ctxt, group_tov.id] } %>
+<div class="row">
+      <div class="col-md-4 col-md-offset-1">
+      <div class="well">
+         <%= form_for(@kategory) do |f| %>
+            <%= render 'shared/error_messages', object: f.object %>
+            <table>
+               <tr>
+                  <td> <%= f.label        "Название" %> 
+                       <%= f.text_field   :ctxt_ua %></td>
+               </tr>
+               <tr>        
+                  <td> <%= f.label        "Група: " %> <%= @kategory.group_tov_id %>
+                       <%= f.select(:group_tov_id, options_for_select(group_tovs_array)) %></td>
+               </tr>
+               <tr>
+                   <td> <%= f.label        "Показать/скрыть: " %>  <%= @kategory.lvisible %>
+                        <%= f.select(:lvisible, options_for_select(["--", true, false]), class: ["btn btn-default"]) %></td>
+               </tr>
+                  <td> <%= f.label        "Фото: " %> <%= @kategory.avatar %>
+                       <%= f.file_field   :avatar %></td>
+               </tr>
+       </table>
+       <div class="col-md-6-md-offset-4">
+         <%= f.submit "Сохранить", class: ["btn btn-default", "col-md-4 col-md-offset-3"] %>
+      </div><br>  
+      <% end %><br>
+    </div>
+  </div>  
+</div>
+

@@ -59,8 +59,6 @@ before_filter :admin_user, only: :destroy
     end  
   end
   
-  def edit
-  end
 
   def search
       @user = User.find_by_email(params[:email]) 
@@ -71,6 +69,9 @@ before_filter :admin_user, only: :destroy
       else	
          redirect_to new_user_path
       end
+  end
+
+  def edit
   end
 
   def update

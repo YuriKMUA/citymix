@@ -1,0 +1,7 @@
+<li>
+  <%= kategory.ctxt_ua %>
+  <%= kategory.group_tov_id %>
+  <%= kategory.ctxt_rus %>
+  <%= link_to '< изменить >', edit_kategory_path(kategory.id)  %>
+  <%= link_to '< удалить >', kategory, method: :delete, data: { confirm: "Удалять?" } %>
+ </li>

@@ -191,7 +191,7 @@
                            <% else %>
                               <br>
                            <% end %>
-                           <% if  current_user && current_user.admin? %>
+                           <% if  signed_in? && current_user.admin? %>
                                 <%= link_to "Изменить", edit_product_path(con.product_id) %>
                                 <%= link_to "Удалить", con.product, method: :delete, data: { confirm: "Будут удалены также все связи. Удалять?"} %>
                            <% end %>     
