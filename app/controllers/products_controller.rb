@@ -269,7 +269,7 @@ class ProductsController < ApplicationController
 private
 
    def product_params
-      params.require(:product).permit(:ctxt, :type_id, :avatar, :nprice, :nold_price, :cartikul, :kategories_id, :brand_id, :season_id, :manufacturer_id, :neck_id, :fastener_id, :llatest, :created_at, :group_tov_id, :ccontent, :condition_id, :availability, :npurchase_price, connections_attributes: [:number, :color_id, :avatar, :content])
+      params.require(:product).permit(:ctxt, :type_id, :avatar, :nprice, :nold_price, :cartikul, :kategories_id, :brand_id, :season_id, :manufacturer_id, :neck_id, :fastener_id, :llatest, :created_at, :group_tov_id, :ccontent, :condition_id, :availability, :npurchase_price, connections_attributes: [:cartikul, :color_id, :avatar, :content, :number])
    end
 end
 

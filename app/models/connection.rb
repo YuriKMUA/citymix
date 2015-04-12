@@ -1,7 +1,7 @@
 class Connection < ActiveRecord::Base
 
    mount_uploader :avatar, AvatarUploader
-   attr_accessible :avatar, :number, :cartikul, :size_id, :color_id, :content 
+   attr_accessible :avatar, :number, :cartikul, :color_id, :content
 
    belongs_to :product
    belongs_to :color

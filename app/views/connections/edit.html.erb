@@ -10,13 +10,13 @@
             <tr align="center">
                  <b> <td><%= c.label "Код товара:"%> <%= @connection.cartikul %></td>
                   <td>Цвет: <%=@connection.color.ctxt %></td></b>
-                  <td></td>   
+                  <td>Уценка:<%= @connection.number %></td>   
 
             </tr>
             <tr align="center">      
                   <td align="center"><%= c.text_field :cartikul %></td>
                   <td align="center"><%= c.select(:color, options_for_select(colors_array)) %></td>
-                  <td></td>
+                  <td align="center"><%= c.text_field :number %> </td>
                   <td></td>
                   <td></td>
            <tr>  
@@ -35,7 +35,7 @@
                 <td width="600"> <%= c.text_area :content %></td>
            </tr>
            <tr>
-                <td align="center"><%= c.submit "Сохранить", class: ["btn btn-default"] %></td>
+                <td align="center"><%= c.submit "Сохранить", class: ["btn btn-default", "col-md-3 col-md-offset-4"] %></td>
            </tr> 
        </table> 
    </div>

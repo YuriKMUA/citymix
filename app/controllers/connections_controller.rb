@@ -24,6 +24,8 @@ class ConnectionsController < ApplicationController
 
   def update
       @connection = Connection.find(params[:id])
+      @connection.cartikul = params[:connection][:cartikul]
+      @connection.number = params[:connection][:number]
       @connection.color_id = params[:connection][:color] unless params[:connection][:color].to_i == 0
       @connection.avatar = params[:connection][:avatar] unless params[:connection][:avatar].nil?
       @connection.content = params[:connection][:content] unless params[:connection][:content].nil?

@@ -143,12 +143,6 @@
                                    <% if $filter_value[9] == nil %>
                                          <% $filter_value[9] = @flt.uniq %>
                                    <% end %>    
-                               <% when 1 %>
-                                 <ul class="search_block">
-                                 <% Fastener.all.each do |f| %>
-                                    <li><%= link_to f.ctxt,  filter_fastener_fastener_path(f) %></li>
-                                 <% end %>
-                                 </ul>
                           <% end %>
                           </ul>  
                         <% end %><br>
@@ -182,7 +176,7 @@
                            <% end %>
                            <h5><%= con.product.ctxt %></h5>
                            <% unless con.product.nprice.to_i == 0 %>
-                              <h4><%= con.product.nprice %> грн. </h4>
+                              <h4><%= con.product.nprice - con.number %> грн. </h4>
                            <% else%>
                               <h5 style="color: #ff00ff;">Цену уточняйте у менеджера</h5>
                            <% end %>
