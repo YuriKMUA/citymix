@@ -176,7 +176,11 @@
                            <% end %>
                            <h5><%= con.product.ctxt %></h5>
                            <% unless con.product.nprice.to_i == 0 %>
-                              <h4><%= con.product.nprice - con.number %> грн. </h4>
+                              <% if con.number > 0 %>  
+                                <h4><%= con.product.nprice - con.number %> грн. </h4>
+                              <% else %>
+                                <h4><%= con.product.nprice %> грн. </h4>
+                              <% end %>
                            <% else%>
                               <h5 style="color: #ff00ff;">Цену уточняйте у менеджера</h5>
                            <% end %>
