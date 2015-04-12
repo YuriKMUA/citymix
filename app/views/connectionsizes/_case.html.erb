@@ -6,7 +6,7 @@
         <% @sizes_array = Size.where(group_tov_id: [0, 2]).map { |size| [size.ctxt, size.id] } %>
         <% @sizes_array = Size.where(group_tov_id: [0, 6]).map { |size| [size.ctxt, size.id] } if $filter_value[1] == 29 %>
     <% when 3 %>
-        
+        <% @sizes_array = Size.where(group_tov_id: [0, 3]).map { |size| [size.ctxt, size.id] } %>
     <% when 4 %>
         <% @sizes_array = Size.where(group_tov_id: [0, 4]).map { |size| [size.ctxt, size.id] } if $filter_value[1] == 2 %>
         <% @sizes_array = Size.where(group_tov_id: [0, 7]).map { |size| [size.ctxt, size.id] } if $filter_value[1] == 3 %>

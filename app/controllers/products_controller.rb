@@ -5,6 +5,7 @@ class ProductsController < ApplicationController
    @product = Product.new
    @connection = @product.connections.build
    @connectionsize = Connectionsize.new
+   render "new"
   end
 
   def create
@@ -18,6 +19,7 @@ class ProductsController < ApplicationController
          @product.avatar = params[:avatar] 
       end
       @product.llatest = true
+      @product.lvisible = true
       @product.avatar.url
       @product.avatar.current_path
       @product.avatar.identifier
@@ -244,7 +246,7 @@ class ProductsController < ApplicationController
   end
 
   def flt_by_kategory
-#      @group_tovs_array = GroupTov.where(id: params[:ngroup_tov_id]).map { |group_tov| [group_tov.ctxt, group_tov.id] } 
+#      @group_tovs_array = GroupTov.where(id: params[:group_tov_id]).map { |group_tov| [group_tov.ctxt, group_tov.id] } 
       @kategories_array = Kategory.order("ctxt_ua").where(id: params[:kategories_id]).map { |kategory| [kategory.ctxt_ua, kategory.id] }  
       @@kategory_id = params[:kategories_id]
       @types_array = Type.where(kategories_id: params[:kategories_id]).map { |brand| [brand.ctxt, brand.id] } 
@@ -263,7 +265,7 @@ class ProductsController < ApplicationController
       @product = Product.new
       @connection = @product.connections.build
       @connectionsize = Connection.new
-      render "new"
+      redirect_to new_product_path
    end
 
 private

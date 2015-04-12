@@ -1,7 +1,7 @@
 <header>
 
      <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
-            <%= form_tag({controller: "products", action: "locate"}, method: "get", class: ["navbar-form", "navbar-left"]) do %>
+            <%= form_tag({ controller: "products", action: "locate" }, method: "get", class: ["navbar-form", "navbar-left"]) do %>
                <ul class="nav nav-left">
                   <li><%= text_field_tag(:artikul, nil, placeholder: "Введите код товара", class: "form-control") %></li>   
                </ul>

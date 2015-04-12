@@ -8,11 +8,13 @@
                 <tr>
                     <td width="120" align="center">Цвет</td>
                     <td width="350" align="center">Выбор файла</td>
+                    <td width="100" align="center">Уценка</td>
                     <td width="100">
                 </tr>
                 <tr>
                   <td width="120"><%= c.select(:color_id, options_for_select(colors_array)) %></td>
                   <td width="350" align="center"><%= c.file_field :avatar %></td>
+                  <td width="100" align="center"><%= c.text_field :number, value: 0 %>
                   <td width="100"><%= c.submit "далее", class: ["btn btn-default"], style: ["width: 100px;"] %></td>
                 </tr>
               </table>
