@@ -1,9 +1,9 @@
    <div class="col-md-6 media-grid">
         <% if @show_add_photo %>
-            <%= image_tag(@show_add_photo.avatar_url.to_s, class: ["thumbnail", "fast"], size: "230x320", onmouseout: "this.width=230;this.height=320",
+            <%= image_tag(@show_add_photo.avatar.thumb.url.to_s, class: ["thumbnail", "fast"], size: "230x320", onmouseout: "this.width=230;this.height=320",
                         onmouseover: "this.width=440;this.height=620",  alt: "") %>
         <% else %>  
-            <%= image_tag(@show_photo.avatar_url.to_s, class: ["thumbnail", "fast"], size: "230x320", onmouseout: "this.width=230;this.height=320",
+            <%= image_tag(@show_photo.avatar.thumb.url.to_s, class: ["thumbnail", "fast"], size: "230x320", onmouseout: "this.width=230;this.height=320",
                         onmouseover: "this.width=440;this.height=620",  alt: "") %>
         <% end %>                
    </div>

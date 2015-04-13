@@ -1,7 +1,7 @@
    <% unless @connections.nil?%>
      <tr align="center">
         <td width="100"><%= connection.cartikul%> 
-        <td width="100"><%= image_tag(connection.avatar_url, title: connection.color.ctxt, alt: connection.color.ctxt, size: "60x80")%>
+        <td width="100"><%= image_tag(connection.avatar.small_thumb.url, title: connection.color.ctxt, alt: connection.color.ctxt, size: "60x80")%>
  
 
         <% sizes_array = connection.connectionsizes.uniq.map { |size_ar| [size_ar.size.ctxt + '-' + size_ar.number.to_s, size_ar.size.id] } %>

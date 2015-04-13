@@ -19,9 +19,9 @@ class ProductsController < ApplicationController
       end
       @product.llatest = true
       @product.lvisible = true
-      @product.avatar.url
-      @product.avatar.current_path
-      @product.avatar.identifier
+#      @product.avatar.url
+#      @product.avatar.current_path
+#      @product.avatar.identifier
       if  @product.save 
         flash[:success] = "Товар внесен в базу данных!"
         $product = @product

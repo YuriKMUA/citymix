@@ -2,7 +2,7 @@
 <br>
 
 <div class="row">
-   <div class="col-md-8 col-md-offset-1">
+   <div class="col-md-7 col-md-offset-1">
      <ul class="breadcrumb">
          <li><%= link_to "Главная", root_path, class: "cat" %></li>
          <li><%= link_to @gr_tov_ctxt.ctxt, mens_path, class: "cat" %></li>
@@ -13,9 +13,9 @@
 </div>
 
 <div class="container"><br>
-      <div class="col-md-6 col-md-2" style="background: #eee;">
-         <font size="5" color='#000' face="Times New Roman, Times, serif;"><%= @show_photo.product.ctxt %></font>
-         <font size="6" color="#900090" face="Times New Roman, Times, serif;" style="margin-left: 190px;" ><%= @current_product.nprice %><font size="3"> грн.</font></font><br>
+      <div class="col-md-5 col-md-2" style="background: #eee;">
+         <font size="4" color='#000' face="Times New Roman, Times, serif;"><%= @show_photo.product.ctxt %></font>
+         <font size="5" color="#900090" face="Times New Roman, Times, serif;" style="margin-left: 190px;" ><%= @current_product.nprice %><font size="3"> грн.</font></font><br>
          <div class="row">
             <div class="col-md-offset-1">
                 <font size="2" color='#000' face="Times New Roman, Times, serif;">Код товара <%= @show_photo.cartikul %></font>
@@ -67,7 +67,7 @@
                             <% if @show_photo && @show_photo.id == f.id %>
                                 <% border = "border: 3px solid #ff0000;" %>
                             <% end %>    
-                                <td width="80px;" height="100px;"> <%= link_to image_tag(f.avatar_url.to_s, title: f.color.ctxt, size: "60x80", alt: f.color.ctxt, 
+                                <td width="80px;" height="100px;"> <%= link_to image_tag(f.avatar.small_thumb.url.to_s, title: f.color.ctxt, size: "60x80", alt: f.color.ctxt, 
                                                                style: "#{border}"), photo_basket_path(f.id) %></td>
                             <% end %>  
                         </tr>                
@@ -101,10 +101,10 @@
         <%= render "products/show_photo" %>
 </div><br>
 <div class="row">
-    <%= link_to image_tag(@show_photo.avatar_url, size: "120x160", title: @current_product.id), product_path(@show_photo.id) %>
+    <%= link_to image_tag(@show_photo.avatar.thumb.url, size: "120x160", title: @current_product.id), product_path(@show_photo.id) %>
     <% unless @additional_photos.nil? %>
         <% @additional_photos.each do |f| %>
-               <%= link_to image_tag(f.avatar_url, size: "120x160", alt: "Нет фото"), additional_photo_path(f.id) %>                        
+               <%= link_to image_tag(f.avatar.thumb.url, size: "120x160", alt: "Нет фото"), additional_photo_path(f.id) %>                        
         <% end %>
     <% end %>
 </div>

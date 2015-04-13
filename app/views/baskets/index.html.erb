@@ -19,7 +19,7 @@
          <table>
             <%  @baskets.each do |f| %>
                <tr>                  
-                  <td width="150"><%= image_tag(f.avatar_url.to_s, size: "80x100", title: f.color.ctxt, alt: f.color.ctxt) %></td>
+                  <td width="150"><%= image_tag(f.avatar.small_thumb.url.to_s, size: "80x100", title: f.color.ctxt, alt: f.color.ctxt) %></td>
                   <td width="350"><%= f.ctxt %>( <%= f.color.ctxt %> )<br><br>
                   Код товара: <%= f.cartikul %><br>
                   Размер: <%= f.size.ctxt %><br> 

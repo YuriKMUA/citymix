@@ -14,7 +14,7 @@
                   <td><strong style="color: #ff0000;">*</strong><%= c.label "Количество" %>
                    <%= c.text_field :number %></div></td>
                                  <tr>
-               <td>Фото <%= image_tag(@current_product.avatar_url, size: "143x200") if @current_product.avatar? %>
+               <td>Фото <%= image_tag(@current_product.avatar.small_thumb.url, size: "143x200") if @current_product.avatar? %>
                <%= c.file_field :avatar %></td>
                <td><%= c.hidden_field :avatar_cache %></td></tr>
  <td><%= c.submit "Сохранить", class: ["btn btn-default"] %></td>

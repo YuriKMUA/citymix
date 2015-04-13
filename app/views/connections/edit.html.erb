@@ -20,7 +20,7 @@
                   <td></td>
                   <td></td>
            <tr>  
-                  <td align="center"> <%= image_tag(@connection.avatar_url, size: "60x80") %></td>
+                  <td align="center"> <%= image_tag(@connection.avatar.small_thumb.url, size: "60x80") %></td>
                   <td > <%= c.file_field :avatar %></td>
                   <td></td>
                   <td></td>

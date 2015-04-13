@@ -169,7 +169,7 @@
                   <% unless con.avatar_url.nil? %>
                      <td>
                         <div class="thumbnails" style="background: #000; hover: #ff00ff;"> 
-                        <%= link_to image_tag(con.avatar_url), product_path(con.id) %>
+                        <%= link_to image_tag(con.avatar.thumb.url), product_path(con.id) %>
                         <div class="caption" style="color: #fff; margin-left: 30px;">
                            <% if con.product.lvisible == false %>
                                <h5 style="color: #ff0000"><blink>Товар скрыт от покупателя</blink></h5> 
