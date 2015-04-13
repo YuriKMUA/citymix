@@ -245,11 +245,10 @@ class ProductsController < ApplicationController
   end
 
   def flt_by_kategory
-#      @group_tovs_array = GroupTov.where(id: params[:group_tov_id]).map { |group_tov| [group_tov.ctxt, group_tov.id] } 
+      @group_tovs_array = GroupTov.where(id: @@group_tov_id).map { |group_tov| [group_tov.ctxt, group_tov.id] } 
       @kategories_array = Kategory.order("ctxt_ua").where(id: params[:kategories_id]).map { |kategory| [kategory.ctxt_ua, kategory.id] }  
       @@kategory_id = params[:kategories_id]
       @types_array = Type.where(kategories_id: params[:kategories_id]).map { |brand| [brand.ctxt, brand.id] } 
-#      @@type_id = params[:type_id]
       @product = Product.new
       @connection = @product.connections.build
       @connectionsize = Connection.new
