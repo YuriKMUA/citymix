@@ -18,14 +18,14 @@
                </div>   
                <div class="tab-pane active" id="tab1">
                   <% unless current_user.admin %>
-                     <% @orders = Order.where(user_id: current_user.id) %>               
+                     <% @orders = Order.order("id DESC").where(user_id: current_user.id) %>               
                   <% else %>
-                     <% @orders = Order.where(declaration_id: ["", nil] ) %>
+                     <% @orders = Order.order("id DESC").where(declaration_id: ["", nil] ) %>
                   <% end %>
                   <%= render "table_kabinet" %>
                </div>
                <div class="tab-pane" id="tab3">
-                    <% @orders = Order.all %>              
+                    <% @orders = Order.order("id DESC").all %>              
                     <%= render "table_kabinet" %>
                </div>
             </div>

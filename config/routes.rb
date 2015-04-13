@@ -89,7 +89,7 @@ Citymix::Application.routes.draw do
   match "/sendpass",   to: "users#send_pass", via: :get
   match "/changepass", to: "users#change_pass", via: :get  
   match  "/flt_by_kategory", to: "products#flt_by_kategory", via: :get
-  match  "/flt_by_group_tov", to: "products#flt_by_group_tov", via: :post
+  match  "/flt_by_group_tov", to: "products#flt_by_group_tov", via: :get
   match  "/sbros_flt", to: "products#sbros_flt", via: :get
   match  "/vybor", to: "static_pages#vybor", via: :get 
   match  "/call_back", to: "users#call_back", via: :get  

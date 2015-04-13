@@ -14,28 +14,31 @@
 <% conditions_array = Condition.all.map { |condition| [condition.ctxt, condition.id] } %>
 
 <div class="row">
-   <div class="col-md-7 col-md-offset-3">
+   <div class="col-md-7 col-md-offset-2" style="padding-left: 120px;">
       <div class="well">
       <h2>Наполнение склада</h2>
-         <div class="row">
+            <%= form_tag("/flt_by_group_tov", method: "get") do %>
             <table>
-            <%= form_tag("/flt_by_group_tov") do %>
                   <tr>
                     <td width="300"><strong style="color: #ff0000;">* Категория</strong></td>
-                    <td width="700"><%= select_tag(:group_tov_id, options_for_select(@group_tovs_array), class: ["btn btn-default", "form-control"]) %></td>
+                    <td width="500"><%= select_tag(:group_tov_id, options_for_select(@group_tovs_array), class: ["btn btn-default", "form-control"]) %></td>
                     <td width="150"><%= button_tag("Выбрать", class: ["btn btn-default"]) %></td>
-                    <td width="150"><%= link_to("Доб. группу ", "#", class: ["btn btn-default"])%>
+                    <td width="150"><%= link_to("Доб. группу ", "#", class: ["btn btn-default"])%></td>
                   </tr>
+            </table>
             <% end %>
             <%= form_tag("/flt_by_kategory", method: "get") do %>
+            <table>
                   <tr>
-                     <td width="300"><strong style="color: #ff0000;">* Подкатегория</strong></td>
-                    <td width="700"><%= select_tag(:kategories_id, options_for_select(@kategories_array), class: ["btn btn-default"]) %></td>
-                    <td width="150"><%= button_tag("Выбрать", class: ["btn btn-default"]) -%></td>
+                    <td width="300"><strong style="color: #ff0000;">* Подкатегория</strong></td>
+                    <td width="800"><%= select_tag(:kategories_id, options_for_select(@kategories_array), class: ["btn btn-default"]) %></td>
+                    <td width="150"><%= button_tag("Выбрать", class: ["btn btn-default"]) %></td>
                     <td width="150"><%= link_to("Доб.категор.  ", new_kategory_path, class: ["btn btn-default"])%></td>
                   </tr>
+            </table>
             <% end %>
           <%= form_for @product, { html: { multipart: true } }  do |f| %>  
+            <table>
                   <tr>
                     <td width="300"><strong style="color: #ff0000;">* Тип</strong></td>
                     <td width="700"><%= f.select(:type_id, options_for_select(@types_array), class: ["btn btn-default"]) %></td>
@@ -69,7 +72,7 @@
                     <td width="300"><strong>Состояние</strong></td>
                     <td width="700"><%= f.select(:condition_id, options_for_select(conditions_array), class: ["btn btn-default"]) %></td>
                     <td width="300" align="right"><strong>Наличие</strong></td>
-                    <td width="250"><%= f.select(:availability, options_for_select(["есть в наличии", "под заказ"]), class: ["btn btn-default"]) %></td>
+                    <td width="250"><%= f.select(:availability, options_for_select(["--", "есть в наличии", "под заказ"]), class: ["btn btn-default"]) %></td>
                   </tr>
                   <tr>
                     <td width="300"><strong style="color: #ff0000;">* Наименование</strong></td>
@@ -96,7 +99,6 @@
                      <td width="450"><%= f.text_area :ccontent %></td>
                   </tr>  
                </table>   
-               <strong style="color: #ff0000;">* Поля, обязательные для заполнения</strong><br>   
                <%= f.submit "Сохранить", class: ["btn btn-default", "col-md-3 col-md-offset-3"] %>
             <% end %>
             <div class="row">
@@ -104,7 +106,7 @@
                <%= submit_tag("Сброс фильтров", class: ["btn btn-default", "col-md-3"]) %>
             <% end %>
             </div>
-         </div>
+         <strong style="color: #ff0000;">* Поля, обязательные для заполнения</strong><br>   
       </div>
    </div>   
 </div>   

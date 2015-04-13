@@ -5,7 +5,6 @@ class ProductsController < ApplicationController
    @product = Product.new
    @connection = @product.connections.build
    @connectionsize = Connectionsize.new
-   render "new"
   end
 
   def create

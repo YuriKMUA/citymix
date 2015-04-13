@@ -1,12 +1,12 @@
 <header>
 
-     <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
-            <%= form_tag({ controller: "products", action: "locate" }, method: "get", class: ["navbar-form", "navbar-left"]) do %>
+            <%= form_tag({ controller: "products", action: "locate" }, method: "get", class: ["navbar-form", "navbar-left"], style: ["margin-top: 20px;", "margin-left: 5px;"]) do %>
                <ul class="nav nav-left">
                   <li><%= text_field_tag(:artikul, nil, placeholder: "Введите код товара", class: "form-control") %></li>   
                </ul>
              <% end %>             
-            <div class="navbar-header nav navbar-right">
+     <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation" style="margin-top: -15px;">
+            <div class="navbar-header nav navbar-right" style="margin-top: 10px;">
                <ul class="nav navbar-nav">
                   <li><%= link_to " Регистрация", signup_path, class: ["glyphicon glyphicon-user"] unless signed_in? %> </li>
                   <% if signed_in? %>
@@ -40,10 +40,10 @@
                         <li><%= link_to(" Кабинет: " + current_user.name, current_user, class: ["ws11", "cat", "glyphicon glyphicon-user" ]) %></li>
                         <li><%= link_to " Корзина", baskets_path,  class:  "glyphicon glyphicon-shopping-cart" %></li>    
                         <% if current_user.admin? %>
-                            <li><%= link_to(Basket.all.count, baskets_path, id: "kol_bange", class: ["cat", "badge"]) %></li>
+                            <li><%= link_to(Basket.all.count, baskets_path, class: ["cat"]) %></li>
                         <% else %>
-                            <li><%= link_to(Basket.where(user_id: current_user.id, order_id: nil).count, baskets_path, id: "kol_bange", 
-                                class: ["cat", "badge"]) %></li>
+                            <li><%= link_to(Basket.where(user_id: current_user.id, order_id: nil).count, baskets_path, 
+                                class: ["cat"]) %></li>
                         <% end %>        
                         <li><%= link_to " Выход", signout_path, class: "glyphicon glyphicon-share", method: "delete" %></li>
                         <li><%= link_to "          ", "#" %></li>
@@ -61,11 +61,11 @@
 
 
 <div class="col-md-8 col-md-offset-1">
-      <%= link_to image_tag("citylogo1.png", class: "logo"), root_path %><%= link_to image_tag("telefon-ico.png", class: ["col-md-offset-2"], width: 32, weight: 32), 
+      <%= link_to image_tag("citylogo1.png", class: "logo"), root_path %><%= link_to image_tag("telefon-ico.png", class: ["col-md-offset-1"], width: 32, weight: 32), 
           "#" %><%= link_to("(098)", "#", font: "Century Gotic", class: ["ws12", "cat"]) %><%= link_to(" - 745-85-45", "#", font: "Century Gotic", class: ["ws14", "cat"]) %> 
       <%= link_to " Заказать обратный звонок", call_back_path, class: ["col-md-offset-1", "cat", "glyphicon glyphicon-phone-alt"] %>
 </div> 
-<div class="col-md-8 col-md-offset-2">
+<div class="col-md-8 col-md-offset-3">
          <ul class="nav navbar-nav">
                <% @group_tovs_filter = GroupTov.where(lvisible: true) %>
                <% @group_tovs_filter.each do |txt| %>
@@ -83,7 +83,7 @@
         </ul>
 </div>
 <div class="col-md-5 col-md-offset-3">
-   <hr style="margin-left: -100px; height: 3px; width: 1000px;">
+   <hr style="margin-left: 40px; height: 3px; width: 728px;">
 </div>   
 </header>
  
