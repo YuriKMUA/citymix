@@ -42,7 +42,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
      process :resize_to_fit => [400, 400]
    end
    version :small_thumb, from_version: :thumb do
-    process resize_to_fit: [70, 70]
+    process resize_to_fit: [120, 120]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

@@ -67,7 +67,7 @@
                             <% if @show_photo && @show_photo.id == f.id %>
                                 <% border = "border: 3px solid #ff0000;" %>
                             <% end %>    
-                                <td width="80px;" height="100px;"> <%= link_to image_tag(f.avatar.small_thumb.url.to_s, title: f.color.ctxt, size: "60x80", alt: f.color.ctxt, 
+                                <td width="80%" height="100%"> <%= link_to image_tag(f.avatar.small_thumb.url.to_s, title: f.color.ctxt, size: "60x80", alt: f.color.ctxt, 
                                                                style: "#{border}"), photo_basket_path(f.id) %></td>
                             <% end %>  
                         </tr>                
@@ -98,15 +98,27 @@
                             
          <br> 
       </div>    
-        <%= render "products/show_photo" %>
+      <div class="col-md-6 media-grid">
+        <% if @show_add_photo %>
+            <%= link_to image_tag(@show_add_photo.avatar.thumb.url.to_s, class: ["thumbnail", "fast"], size: "300x400", onmouseout: "this.width=230;this.height=320",
+                        onmouseover: "this.width=440;this.height=620",  alt: "") %>
+        <% else %>  
+            <%= link_to image_tag(@show_photo.avatar.thumb.url.to_s, class: ["thumbnail", "fast"], size: "300x460",  alt: ""), "#" %>
+        <% end %>                
+     </div>
+
+
 </div><br>
 <div class="row">
-    <%= link_to image_tag(@show_photo.avatar.thumb.url, size: "120x160", title: @current_product.id), product_path(@show_photo.id) %>
-    <% unless @additional_photos.nil? %>
-        <% @additional_photos.each do |f| %>
-               <%= link_to image_tag(f.avatar.thumb.url, size: "120x160", alt: "Нет фото"), additional_photo_path(f.id) %>                        
+    <div class="highslide-gallery">
+        <%= link_to image_tag(@show_photo.avatar.thumb.url, size: "120x160", title: @current_product.id), product_path(@show_photo.id) %>
+        <% unless @additional_photos.nil? %>
+            <% @additional_photos.each do |f| %>
+               <%= link_to image_tag(f.avatar.thumb.url, size: "120x160", title: "Нажмите, чтоб раскрыть", alt: "Нет фото"), 
+                   path_to_image(f.avatar.url), class: "highslide", onclick: "return hs.expand(this)" %>                       
+            <% end %>
         <% end %>
-    <% end %>
+    </div>    
 </div>
 <%= render "shared/hr_line" %>
 <span style="color: #000;">
