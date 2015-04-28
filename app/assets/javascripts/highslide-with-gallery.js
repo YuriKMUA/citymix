@@ -30,7 +30,7 @@ lang : {
 	nextTitle : 'Следующий (arrow right)',
 	moveTitle : 'Переместить',
 	fullExpandText : '1:1',
-	number: 'Image %1 of %2',
+	number: 'Фото %1 из %2',
 	restoreTitle : ''
 },
 // See http://highslide.com/ref for examples of settings  
@@ -59,7 +59,7 @@ enableKeyListener : true,
 openerTagNames : ['a'], // Add more to allow slideshow indexing
 transitions : [],
 transitionDuration: 250,
-dimmingOpacity: 0, // Lightbox style dimming background
+dimmingOpacity: 1, // Lightbox style dimming background
 dimmingDuration: 50, // 0 for instant dimming
 
 anchor : 'auto', // where the image expands from
