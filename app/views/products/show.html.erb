@@ -2,7 +2,7 @@
 <br>
 
 <div class="row">
-   <div class="col-md-7 col-md-offset-1">
+   <div class="col-sm-10 col-md-7 col-md-offset-1">
      <ul class="breadcrumb">
          <li><%= link_to "Главная", root_path, class: "cat" %></li>
          <li><%= link_to @gr_tov_ctxt.ctxt, mens_path, class: "cat" %></li>
@@ -13,13 +13,16 @@
 </div>
 
 <div class="container"><br>
-      <div class="col-md-5 col-md-2" style="background: #eee;">
+      <div class="col-sm-8 col-md-5 col-md-2" style="background: #eee;">
          <font size="4" color='#000' face="Times New Roman, Times, serif;"><%= @show_photo.product.ctxt %></font>
          <font size="5" color="#900090" face="Times New Roman, Times, serif;" style="margin-left: 190px;" ><%= @current_product.nprice %><font size="3"> грн.</font></font><br>
          <div class="row">
             <div class="col-md-offset-1">
                 <font size="2" color='#000' face="Times New Roman, Times, serif;">Код товара <%= @show_photo.cartikul %></font>
             </div>
+         <%= form_tag({ controller: "baskets", action: "create" }, method: "post") do %>
+            <%= button_tag(" КУПИТЬ", name: :btn_buy, class: ["btn btn-danger", "col-md-offset-8", "glyphicon glyphicon-shopping-cart"]) %>
+         <% end %> 
          </div>   
          <%= render "shared/hr_line" %>
          <table>
@@ -91,9 +94,6 @@
             <% end %>
             </tr>
             </table><br>
-         <%= form_tag({ controller: "baskets", action: "create" }, method: "post") do %>
-            <%= button_tag(" КУПИТЬ", name: :btn_buy, class: ["btn btn-danger", "col-md-offset-8", "glyphicon glyphicon-shopping-cart"], style: ["margin-top: -500px;"]) %>
-         <% end %> 
             Дополнительная информация: <br>
             <%= @show_photo.product.ccontent %><br>
             <%= @show_photo.content %>
