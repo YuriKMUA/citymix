@@ -26,7 +26,7 @@
                   <%= link_to "удалить", f,  method: :delete, data: { confirm: "Удалить из корзины?" }, style: ["color: #f00;"] %></td>
                   <% @kol = "kol" + f.id.to_s %>
                   <td width="80"><%= text_field_tag(@kol, f.number, style: ["width: 50px; height: 33px;"]) %></td>
-                  <% if current_user && current_user.admin? %>
+                  <% if signed_in? && current_user.admin? %>
                     <% @price = "price" + f.id.to_s %>
                     <td width="190" align="center"><%= text_field_tag(@price, f.nprice, style: ["width: 80px; height: 33px;"]) %> грн.</td>
                   <% else %>
@@ -57,7 +57,7 @@
                   <%= link_to "Удалить все", del_basket_all_path, data: { confirm: "Удалить из корзины все записи?" }, class: "btn btn-sm" %>      
                </div>
                <div class="col-md-3 col-md-offset-2">
-                   <%= submit_tag("Пересчитать", class: "btn btn-sm") if @baskets && @baskets.any? %>
+                   <%= submit_tag("Пересчитать", class: "btn btn-sm") %>
                </div>
             </div>
          
@@ -78,7 +78,7 @@
                <% if signed_in? %>
                   <%= link_to " Оформить заказ", info_orders_path, class: ["btn btn-lg btn-default", "glyphicon glyphicon-thumbs-up"] if @baskets && @baskets.any? %>
                <% else %>
-                  <%= link_to " Оформить заказ", signin_path, class: ["btn btn-lg btn-default", "glyphicon glyphicon-thumbs-up"] if @baskets && @baskets.any? %>
+                  <%= link_to " Оформить заказ", new_user_path, class: ["btn btn-lg btn-default", "glyphicon glyphicon-thumbs-up"] if @baskets && @baskets.any? %>
                <% end %>
 
             </div>   

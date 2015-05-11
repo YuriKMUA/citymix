@@ -1,15 +1,15 @@
 class BasketsController < ApplicationController
 
   def index
-      if current_user && current_user.admin?
+      if signed_in? && current_user.admin?
          @baskets = Basket.where(status_delivery_id: 3)   
       else 
         if signed_in?
              @baskets = Basket.where(user_id: current_user.id, order_id: nil)
         else
              unless cookies[:remember_token].nil?
-            @baskets = Basket.where(remember_token: cookies[:remember_token])
-            end   
+                @baskets = Basket.where(remember_token: cookies[:remember_token])
+             end   
         end
       end  
   end
@@ -66,7 +66,8 @@ class BasketsController < ApplicationController
      @current_product = Product.find($connection.product_id)
      @additional_photos = @show_photo.additional_photos
      $filter_value[13] = params[:id]
-     render "products/show" 
+     @chooze_size = nil
+     redirect_to product_path(params[:id])
   end
     
   def chooze_size
@@ -94,8 +95,12 @@ class BasketsController < ApplicationController
          @kol = "kol" + f.id.to_s
          @price = "price" + f.id.to_s
          f.number = params[@kol]
-         f.nprice = params[@price]
-         f.nsum = params[@price].to_i * params[@kol].to_i
+         if signed_in? && current_user.admin? 
+             f.nprice = params[@price]
+             f.nsum = params[@price].to_i * params[@kol].to_i
+         else
+             f.nsum = params[@kol].to_i * f.nprice unless f.nprice.nil?            
+         end
          f.save
       end
       render "index"

@@ -3,25 +3,12 @@
 <div class="row">
    <div class="col-md-7 col-md-offset-3">
       <div class="well">
-      <h2>Для доставки товара внесите Ваши данные</h2>
-         <div class="row">
-            <div class="col-md-5 col-md-offset-3">
-                <%= link_to " Я уже раньше здесь покупал ", signin_path, class: ["btn btn-default", "glyphicon glyphicon-user"] %>
-            </div>
-         </div>
-         <br>
+      <h2>Открываем персональный кабинет</h2>
          <div class="row">
             <div class="col-md-10 col-md-offset-1">
-
                <%= form_for(@user) do |f| %>
                <%= render 'shared/error_messages', object: f.object %>
             <table>
-             <tr>
-                  <td><strong style="color: #ff0000;">*</strong><%= f.label "Електронный адрес" %>
-                      <%= f.text_field   :email %> </td>
-                  <td><strong style="color: #ff0000;">*</strong><%= f.label "Мобильный телефон" %>
-                      <%= f.text_field   :phone %> </td>
-             </tr>
                <tr>
                   <td><strong style="color: #ff0000;">*</strong><%= f.label "Имя" %>
                        <%= f.text_field   :name %></td>
@@ -35,6 +22,12 @@
                        <%= f.text_field   :adress %></td>
              </tr>
              <tr>
+                  <td><strong style="color: #ff0000;">*</strong><%= f.label "Мобильный телефон" %>
+                      <%= f.text_field   :phone %> </td>
+                  <td><strong style="color: #ff0000;">*</strong><%= f.label "Електронный адрес" %>
+                      <%= f.text_field   :email %> </td>
+             </tr>
+             <tr>
                   <td><strong style="color: #ff0000;">*</strong><%= f.label "Пароль (не менее 6 символов)" %>
                       <%= f.text_field   :password, type: :password %></td>
                   <td><strong style="color: #ff0000;">*</strong><%= f.label "Повторите пароль еще раз" %>
@@ -42,7 +35,7 @@
              </tr>
             </table>
        <strong style="color: #ff0000;">*  Поля, обязательные для заполнения</strong><br>   
-               <%= f.submit "OK", class: ["btn btn-default", "col-md-5 col-md-offset-3", "glyphicon glyphicon-save"] %>
+               <%= f.submit "Регистрация", class: ["btn btn-default", "col-md-5 col-md-offset-3", "glyphicon glyphicon-check"] %>
                <% end %>
             </div>
          </div>  

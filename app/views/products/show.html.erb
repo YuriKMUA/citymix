@@ -67,7 +67,7 @@
                             <% if @show_photo && @show_photo.id == f.id %>
                                 <% border = "border: 3px solid #ff0000;" %>
                             <% end %>    
-                                <td width="80%" height="100%"> <%= link_to image_tag(f.avatar.small_thumb.url.to_s, title: f.color.ctxt, size: "60x80", alt: f.color.ctxt, 
+                                <td width="80px;" height="80px;"> <%= link_to image_tag(f.avatar.small_thumb.url.to_s, title: f.color.ctxt, size: "60x80", alt: f.color.ctxt, 
                                                                style: "#{border}"), photo_basket_path(f.id) %></td>
                             <% end %>  
                         </tr>                
@@ -78,13 +78,15 @@
             <table>
             <tr>
             Выбирите размер:
-            <% img = "/uploads/images/kvadrat_lighter.gif" %>
+            <% img = '/uploads/images/kvadrat_lighter.gif' %>
             <% Connectionsize.where(connection_id: @show_photo.id).each do |c| %>
                 <% if @chooze_size && @chooze_size.id == c.id %>    
-                    <% border = "border: 1px solid #ff0000;" %>
+                    <% border = "border: 1px solid #ff0000; border-radius: 7px;" %>
+                    <% img = '/uploads/images/kvadrat.gif' %>
+                <% else %>    
+                    <% img = '/uploads/images/kvadrat_lighter.gif' %>
                 <% end %>    
-               <td><%= link_to image_tag(img, alt: c.size.ctxt, onmouseover: "this.src='/uploads/images/kvadrat.gif';", title: c.size.ctxt,
-                        onmouseout: "this.src='/uploads/images/kvadrat_lighter.gif';", style: "#{border}"), size_basket_path(c.id) %></td>
+               <td><%= link_to image_tag(img, alt: c.size.ctxt, title: c.size.ctxt, style: "#{border}"), size_basket_path(c.id) %></td>
                 <td><span style="margin-left: -35px;"><%= c.size.ctxt %></span></td>
             <% end %>
             </tr>

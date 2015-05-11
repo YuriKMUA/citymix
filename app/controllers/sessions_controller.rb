@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
          redirect_to user_path(current_user.id)
       end
     else
-      flash.now[:danger] = "Не верно введен електронный адресс или пароль"
+      flash.now[:danger] = "Не верно введен електронный адрес или пароль"
       render 'new'
     end
  end
