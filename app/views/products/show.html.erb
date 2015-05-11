@@ -21,7 +21,7 @@
                 <font size="2" color='#000' face="Times New Roman, Times, serif;">Код товара <%= @show_photo.cartikul %></font>
             </div>
          <%= form_tag({ controller: "baskets", action: "create" }, method: "post") do %>
-            <%= button_tag(" КУПИТЬ", name: :btn_buy, class: ["btn btn-danger", "col-md-offset-8", "glyphicon glyphicon-shopping-cart"]) %>
+            <%= button_tag(" КУПИТЬ", name: :btn_buy, class: ["btn btn-danger", "col-md-offset-7", "glyphicon glyphicon-shopping-cart"]) %>
          <% end %> 
          </div>   
          <%= render "shared/hr_line" %>

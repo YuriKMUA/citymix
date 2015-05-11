@@ -62,19 +62,19 @@
             </div>
          
             <div class="row">
-               <div class="col-md-5 col-md-offset-7">
+               <div class="col-sm-8 col-sm-offset-4 col-md-5 col-md-offset-7">
                   <span class="ws12" style="margin-left: 60px; color: #900090;"> Доставка: 35 грн.  </span>
                </div>
             </div>   
                <div class="row">
-                  <div class="col-md-5 col-md-offset-7">
+                  <div class="col-sm-8 col-sm-offset-4 col-md-5 col-md-offset-7">
                      <span class="ws18" style="margin-left: 60px; color: #900090;"> Итого: <%= sum_in_basket + 35 %> грн.  </span>
                </div>
            <% end %>    
          </div>         
          <% end %>
          <div class="row">
-            <div class="col-md-4 col-md-offset-7">
+            <div class="col-sm-8 col-sm-offset-4 col-md-4 col-md-offset-7">
                <% if signed_in? %>
                   <%= link_to " Оформить заказ", info_orders_path, class: ["btn btn-lg btn-default", "glyphicon glyphicon-thumbs-up"] if @baskets && @baskets.any? %>
                <% else %>
