@@ -58,7 +58,7 @@
                                  <% @brand = "brand" + f.to_s %>
                                  <li><div class="col-md-1"><%= radio_button_tag(:brand, f) %></div>
                                            <% brand = Brand.find(f) %> 
-                                           <%= label_tag(@brand, brand.ctxt) %></li>
+                                           <div class="col-md-3 col-md-offset-1"><%= label_tag(@brand, brand.ctxt) %></div></li>
                                  <% end %>
                                  </ul>
                                  <% if $filter_value[3] == nil %>
