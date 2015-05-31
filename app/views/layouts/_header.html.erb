@@ -75,8 +75,8 @@
                     <ul class="dropdown-menu pull-right" style="filter:alpha(opacity=60); opacity: 0.7; color: #000; background: #000;">
                        <% kat_all = Kategory.where(lvisible: true, group_tov_id: txt.id) %>
                        <% kat_all.each do |f| %>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
-                         <li> <%= link_to f.ctxt_ua, kategory_group_tov_path(f.id, txt.id), class: ["cat"] %></li></div>
+
+                         <li> <%= link_to f.ctxt_ua, kategory_group_tov_path(f.id, txt.id), class: ["cat", "col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3"] %></li>
                        <% end %>
                     </ul> 
                <% end %>         
