@@ -7,11 +7,10 @@
              <% end %>             
      <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation" style="margin-top: -1%;">
             <div class="navbar-header nav navbar-right" style="margin-top: 0.1%;">
-            <div class="row">
                <ul class="nav navbar-nav">
-                  <li><%= link_to " Регистрация", signup_path, class: ["glyphicon glyphicon-user"] unless signed_in? %> </li>
+                  <li><%= link_to " Регистрация", signup_path, class: ["glyphicon glyphicon-user"], style: "width: 170px;" unless signed_in? %> </li>
                   <% if signed_in? %>
-                   <li><%= link_to "Пользователи", users_path if current_user.admin? %></li>
+                   <li><%= link_to "Пользователи", users_path,  style: "width: 140px;" if current_user.admin? %></li>
                    <% if current_user.admin? %>
                    <li id="fat-menu" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Словари<b class="caret"></b></a>
@@ -50,14 +49,13 @@
                         <li><%= link_to "          ", "#" %></li>
                    </ul>
                   <% else %>
-                       <li><%= link_to" Вход", signin_path, class: ["cat", "glyphicon glyphicon-log-in"] %></li>
-                       <li><%= link_to " Корзина", baskets_path,  class: "glyphicon glyphicon-shopping-cart" %></li> 
+                       <li><%= link_to" Вход", signin_path, class: ["cat", "glyphicon glyphicon-log-in"], style: "width: 150px;" %></li>
+                       <li><%= link_to " Корзина", baskets_path,  class: "glyphicon glyphicon-shopping-cart", style: "width: 150px;" %></li> 
                        <li><%= link_to(Basket.where(remember_token: cookies[:remember_token]).count, baskets_path, id: "kol_bange", class: ["cat"]) %></li>
                        <li><%= link_to "          ", "#" %></li>
 
                   <% end %>
                </ul>
-            </div>
             </div>   
      </nav>
 
