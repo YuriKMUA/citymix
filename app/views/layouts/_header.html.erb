@@ -1,12 +1,12 @@
 <header>
 
-            <%= form_tag({ controller: "products", action: "locate" }, method: "get", class: ["navbar-form", "navbar-left"], role: "search", style: ["margin-top: 20px;", "margin-left: 5px;"]) do %>
+            <%= form_tag({ controller: "products", action: "locate" }, method: "get", class: ["navbar-form", "navbar-left"], role: "search", style: ["margin-top: 2%;", "margin-left: 1%;"]) do %>
                <ul class="nav nav-left">
                   <li><%= text_field_tag(:artikul, nil, placeholder: "Введите код товара", class: "form-control", style: "width: 85%") %></li>   
                </ul>
              <% end %>             
      <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation" style="margin-top: -1%;">
-            <div class="navbar-header nav navbar-right" style="margin-top: 10px;">
+            <div class="navbar-header nav navbar-right" style="margin-top: 0.1%;">
                <ul class="nav navbar-nav">
                   <li><%= link_to " Регистрация", signup_path, class: ["glyphicon glyphicon-user"] unless signed_in? %> </li>
                   <% if signed_in? %>
