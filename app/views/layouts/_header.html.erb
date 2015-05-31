@@ -8,7 +8,7 @@
      <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation" style="margin-top: -1%;">
             <div class="navbar-header nav navbar-right" style="margin-top: 0.1%;">
                <ul class="nav navbar-nav">
-                  <li><%= link_to " Регистрация", signup_path, class: ["glyphicon glyphicon-user"], style: "width: 170px;" unless signed_in? %> </li>
+                  <li><%= link_to " Регистрация", signup_path, class: ["glyphicon glyphicon-user"] unless signed_in? %> </li>
                   <% if signed_in? %>
                    <li><%= link_to "Пользователи", users_path,  style: "width: 140px;" if current_user.admin? %></li>
                    <% if current_user.admin? %>
@@ -49,8 +49,8 @@
                         <li><%= link_to "          ", "#" %></li>
                    </ul>
                   <% else %>
-                       <li><%= link_to" Вход", signin_path, class: ["cat", "glyphicon glyphicon-log-in"], style: "width: 150px;" %></li>
-                       <li><%= link_to " Корзина", baskets_path,  class: "glyphicon glyphicon-shopping-cart", style: "width: 150px;" %></li> 
+                       <li><%= link_to" Вход", signin_path, class: ["cat", "glyphicon glyphicon-log-in"] %></li>
+                       <li><%= link_to " Корзина", baskets_path,  class: "glyphicon glyphicon-shopping-cart" %></li> 
                        <li><%= link_to(Basket.where(remember_token: cookies[:remember_token]).count, baskets_path, id: "kol_bange", class: ["cat"]) %></li>
                        <li><%= link_to "          ", "#" %></li>
 
@@ -66,7 +66,6 @@
      <font size="4" face="Century Gotic" color="#fff"> - 745-85-45 </font>
      <%= link_to " Заказать обратный звонок", call_back_path, class: ["col-sm-offset-1 col-md-offset-1 col-xs-offset-1", "cat", "glyphicon glyphicon-phone-alt"] %>
 </div> 
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-1 col-sm-offset-1 col-md-offset-3 col-lg-offset-3">
          <ul class="nav navbar-nav">
                <% @group_tovs_filter = GroupTov.where(lvisible: true) %>
                <% @group_tovs_filter.each do |txt| %>
@@ -76,13 +75,13 @@
                     <ul class="dropdown-menu pull-right" style="filter:alpha(opacity=60); opacity: 0.7; color: #000; background: #000;">
                        <% kat_all = Kategory.where(lvisible: true, group_tov_id: txt.id) %>
                        <% kat_all.each do |f| %>
-                         <li> <%= link_to f.ctxt_ua, kategory_group_tov_path(f.id, txt.id), class: ["cat"] %></li>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
+                         <li> <%= link_to f.ctxt_ua, kategory_group_tov_path(f.id, txt.id), class: ["cat"] %></li></div>
                        <% end %>
                     </ul> 
                <% end %>         
                <% end %> 
         </ul>
-</div>
 <div class="col-sm-6 col-md-5 col-sm-offset-2 col-md-offset-3">
    <hr style="margin-left: 6%; height: 3; width: 113%;">
 </div>   
