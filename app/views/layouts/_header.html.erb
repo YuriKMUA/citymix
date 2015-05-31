@@ -7,8 +7,57 @@
              <% end %>             
      <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation" style="margin-top: -1%;">
             <div class="navbar-header nav navbar-right" style="margin-top: 0.1%;">
+            <div class="row">
                <ul class="nav navbar-nav">
-                                </ul>
+                  <li><%= link_to " Регистрация", signup_path, class: ["glyphicon glyphicon-user"] unless signed_in? %> </li>
+                  <% if signed_in? %>
+                   <li><%= link_to "Пользователи", users_path if current_user.admin? %></li>
+                   <% if current_user.admin? %>
+                   <li id="fat-menu" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Словари<b class="caret"></b></a>
+                     <ul class="dropdown-menu">
+                        <li><%= link_to " Ввод новой категории товара", new_kategory_path, class: "glyphicon glyphicon-plus" %></li>
+                        <li><%= link_to " Редактирование категории товаров", kategories_path, class: "glyphicon glyphicon-edit" %></li>
+                        <li class="divider"></li>
+                    </ul>
+
+                   <li id="fat-menu" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Складские операции<b class="caret"></b></a>
+                     <ul class="dropdown-menu">
+                        <li><%= link_to " Ввод нового товара", new_product_path, class: "glyphicon glyphicon-plus" %></li>
+                        <li class="divider"></li>
+                        <li><%= link_to " Редактирование данных по товару", edit_product_path(Product.first.id), class: "glyphicon glyphicon-edit" if Product.first %></li>
+                    </ul>
+                   <% end %>  
+                   <li id="fat-menu" class="dropdown">
+                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Account <b class="caret"></b></a>
+                   <ul class="dropdown-menu">
+                        <li class="divider"></li>
+                        <li><%= link_to " Просмотр профиля/заказов", current_user, class: "glyphicon glyphicon-search" %></li>
+                        <li><%= link_to " Обновить профиль",  edit_user_path(current_user), class: "glyphicon glyphicon-edit" %></li> 
+                        <li class="divider"></li>
+                        <li><%= link_to " Выход", signout_path, class: "glyphicon glyphicon-share", method: "delete" %></li>
+                   </ul>
+                        <li><%= link_to(" Кабинет: " + current_user.name, current_user, class: ["ws11", "cat", "glyphicon glyphicon-user" ]) %></li>
+                        <li><%= link_to " Корзина", baskets_path,  class:  "glyphicon glyphicon-shopping-cart" %></li>    
+                        <% if current_user.admin? %>
+                            <li><%= link_to(Basket.all.count, baskets_path, class: ["cat"]) %></li>
+                        <% else %>
+                            <li><%= link_to(Basket.where(user_id: current_user.id, order_id: nil).count, baskets_path, 
+                                class: ["cat"]) %></li>
+                        <% end %>        
+                        <li><%= link_to " Выход", signout_path, class: "glyphicon glyphicon-share", method: "delete" %></li>
+                        <li><%= link_to "          ", "#" %></li>
+                   </ul>
+                  <% else %>
+                       <li><%= link_to" Вход", signin_path, class: ["cat", "glyphicon glyphicon-log-in"] %></li>
+                       <li><%= link_to " Корзина", baskets_path,  class: "glyphicon glyphicon-shopping-cart" %></li> 
+                       <li><%= link_to(Basket.where(remember_token: cookies[:remember_token]).count, baskets_path, id: "kol_bange", class: ["cat"]) %></li>
+                       <li><%= link_to "          ", "#" %></li>
+
+                  <% end %>
+               </ul>
+            </div>
             </div>   
      </nav>
 
