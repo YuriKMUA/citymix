@@ -24,7 +24,7 @@
        <hr color="black">
    </div>
                <ul class="col-xs-8 col-md-3" style="width: 300px;">
-                   <div class="well" style="background: #bbb;">
+                   <div class="well" style="background: black;">
                       <strong>Цена</strong><br>
                     <%= form_tag({ controller: "products", action: "search" }, method: "get") do %>
                       <%= text_field_tag(:price_min, 0, type: "text", maxlength: 5, placeholder: " цена от", class: ["col-md-5"]) %>
