@@ -6,9 +6,9 @@
                </ul>
              <% end %>             
      <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation" style="margin-top: -1%;">
-            <div class="navbar-header nav navbar-right" style="margin-top: 1.5%;">
+            <div class="navbar-header nav navbar-right" style="margin-top: 1.0%;">
                <div class="nav navbar-nav">
-                  <%= link_to " Регистрация", signup_path, class: ["col-md-5", "cat", "glyphicon glyphicon-user"] unless signed_in? %>
+                  <%= link_to " Регистрация", signup_path, class: ["col-md-4", "cat", "glyphicon glyphicon-user"] unless signed_in? %>
                   <% if signed_in? %>
                    <li><%= link_to "Пользователи", users_path if current_user.admin? %></li>
                    <% if current_user.admin? %>
@@ -49,10 +49,10 @@
                         <li><%= link_to "          ", "#" %></li>
                    </ul>
                   <% else %>
-                       <%= link_to" Вход", signin_path, class: ["col-md-3", "cat", "glyphicon glyphicon-log-in"] %>
-                       <%= link_to " Корзина", baskets_path,  class: ["col-md-4", "cat", "glyphicon glyphicon-shopping-cart"] %> 
-                       <div class="col-md-1"><%= link_to(Basket.where(remember_token: cookies[:remember_token]).count, baskets_path, id: "kol_bange", class: ["col-md-1", "cat"]) %></div>
-                       <div><%= link_to "          ", "#" %></div>
+                       <%= link_to" Вход", signin_path, class: ["col-md-2", "cat", "glyphicon glyphicon-log-in"] %>
+                       <%= link_to " Корзина", baskets_path,  class: ["col-md-3", "cat", "glyphicon glyphicon-shopping-cart"] %> 
+                       <%= link_to(Basket.where(remember_token: cookies[:remember_token]).count, baskets_path, id: "kol_bange", class: ["col-md-2", "cat"]) %>
+                       <%= link_to "          ", "#" %>
 
                   <% end %>
                </div>
