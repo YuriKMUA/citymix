@@ -6,7 +6,7 @@
                </ul>
              <% end %>             
      <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation" style="margin-top: -1%;">
-            <div class="navbar-header nav navbar-right" style="margin-top: 1.0%;">
+            <span class="navbar-header nav navbar-left" style="margin-top: 1.0%;">
                <div class="nav navbar-nav">
                   <%= link_to " Регистрация", signup_path, class: ["col-md-4", "cat", "glyphicon glyphicon-user"] unless signed_in? %>
                   <% if signed_in? %>
@@ -56,7 +56,7 @@
 
                   <% end %>
                </div>
-            </div>   
+            </span>   
      </nav>
 
 
