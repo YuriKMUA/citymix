@@ -10,7 +10,7 @@
                <ul class="nav navbar-nav">
                   <li><%= link_to " Регистрация", signup_path, class: ["glyphicon glyphicon-user"] unless signed_in? %> </li>
                   <% if signed_in? %>
-                   <li><%= link_to "Пользователи", users_path,  style: "width: 140px;" if current_user.admin? %></li>
+                   <li><%= link_to "Пользователи", users_path if current_user.admin? %></li>
                    <% if current_user.admin? %>
                    <li id="fat-menu" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Словари<b class="caret"></b></a>
