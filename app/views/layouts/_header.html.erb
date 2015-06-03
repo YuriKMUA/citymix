@@ -1,8 +1,8 @@
 <header>
 
-            <%= form_tag({ controller: "products", action: "locate" }, method: "get", class: ["navbar-form", "navbar-left"], role: "search", style: ["margin-top: 2%;", "margin-left: 1%;"]) do %>
+            <%= form_tag({ controller: "products", action: "locate" }, method: "get", class: ["navbar-form", "navbar-left"], role: "search", style: ["margin-top: 2%;", "margin-left: 4%;"]) do %>
                <ul class="nav nav-left">
-                  <li><%= text_field_tag(:artikul, nil, placeholder: "Введите код товара", class: "form-control", style: "width: 155px;") %></li>   
+                  <li><%= text_field_tag(:artikul, nil, placeholder: "Введите код товара", class: "form-control", style: "width: 165px;") %></li>   
                </ul>
              <% end %>             
      <font face="Century Gothic"> 
@@ -59,11 +59,11 @@
      </nav>
      </font>
 
-<div class="col-sm-12 col-xs-6 col-md-12 col-md-offset-2" style="margin-top: -6%;">
+<div class="col-sm-12 col-xs-6 col-md-12 col-md-offset-3" style="margin-top: -6%;">
      <%= link_to image_tag("citylogo1.png", class: "logo"), root_path %><%= image_tag("telefon-ico.png", width: 32, weight: 32) %>
-     <font size="3.5" face="Century Gothic" color="#fff">(098) </font>
-     <font size="4" face="Century Gothic" color="#fff"> - 745-85-45 </font>
-     <%= link_to " Заказать обратный звонок", call_back_path, class: ["col-sm-offset-1 col-md-offset-1 col-xs-offset-1", "cat", "glyphicon glyphicon-phone-alt"] %>
+     <font size="3.5" color="#fff">(098) </font>
+     <font size="4" color="#fff"> - 745-85-45 </font>
+<!--     <%= link_to " Заказать обратный звонок", call_back_path, class: ["col-sm-offset-1 col-md-offset-1 col-xs-offset-1", "cat", "glyphicon glyphicon-phone-alt"] %> -->
 </div> 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
          <ul class="nav navbar-nav">

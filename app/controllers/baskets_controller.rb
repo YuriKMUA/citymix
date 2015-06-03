@@ -46,7 +46,7 @@ class BasketsController < ApplicationController
             flash[:warning] = "Перед выбором данного товара уточните цену у менеджера"
         end
         if $filter_value[9].nil?
-            flash[:warning] = "Не выбрано размер. Сделайте выбор размера и нажимите кнопку 'КУПИТЬ'"
+            flash[:warning] = "Не выбран размер. Сделайте выбор размера и нажимите кнопку 'КУПИТЬ'"
         end
         check_type
         check_kategory

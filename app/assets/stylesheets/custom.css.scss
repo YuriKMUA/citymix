@@ -34,10 +34,9 @@ html {
 
 body {
    font-family: "Century Gothic"; 
-   padding-top: 40px;
+   padding-top: 3%;
    text-align: justify;
    padding-bottom: 0px;
-   border-top: 3px solid #ff0000;
    color: #5a5a5a;
    text: #FFFFFF; 
    background-color: #000000;
@@ -216,16 +215,18 @@ p {
 
 /*header*/
 header { 
-
+    ul {
+        list-style-type: none;
+    }
 }
 
 #logo {
   float: left;
-  margin-right: 50px;
-  margin-top:   5px;
+  margin-right: 5%;
+  margin-top:   5%;
   font-size:    1.2em;
-   width:   80px;
-   height:  40px;
+   width:   9%;
+   height:  7%;
 
   &:hover {
     color: #000;
@@ -266,15 +267,12 @@ footer {
   margin-top:  0px;
   padding-top: 0px;
   padding-left: 40px;
-  border-bottom: 3px solid #ff0000; 
-  width: 1000px;
-  color: $grayLight; 
   small {
     float: left; 
   }
   ul {
     float: left; 
-    list-style: none;
+    list-style-type: none;
     li {
       float: left; 
       margin-left: 10px;
