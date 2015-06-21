@@ -1,8 +1,8 @@
 <header>
 
-            <%= form_tag({ controller: "products", action: "locate" }, method: "get", class: ["navbar-form", "navbar-left"], role: "search", style: ["margin-top: 2%;", "margin-left: 4%;"]) do %>
+            <%= form_tag({ controller: "products", action: "locate" }, method: "get", class: ["navbar-form", "navbar-left"], role: "search") do %>
                <ul class="nav nav-left">
-                  <li><%= text_field_tag(:artikul, nil, placeholder: "Введите код товара", class: "form-control", style: "width: 165px;") %></li>   
+                  <li><%= text_field_tag(:artikul, nil, placeholder: "Введите код товара", class: "form-control", style: ["margin-left: 30%;", "width: 60%;"]) %></li>   
                </ul>
              <% end %>             
      <font face="Century Gothic"> 
@@ -59,7 +59,7 @@
      </nav>
      </font>
 
-<div class="col-sm-12 col-xs-6 col-md-12 col-md-offset-3" style="margin-top: -6%;">
+<div class="col-sm-12 col-xs-12 col-md-12 col-sm-offset-2 col-md-offset-3" style="margin-top: -6%;">
      <%= link_to image_tag("citylogo1.png", class: "logo"), root_path %><%= image_tag("telefon-ico.png", width: 32, weight: 32) %>
      <font size="3.5" color="#fff">(098) </font>
      <font size="4" color="#fff"> - 745-85-45 </font>
@@ -84,7 +84,7 @@
         </ul>
 </div>
 <div class="col-sm-6 col-md-5 col-sm-offset-2 col-md-offset-3">
-   <hr style="margin-left: 6%; height: 3; width: 113%;">
+   <hr style="margin-left: 0%; height: 3; width: 121%;">
 </div>   
 </header>
  
