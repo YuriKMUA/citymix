@@ -9,21 +9,20 @@
     </ul>
     <%= form_tag({ controller: "products", action: "search" }, method: "get") do %>
          <div class="row">
-               Сортировать 
-               <%= button_tag("по цене", name: :btn_up, class: ["btn-sm", "glyphicon glyphicon-arrow-up"]) %>
-               <%= button_tag("по цене", name: :btn_down, class: ["btn-sm", "glyphicon glyphicon-arrow-down"]) %>
-               <%= button_tag("новинки", name: :btn_new, class: ["btn-sm", "glyphicon glyphicon-check"]) %>
+               <%= button_tag("цена по возрастанию", name: :btn_up, class: "cat") %>
+               <%= button_tag("цена по убыванию", name: :btn_down) %>
+               <%= button_tag("новинки", name: :btn_new) %>
                <span class="col-md-offset-4"> На странице</span>
                <div class="btn-group">
-                  <%= button_tag("24", name: :page_per, class: ["btn-sm", "glyphicon glyphicon-share"], value: 24) %>
-                  <%= button_tag("48", name: :page_per, class: ["btn-sm", "glyphicon glyphicon-share"], value: 48) %>
-                  <%= button_tag("96", name: :page_per, class: ["btn-sm", "glyphicon glyphicon-share"], value: 96) %>
+                  <%= button_tag("24", name: :page_per, value: 24) %>
+                  <%= button_tag("48", name: :page_per, value: 48) %>
+                  <%= button_tag("96", name: :page_per, value: 96) %>
                </div>
          </div>
      <% end %>
-       <hr color="black">
+    <br>
    </div>
-               <ul class="col-xs-8 col-md-3" style="width: 300px;">
+               <ul class="col-xs-8 col-md-3 col-md-offset-1" style="width: 300px;">
                    <div class="well" style="background: black;">
                       <strong>Цена</strong><br>
                     <%= form_tag({ controller: "products", action: "search" }, method: "get") do %>
