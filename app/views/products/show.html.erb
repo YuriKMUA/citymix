@@ -2,7 +2,7 @@
 <br>
 
 <div class="row">
-   <div class="col-sm-10 col-md-7 col-md-offset-1">
+   <div class="col-sm-10 col-md-12 col-sm-offset-2 col-md-offset-3">
      <ul class="breadcrumb">
          <li><%= link_to "Главная", root_path, class: "cat" %></li>
          <li><%= link_to @gr_tov_ctxt.ctxt, mens_path, class: "cat" %></li>
@@ -12,8 +12,15 @@
    </div>
 </div>
 
-<div class="container"><br>
-      <div class="col-sm-8 col-md-5 col-md-2" style="background: #eee;">
+<div class="row"><br>
+      <div class="col-md-3 col-sm-3 col-md-offset-2 col-sm-offset-2">
+        <% if @show_add_photo %>
+            <%= image_tag(@show_add_photo.avatar.thumb.url.to_s, class: ["thumbnail", "fast"], size: "330x500",  alt: "") %>
+        <% else %>  
+            <%= image_tag(@show_photo.avatar.thumb.url.to_s, class: ["thumbnail", "fast"], size: "330x500",  alt: "") %>
+        <% end %>                
+     </div>
+      <div class="col-sm-4 col-md-4" style="background: #eee;">
          <font size="4" color='#000' face="Times New Roman, Times, serif;"><%= @show_photo.product.ctxt %></font>
          <font size="5" color="#900090" face="Times New Roman, Times, serif;" style="margin-left: 190px;" ><%= @current_product.nprice %><font size="3"> грн.</font></font><br>
          <div class="row">
@@ -100,19 +107,12 @@
                             
          <br> 
       </div>    
-      <div class="col-md-6 media-grid">
-        <% if @show_add_photo %>
-            <%= image_tag(@show_add_photo.avatar.thumb.url.to_s, class: ["thumbnail", "fast"], size: "200x300",  alt: "") %>
-        <% else %>  
-            <%= image_tag(@show_photo.avatar.thumb.url.to_s, class: ["thumbnail", "fast"], size: "200x300",  alt: "") %>
-        <% end %>                
-     </div>
 
 
 </div><br>
 <div class="row">
-<%= render "products/slide_photo" %>
+    <%= render "products/slide_photo" %>
 </div>
-<%= render "shared/hr_line" %>
-<span style="color: #000;">
+
+
 
