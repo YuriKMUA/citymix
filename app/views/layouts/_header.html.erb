@@ -1,6 +1,6 @@
 <header>
 
-            <%= form_tag({ controller: "products", action: "locate" }, method: "get", class: ["navbar-form", "navbar-left"], style: "margin-top: 2%;", role: "search") do %>
+            <%= form_tag({ controller: "products", action: "locate" }, method: "get", class: ["navbar-form", "navbar-left"], style: "margin-top: 4%;", role: "search") do %>
                <ul class="nav nav-left">
                   <li><%= text_field_tag(:artikul, nil, placeholder: "Введите код товара", class: "form-control", style: ["margin-left: 30%;", "width: 60%;"]) %></li>   
                </ul>
