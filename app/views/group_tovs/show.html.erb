@@ -22,12 +22,12 @@
      <% end %>
     <br>
    </div>
-               <ul class="col-sm- 4 col-xs-4 col-md-3 col-md-offset-1" style="width: 300px;">
+               <ul class="col-sm-4 col-xs-4 col-md-3 col-md-offset-1" style="width: 300px;">
                    <div class="well" style="background: black;">
                       <strong>Цена</strong><br>
                     <%= form_tag({ controller: "products", action: "search" }, method: "get") do %>
-                      <%= text_field_tag(:price_min, 0, type: "text", maxlength: 5, placeholder: " цена от", class: ["col-md-5"]) %>
-                      <%= text_field_tag(:price_max, 99000, type: "text", maxlength: 5, placeholder: "цена до", class: ["col-md-5 col-md-offset-1"]) %>
+                      <%= text_field_tag(:price_min, 0, type: "text", maxlength: 5, placeholder: " цена от", class: ["col-sm-3 col-md-5"]) %>
+                      <%= text_field_tag(:price_max, 99000, type: "text", maxlength: 5, placeholder: "цена до", class: ["col-sm-3 col-md-5 col-sm-offset-1 col-md-offset-1"]) %>
 
                         <% filter.each do |f| %>
                            <% @id = f.id %>
