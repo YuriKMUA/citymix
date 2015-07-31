@@ -28,8 +28,9 @@
                     <%= form_tag({ controller: "products", action: "search" }, method: "get") do %>
                       <%= text_field_tag(:price_min, 0, type: "text", maxlength: 5, placeholder: " цена от", class: ["col-sm-4 col-md-5"]) %>
                       <%= text_field_tag(:price_max, 99000, type: "text", maxlength: 5, placeholder: "цена до", 
-                                         class: ["col-sm-4 col-md-5 col-sm-offset-1 col-md-offset-1"]) %><br>
-                                                             
+                                         class: ["col-sm-4 col-md-5 col-sm-offset-1 col-md-offset-1"]) %>
+                      <div class="row">                                       
+                      </div>
                         <% filter.each do |f| %>
                            <% @id = f.id %>
                          <li><strong><%= f.ctxt %></strong></li>
