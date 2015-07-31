@@ -13,14 +13,14 @@
 </div>
 
 <div class="row"><br>
-      <div class="col-md-3 col-sm-3 col-md-offset-2 col-sm-offset-2">
+      <div class="col-md-3 col-sm-3 col-md-offset-2 col-sm-offset-1">
         <% if @show_add_photo %>
             <%= image_tag(@show_add_photo.avatar.thumb.url.to_s, class: ["thumbnail", "fast"], size: "330x500",  alt: "") %>
         <% else %>  
             <%= image_tag(@show_photo.avatar.thumb.url.to_s, class: ["thumbnail", "fast"], size: "330x500",  alt: "") %>
         <% end %>                
      </div>
-      <div class="col-sm-4 col-md-4 col-sm-offset-1 col-md-offset-1" style="background: #eee;">
+      <div class="col-sm-5 col-md-4 col-sm-offset-1 col-md-offset-1" style="background: #eee;">
          <font size="4" color='#000' face="Times New Roman, Times, serif;"><%= @show_photo.product.ctxt %></font>
          <font size="5" color="#900090" face="Times New Roman, Times, serif;" style="margin-left: 30%;" ><%= @current_product.nprice %><font size="3"> грн.</font></font><br>
          <div class="row">
@@ -77,8 +77,8 @@
                             <% if @show_photo && @show_photo.id == f.id %>
                                 <% border = "border: 3px solid #ff0000;" %>
                             <% end %>    
-                                <td width="80px;" height="80px;"> <%= link_to image_tag(f.avatar.small_thumb.url.to_s, title: f.color.ctxt, size: "60x80", alt: f.color.ctxt, 
-                                                               style: "#{border}"), photo_basket_path(f.id) %></td>
+                                <td width="80px;" height="80px;"> <%= link_to image_tag(f.avatar.small_thumb.url.to_s, title: f.color.ctxt, size: "60x80", 
+                                                                      alt: f.color.ctxt, style: "#{border}"), photo_basket_path(f.id) %></td>
                             <% end %>  
                         </tr>                
                     </table>
