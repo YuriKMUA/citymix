@@ -1,17 +1,17 @@
 <%= provide(:title, "Регистрация") %>
 
 <div class="row">
-   <div class="col-md-7 col-md-offset-3">
+   <div class="col-sm-10 col-md-7 col-sm-offset-1 col-md-offset-3">
       <div class="well">
       <h2>Для доставки товара внесите Ваши данные</h2>
          <div class="row">
-            <div class="col-md-5 col-md-offset-3">
+            <div class="col-sm-6 col-md-5 col-sm-offset-2 col-md-offset-3">
                 <%= link_to " Я уже раньше здесь покупал ", signin_path, class: ["btn btn-default", "glyphicon glyphicon-user"] %>
             </div>
          </div>
          <br>
          <div class="row">
-            <div class="col-md-10 col-md-offset-1">
+            <div class="col-sm-10 col-md-10 col-sm-offset-1 col-md-offset-1">
 
                <%= form_for(@user) do |f| %>
                <%= render 'shared/error_messages', object: f.object %>
@@ -42,7 +42,7 @@
              </tr>
             </table>
        <strong style="color: #ff0000;">*  Поля, обязательные для заполнения</strong><br>   
-               <%= f.submit "OK", class: ["btn btn-default", "col-md-5 col-md-offset-3", "glyphicon glyphicon-save"] %>
+               <%= f.submit "OK", class: ["btn btn-default", "col-sm-6 col-md-5 col-sm-offset-2 col-md-offset-3", "glyphicon glyphicon-save"] %>
                <% end %>
             </div>
          </div>  
