@@ -79,7 +79,7 @@ Citymix::Application.routes.draw do
   match "/del_basket_all", to: "baskets#del_basket_all", via: :get
   match "/make_delivery",  to: "baskets#make_delivery",  via: :get 
 
-  root                 to: "static_pages#index"
+  root                 to: 'static_pages#index'
   match '/signup',     to: 'users#new', via: :get 
   match '/signin',     to: 'sessions#new', via: :get
   match '/signout',    to: 'sessions#destroy', via: :delete
