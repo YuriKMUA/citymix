@@ -6,10 +6,14 @@
     <ul>
       <% object.errors.full_messages.each do |msg| %>
       <%case object.errors.count > 0 %>
+        <% when msg == "Phone is invalid" %>
+          <% msg = "Не верный формат номера телефона (+380ХХХХХХХХХ)"%>  
         <% when msg == "Password can't be blank" %>
-          <% msg = "Пароль не может быть пустым" %>
+          <% msg = "Не введен пароль" %>
         <% when msg == "Password is too short (minimum is 6 characters)" %>
           <% msg = "Пароль слишком короткий (минимум 6 символов)" %>
+        <% when msg == "Password confirmation can't be blank" %>
+          <% msg = "Не введен или несовпадение повторного набора пароля" %>  
       <% end %>
       <li>* <%= msg %></li>
       <% end %>  

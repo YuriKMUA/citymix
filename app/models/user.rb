@@ -17,7 +17,8 @@
 #
 
 class User < ActiveRecord::Base
-    attr_accessible :name, :last_name, :email, :password, :password_confirmation, :adress, :password_digest, :city, :phone
+    attr_accessible :name, :city, :last_name, :email, :phone, :password, :password_confirmation, :adress 
+#    attr_protected :admin, :as => :admin
     has_secure_password
     has_many :microposts, dependent: :destroy 
     has_many :relationships, foreign_key: "follower_id", dependent: :destroy
@@ -30,15 +31,16 @@ class User < ActiveRecord::Base
     before_save { |user| user.email = email.downcase }
     before_save :create_remember_token
 
-    validates :name, presence: true, length: { maximum: 50 } 
-    validates :last_name, presence: true, length: { maximum: 50 }
+    validates :name, presence: true, length: { maximum: 50, message: "Имя не должно быть больше 50 символов" } 
+    validates :last_name, presence: true, length: { maximum: 50, message: "Фамилия не должна быть больше 50 символов" }
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     VALID_PHONE_REGEX = /\A[+]\d+\z/
     validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
-    validates :phone, presence: true, length: { minimum: 10 }, format: { with: VALID_PHONE_REGEX }
+    validates :phone, presence: true, length: { minimum: 10, message: " - минимальная длина меньше 10 символов" }, format: { with: VALID_PHONE_REGEX }
     validates :city, presence: true
-    validates :password, presence: true, length: { minimum: 6 }
-    validates :password_confirmation, presence: true
+    validates :password, presence: true, length: { minimum: 6, message: "должен быть не меньше 6 символов" }
+    validates :password_confirmation,  presence: true
+
 
 
    def feed

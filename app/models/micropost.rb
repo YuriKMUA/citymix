@@ -20,7 +20,7 @@ class Micropost < ActiveRecord::Base
 #  validates :group_id, presence: true
   validates :content, length: { minimum: 10, maximum: 250 }
   
-#  default_scope order: 'microposts.created_at DESC'
+  default_scope order: 'microposts.created_at DESC'
   
   def self.from_users_followed_by(user)
      followed_user_ids = "SELECT followed_id FROM relationships WHERE follower_id = :user_id"

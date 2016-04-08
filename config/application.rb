@@ -16,7 +16,7 @@ module Citymix
 
     config.encoding = "utf-8"
  
-#    config.active_record.whitelist_attributes = true 
+    config.active_record.whitelist_attributes = true 
  # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

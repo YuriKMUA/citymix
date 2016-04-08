@@ -43,25 +43,28 @@ before_filter :admin_user, only: :destroy
   end
   
   def create
-    @user = User.new(params[:user])
+    @user = User.new(user_params)
+    @user.admin = user_params
 
     respond_to do |format|
       if @user.save
          sign_in @user
-         UserMailer.welcome_email(@user).deliver
+#         UserMailer.welcome_email(@user).deliver
 
          format.html { render "orders/info_orders" }
  #        format.json { render json: @user, status: :created, location: @user }
          flash.now[:success] = "Ваш личный кабинет создан успешно!"
       else
          format.html { render action: 'new' }
+         flash.now[:danger] = "Ваш личный кабинет не создан! Не заполены или неверно заполнены необходимые поля."
+
       end
     end  
   end
   
 
   def search
-      @user = User.find_by_email(params[:email]) 
+      @user = User.find_by(email: params[:email]) 
        unless @user.nil? 
          flash.now[:success] = "Спасибо за Ваше сотрудничество с нами. Вы уже зарегистрированы, ввойдите, пожалуйста, в свой кабинет."
           sign_in @user
@@ -75,7 +78,7 @@ before_filter :admin_user, only: :destroy
   end
 
   def update
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(user_params)
       flash[:success] = "Обновление прошло успешно!"
       sign_in @user 
       redirect_to @user
@@ -85,7 +88,7 @@ before_filter :admin_user, only: :destroy
   end
 
   def change_pass
-     @user = User.find_by_email(params[:email])
+     @user = User.find_by(email: params[:email])
         if @user
             @user.password = "Zxcvbn"
             @user.password_confirmation = @user.password
@@ -104,7 +107,7 @@ before_filter :admin_user, only: :destroy
   end 
 
   def send_call_back
-    @user = User.find_by_admin(true)
+    @user = User.find_by(admin: true)
     @phone = params[:phone]
     @name = params[:name]
     @mail = []
@@ -121,5 +124,9 @@ before_filter :admin_user, only: :destroy
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_path) unless current_user?(@user)
+    end
+
+    def user_params
+        params.require(:user).permit(:name, :city, :last_name, :email, :phone, :password, :password_confirmation)
     end
 end  
