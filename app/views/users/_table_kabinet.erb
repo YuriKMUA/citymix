@@ -37,12 +37,12 @@
                            <td width="400"><%= order.declaration_id %>
                         <% end %>
 
-                     <% end %>   
-		               </tr>  	          
+                     <% end %>
+		               </tr>
                      <% end %>
                  <% else %>    
                      <%= flash.now[:notice] = 'Заказы отсутствуют' %>
-                     <%= redirect_to basket_path %>   
+                     <%= redirect_to basket_path %>
                  <% end %>
                   </table>
 

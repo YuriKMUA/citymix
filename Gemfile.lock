@@ -248,6 +248,3 @@ DEPENDENCIES
   unicorn
   will_paginate
   yaml_db!
-
-BUNDLED WITH
-   1.11.2

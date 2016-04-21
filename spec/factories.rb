@@ -5,7 +5,11 @@ FactoryGirl.define do
         city                    "London"
         last_name               "Petrov"
         password                "foobar"
-        password_confirmation  "foobar"
-        phone                  "+380981234578"
+        password_confirmation   "foobar"
+        phone                   "+380981234578"
+   end
+   factory :group_tov do
+        ctxt      "Мужская одежда"
+        lvisible  true
    end
 end

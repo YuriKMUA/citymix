@@ -1,6 +1,7 @@
 <% colors_array = Color.all.map { |color| [color.ctxt, color.id] } %>
  
 <%= form_for @connection do |c| %>
+<%= render 'shared/error_messages', object: c.object %>
 <div class="row">
    <div class="col-md-12">
            <div class="well">     

@@ -40,7 +40,7 @@
                         <li><%= link_to(" Кабинет: " + current_user.name, current_user, class: ["glyphicon glyphicon-user" ]) %></li>
                         <li><%= link_to " Корзина", baskets_path,  class:  "glyphicon glyphicon-shopping-cart" %></li>    
                         <% if current_user.admin? %>
-                            <li><%= link_to(Basket.all.count, baskets_path) %></li>
+                            <li><%= link_to(Basket.where(order_id: nil).count, baskets_path) %></li>
                         <% else %>
                             <li><%= link_to(Basket.where(user_id: current_user.id, order_id: nil).count, baskets_path) %></li>
                         <% end %>        
@@ -76,7 +76,6 @@
                     <ul class="dropdown-menu pull-right" style="color: #000000; background: #000000; opacity: 0.7;">
                        <% kat_all = Kategory.where(lvisible: true, group_tov_id: txt.id) %>
                        <% kat_all.each do |f| %>
-
                          <li> <%= link_to f.ctxt_ua, kategory_group_tov_path(f.id, txt.id), class: ["cat"] %></li>
                        <% end %>
                     </ul> 

@@ -22,6 +22,10 @@ class SessionsController < ApplicationController
  end
 
   def destroy
+     Basket.where(user_id: current_user.id).each do |f|
+            f.remember_token = current_user.remember_token
+            f.save
+     end
     sign_out
     redirect_to root_url
   end

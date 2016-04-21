@@ -127,6 +127,7 @@ before_filter :admin_user, only: :destroy
     end
 
     def user_params
-        params.require(:user).permit(:name, :city, :last_name, :email, :phone, :password, :password_confirmation)
+        params.require(:user).permit(:name, :city, :last_name, :email, :phone,
+                                    :password, :password_confirmation, :adress)
     end
 end  

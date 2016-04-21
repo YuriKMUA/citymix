@@ -1,13 +1,15 @@
 module SessionsHelper
   
   def sign_in(user)
+       remember_token = User.new_remember_token
+       user.update_attribute(:remember_token, User.encrypt(remember_token))
        unless cookies[:remember_token].nil?
-          Basket.where(remember_token: cookies[:remember_token]).each do |f|
+          Basket.where(remember_token: cookies[:remember_token], user_id: nil).each do |f|
             f.user_id = user.id
             f.save
           end
-        end  
-       cookies[:remember_token] = user.remember_token
+        end
+       cookies.permanent[:remember_token] = remember_token
        self.current_user = user
   end
 
@@ -16,7 +18,8 @@ module SessionsHelper
   end  
 
   def current_user
-    @current_user ||= User.find_by_remember_token(cookies[:remember_token])
+    remember_token = User.encrypt(cookies[:remember_token])
+    @current_user ||= User.find_by(remember_token: remember_token)
   end
 
   def current_user?(user)
@@ -35,9 +38,14 @@ module SessionsHelper
   end
 
   def sign_out
+    current_user.update_attribute(:remember_token, User.encrypt(User.new_remember_token))
+    Basket.where(user_id: current_user.id).each do |r|
+        r.remember_token = current_user.remember_token
+        r.save
+    end
     self.current_user = nil
     cookies.delete(:remember_token)
-  end  
+  end
 
   def redirect_back_or(default)
     redirect_to(session[:return_to] || default)

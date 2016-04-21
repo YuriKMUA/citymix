@@ -14,11 +14,11 @@
 ActiveRecord::Schema.define(version: 20150329115229) do
 
   create_table "additional_photos", force: true do |t|
-    t.integer  "connection_id"
-    t.string   "cartikul_add"
+    t.string   "cartikul"
     t.string   "avatar"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "connection_id"
   end
 
   create_table "baskets", force: true do |t|
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 20150329115229) do
   end
 
   create_table "fasteners", force: true do |t|
-    t.string   "ctxt",       limit: nil
+    t.string   "ctxt"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 20150329115229) do
     t.datetime "updated_at"
   end
 
-  create_table "flt_kat_relations", id: false, force: true do |t|
+  create_table "flt_kat_relations", force: true do |t|
     t.integer  "filter_id"
     t.integer  "group_tov_id"
     t.datetime "created_at"
@@ -110,6 +110,12 @@ ActiveRecord::Schema.define(version: 20150329115229) do
   create_table "group_tovs", force: true do |t|
     t.string   "ctxt"
     t.boolean  "lvisible"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "groups", force: true do |t|
+    t.string   "text"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -125,28 +131,13 @@ ActiveRecord::Schema.define(version: 20150329115229) do
     t.string   "ctxt_rus"
   end
 
+  add_index "kategories", ["ctxt_ua"], name: "ctxt_ua", using: :btree
+
   create_table "manufacturers", force: true do |t|
     t.string   "ctxt"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "mens_wears", force: true do |t|
-    t.string   "cedrpou"
-    t.string   "ctxt"
-    t.text     "ccontent"
-    t.string   "csize"
-    t.string   "ccolor"
-    t.float    "nprice"
-    t.boolean  "lvisible"
-    t.integer  "nshtrih_kod"
-    t.string   "cartikul"
-    t.boolean  "ldelivery"
-    t.integer  "nprice_delivery"
     t.integer  "kategories_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "cphoto"
   end
 
   create_table "microposts", force: true do |t|
@@ -157,8 +148,8 @@ ActiveRecord::Schema.define(version: 20150329115229) do
     t.datetime "updated_at"
   end
 
-  add_index "microposts", ["group_id"], name: "index_microposts_on_group_id"
-  add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
+  add_index "microposts", ["group_id"], name: "index_microposts_on_group_id", using: :btree
+  add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at", using: :btree
 
   create_table "necks", force: true do |t|
     t.string   "ctxt"
@@ -167,14 +158,28 @@ ActiveRecord::Schema.define(version: 20150329115229) do
   end
 
   create_table "orders", force: true do |t|
-    t.string   "declaration_id"
-    t.string   "oplata"
-    t.string   "dostavka"
+    t.string   "cartikul"
     t.string   "ctxt"
     t.text     "ccontent"
     t.integer  "user_id"
-    t.integer  "status_delivery_id"
+    t.integer  "number"
+    t.integer  "nprice"
     t.integer  "nsum"
+    t.integer  "color_id"
+    t.integer  "status_delivery_id"
+    t.string   "oplata"
+    t.string   "dostavka"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "declaration_id"
+  end
+
+  add_index "orders", ["cartikul"], name: "index_orders_on_cartikul", using: :btree
+  add_index "orders", ["dostavka"], name: "index_orders_on_dostavka", using: :btree
+
+  create_table "product_colors", force: true do |t|
+    t.integer  "product_id"
+    t.integer  "color_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -206,16 +211,10 @@ ActiveRecord::Schema.define(version: 20150329115229) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "availability"
+    t.integer  "country_brand_id"
   end
 
-  add_index "products", ["cartikul"], name: "index_products_on_cartikul", unique: true
-  add_index "products", ["cedrpou"], name: "index_products_on_cedrpou", unique: true
-
-  create_table "products_colors", id: false, force: true do |t|
-    t.string  "cphoto",               limit: nil
-    t.integer "temporary_product_id"
-    t.integer "color_id"
-  end
+  add_index "products", ["cedrpou"], name: "index_products_on_cedrpou", unique: true, using: :btree
 
   create_table "relationships", force: true do |t|
     t.integer  "follower_id"
@@ -224,9 +223,9 @@ ActiveRecord::Schema.define(version: 20150329115229) do
     t.datetime "updated_at"
   end
 
-  add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id"
-  add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
-  add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id"
+  add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id", using: :btree
+  add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
+  add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
 
   create_table "seasons", force: true do |t|
     t.string   "ctxt"
@@ -256,9 +255,6 @@ ActiveRecord::Schema.define(version: 20150329115229) do
     t.datetime "updated_at"
   end
 
-# Could not dump table "temporary_products" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
-
   create_table "temporary_types", force: true do |t|
     t.string   "ctxt"
     t.integer  "kategories_id"
@@ -267,12 +263,13 @@ ActiveRecord::Schema.define(version: 20150329115229) do
   end
 
   create_table "types", force: true do |t|
-    t.string  "ctxt"
-    t.integer "kategories_id"
+    t.string   "ctxt"
+    t.integer  "kategories_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
-    t.string   "phone",           limit: nil
     t.string   "name"
     t.string   "edrpou"
     t.string   "adress"
@@ -282,10 +279,14 @@ ActiveRecord::Schema.define(version: 20150329115229) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "remember_token"
-    t.boolean  "admin"
+    t.boolean  "admin",           default: false
     t.string   "cpochta"
     t.string   "city"
+    t.string   "phone"
     t.string   "last_name"
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 
 end

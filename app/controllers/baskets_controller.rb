@@ -2,16 +2,16 @@ class BasketsController < ApplicationController
 
   def index
       if signed_in? && current_user.admin?
-         @baskets = Basket.where(status_delivery_id: 3)   
+         @baskets = Basket.where(status_delivery_id: 3)
       else 
         if signed_in?
              @baskets = Basket.where(user_id: current_user.id, order_id: nil)
         else
              unless cookies[:remember_token].nil?
                 @baskets = Basket.where(remember_token: cookies[:remember_token])
-             end   
+             end
         end
-      end  
+      end
   end
 
   def new
@@ -150,9 +150,16 @@ class BasketsController < ApplicationController
    
    private
 
-      def create_remember_token
-       remember_token = SecureRandom.urlsafe_base64
-        cookies.permanent[:remember_token] = remember_token
+      def User.new_remember_token
+         SecureRandom.urlsafe_base64
       end
-  
+
+      def User.encrypt(token)
+        Digest::SHA1.hexdigest(token.to_s)
+      end
+
+      def create_remember_token
+        remember_token = User.encrypt(User.new_remember_token)
+        cookies[:remember_token] = remember_token
+      end
 end

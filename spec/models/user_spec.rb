@@ -2,7 +2,10 @@ require 'spec_helper'
 
 describe User do
 
-    before  {  @user = User.new(name: "Foobar", last_name: "Foobary", email: "user@example.com", password: "123456", password_confirmation: "123456", city: "Boston", phone: "+380982125652", adress: "ул. Толстого", admin: true) }
+    before  {  @user = User.new(name: "Foobar", last_name: "Foobary", 
+    email: "user@example.com", password: "123456", password_confirmation: "123456",
+    city: "Boston", phone: "+380982125652", adress: "ул. Толстого", admin: true) }
+    
     subject { @user }
 
     it { should respond_to(:name) }
@@ -14,14 +17,14 @@ describe User do
     it { should respond_to(:password_digest) }
     it { should respond_to(:authenticate) }
     it { should respond_to(:admin) }
+    it { should respond_to(:remember_token) }
     it { should be_valid }
 
-    describe "check for admin" do   #  Не зрозуміло чому не відпрацьовує вірно.  Чому дає можливість записати поле admin, якщо в attr_accessible це поле не прописано!!!
-        before do 
-            @user.save
-        end
+    describe "check record of admin and remember token" do
+        before { @user.save }
+        
         specify { expect(@user.admin).to eq nil }
-        specify { expect(@user.adress).to eq nil }
+        specify { expect(@user.remember_token).to_not be_blank }
 
     end
     describe "check for empty email" do
@@ -53,7 +56,9 @@ describe User do
         it { should_not be_valid }
    end
    describe "found for email and authenticate of user" do
-        before { @user1 = User.create(name: "Foobar2", last_name: "Foobary", email: "user1@example.com", password: "123456", password_confirmation: "123456", city: "Boston", phone: "+380982125652") }
+        before { @user1 = User.create(name: "Foobar2", last_name: "Foobary", 
+        email: "user1@example.com", password: "123456", 
+        password_confirmation: "123456", city: "Boston", phone: "+380982125652") }
 
         subject { @user1 }
 
@@ -62,9 +67,9 @@ describe User do
             it { should == found_user.authenticate(@user1.password) }
         end
         describe "with invalid password" do
-            let(:user_with_invalid_password) { found_user.authenticate("mismatch") }
+            let(:user_with_invalid_password) { found_user.authenticate("mis") }
             it { should_not eq user_with_invalid_password }
-            specify { expect(user_with_invalid_password).to  be_false }
-        end 
-   end
+            specify { expect(user_with_invalid_password).to  eq false }
+        end
+    end
 end

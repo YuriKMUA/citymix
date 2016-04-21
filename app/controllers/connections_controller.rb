@@ -1,20 +1,20 @@
 class ConnectionsController < ApplicationController
   def new
-   @connection = $product.connections.build
+   @connection = $product.connections.new
   end
 
   def create
-   @connection = $product.connections.build(params[:connection])
+   @connection = $product.connections.new(connection_params)
 #   @connection.product_id = $product.id
    @connection.cartikul = $product.cartikul + "-" + params[:connection][:color_id].to_s
    if @connection.save
       flash[:success] = " Данные по цвету присоединены к товару"
       $connection = @connection
-   else   
+      redirect_to new_connectionsize_path
+   else
       flash[:danger] = "Не внесены обязательные для заполнения поля"
-   end   
-#     redirect_to  edit_product_path($product.id)
-   redirect_to new_connectionsize_path
+      redirect_to  new_connection_path
+   end
   end
 
   def edit
@@ -33,7 +33,7 @@ class ConnectionsController < ApplicationController
       @connection.color_id = params[:connection][:color] unless params[:connection][:color].to_i == 0
       @connection.avatar = params[:connection][:avatar] unless params[:connection][:avatar].nil?
       @connection.content = params[:connection][:content] unless params[:connection][:content].nil?
-      if @connection.save
+      if @connection.update_attributes(connection_params)
          flash[:success] = 'Изменения сохранены'
          redirect_to edit_product_path($product.id)
       else
@@ -47,4 +47,11 @@ class ConnectionsController < ApplicationController
      flash[:success] = "Удалено"
      redirect_to  edit_product_path($product.id)
   end
+
+  private
+
+    def connection_params
+        params.require(:connection).permit(:avatar, :number, :cartikul, :color_id, :content, :product_id)
+    end
+ 
 end
