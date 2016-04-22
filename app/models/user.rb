@@ -18,7 +18,6 @@
 
 class User < ActiveRecord::Base
     attr_accessible :name, :city, :last_name, :email, :phone, :password, :password_confirmation, :adress 
-#    attr_protected :admin, :as => :admin
     has_secure_password
     has_many :microposts, dependent: :destroy 
     has_many :relationships, foreign_key: "follower_id", dependent: :destroy

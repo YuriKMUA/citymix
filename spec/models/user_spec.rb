@@ -33,17 +33,17 @@ describe User do
         it { should_not be_valid}
     end
     describe "dup email" do
-        before do 
+        before do
              user_email_with_dup = @user.dup
              user_email_with_dup.email = @user.email.upcase
              user_email_with_dup.save
-        end     
+        end
         it { should_not be_valid }
     end
     describe "check if do not match password" do
         before { @user.password_confirmation = "mismatch" }
 
-       it { should_not be_valid }
+        it { should_not be_valid }
    end
    describe "check on empty password"  do
         before { @user.password = @user.password_confirmation = " " }

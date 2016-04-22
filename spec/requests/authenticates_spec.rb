@@ -9,7 +9,7 @@ describe "Authenticate Page",  type: "feature" do
       let(:submit) { "Вход" }
       let(:enter) { "Вход в кабинет" }
 
-    describe "with valid data" do
+    describe "with valid data simple users" do
         before do
             fill_in "session[email]",    with: user.email
             fill_in "session[password]", with: user.password

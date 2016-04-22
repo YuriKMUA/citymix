@@ -31,13 +31,21 @@ describe "User pages", type: "feature" do
             end
         end
     end
-    describe "Profile users" do 
+    describe " with users profile" do
         let(:user) { FactoryGirl.create(:user) }
-        before do 
-             visit user_path(user) 
-        end
+        before { visit user_path(user) }
 
         it { should have_title("Профиль пользователя: " + user.name) }
         it { should have_content("Профиль") }
+    end
+    describe "edit" do
+        let(:user) { FactoryGirl.create(:user) }
+        before { visit edit_user_path(user) }
+
+        describe "page" do
+            it { should have_title("Редагування профілю") }
+            it { should have_content("Редактирование профиля") }
+            it { should have_submit("Сохранить") }
+        end
     end
 end

@@ -7,6 +7,7 @@ FactoryGirl.define do
         password                "foobar"
         password_confirmation   "foobar"
         phone                   "+380981234578"
+        admin                   false
    end
    factory :group_tov do
         ctxt      "Мужская одежда"
