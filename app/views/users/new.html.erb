@@ -6,7 +6,8 @@
       <h2>Для доставки товара внесите Ваши данные</h2>
          <div class="row">
             <div class="col-sm-6 col-md-5 col-sm-offset-2 col-md-offset-4">
-                <%= link_to " Я уже раньше здесь покупал ", signin_path, class: ["btn btn-default", "glyphicon glyphicon-user"] %>
+                <%= link_to " Я уже раньше здесь покупал ", signin_path, 
+                class: ["btn btn-default", "glyphicon glyphicon-user"] %>
             </div>
          </div>
          <br>
@@ -42,7 +43,9 @@
              </tr>
             </table>
        <strong style="color: #ff0000;">*  Поля, обязательные для заполнения</strong><br>   
-               <%= f.submit "OK", class: ["btn btn-default active", "col-sm-6 col-md-3 col-sm-offset-2 col-md-offset-4", "glyphicon glyphicon-save"] %>
+               <%= f.submit "OK", class: ["btn btn-default active", 
+               "col-sm-6 col-md-3 col-sm-offset-2 col-md-offset-4", 
+               "glyphicon glyphicon-save"] %>
                <% end %>
             </div>
          </div>  

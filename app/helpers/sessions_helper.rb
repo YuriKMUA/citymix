@@ -26,12 +26,12 @@ module SessionsHelper
     user == current_user
   end
 
-  def signed_in_user
-      unless signed_in?
-         store_location
-         redirect_to signin_url, notice: "Пройдите аутентификацию, пожалуйста"
-      end   
-  end
+#  def signed_in_user
+#      unless signed_in?
+#         store_location
+#         redirect_to signin_url, notice: "Пройдите аутентификацию, пожалуйста"
+#      end   
+#  end
 
   def signed_in?
     !current_user.nil?
@@ -39,10 +39,6 @@ module SessionsHelper
 
   def sign_out
     current_user.update_attribute(:remember_token, User.encrypt(User.new_remember_token))
-    Basket.where(user_id: current_user.id).each do |r|
-        r.remember_token = current_user.remember_token
-        r.save
-    end
     self.current_user = nil
     cookies.delete(:remember_token)
   end
@@ -53,7 +49,7 @@ module SessionsHelper
   end
 
   def store_location
-    session[:return_to] = request.url
+    session[:return_to] = request.url if request.get?
   end
 
 

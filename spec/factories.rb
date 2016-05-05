@@ -1,15 +1,15 @@
 FactoryGirl.define do
-    factory :user do
-        name                    "Yuri2"
-        email                   "yuri@example.com"
-        city                    "London"
-        last_name               "Petrov"
+   factory :user do
+        sequence(:name)         { |n| "Yuri#{n}" }
+        sequence(:email)        { |n| "yuri#{n}@example.com" }
+        city                    "Deli"
+        sequence(:last_name)    { |n| "Petrov#{n}" }
         password                "foobar"
         password_confirmation   "foobar"
         phone                   "+380981234578"
-   end
-   factory :group_tov do
-        ctxt      "Мужская одежда"
-        lvisible  true
+   
+        factory :admin do
+            admin  true
+        end
    end
 end

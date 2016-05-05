@@ -1,8 +1,8 @@
 #encoding: utf-8
 class UsersController < ApplicationController
-before_filter :signed_in_user, only: [:index, :edit, :update, :destroy, :following, :followers, :search] 
-before_filter :correct_user, only: [:edit, :update] 
-before_filter :admin_user, only: :destroy
+  before_action :signed_in_user, only: [:index, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update]
+  before_action :admin_user, only: :destroy
 
 
   def following
@@ -20,13 +20,23 @@ before_filter :admin_user, only: :destroy
   end
 
   def index
-    @users = User.paginate(page: params[:page])
+    if signed_in? && current_user.admin?
+        @users = User.paginate(page: params[:page]) 
+    else
+        flash[:danger] = "У Вас отсутствуют соответствующие права"
+        redirect_to root_path
+    end
   end
 
   def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = 'Удалено'
-    redirect_to users_url
+    if signed_in? && current_user.admin?
+        User.find(params[:id]).destroy
+        flash[:success] = 'Удалено'
+        redirect_to users_url
+    else
+        flash[:dsnger] = 'Отсутствуют права на данную операцию'
+        redirect_to root_path
+    end
   end
 
   def admin_user
@@ -56,20 +66,21 @@ before_filter :admin_user, only: :destroy
          flash.now[:success] = "Ваш личный кабинет создан успешно!"
       else
          format.html { render action: 'new' }
-         flash.now[:danger] = "Ваш личный кабинет не создан! Не заполены или неверно заполнены необходимые поля."
-
+         flash.now[:danger] = "Ваш личный кабинет не создан! 
+         Не заполены или неверно заполнены необходимые поля."
       end
-    end  
+    end
   end
   
 
   def search
       @user = User.find_by(email: params[:email]) 
        unless @user.nil? 
-         flash.now[:success] = "Спасибо за Ваше сотрудничество с нами. Вы уже зарегистрированы, ввойдите, пожалуйста, в свой кабинет."
+         flash.now[:success] = "Спасибо за Ваше сотрудничество с нами.
+         Вы уже зарегистрированы, ввойдите, пожалуйста, в свой кабинет"
           sign_in @user
           render "orders/info_orders"
-      else	
+      else
          redirect_to new_user_path
       end
   end
@@ -80,7 +91,7 @@ before_filter :admin_user, only: :destroy
   def update
     if @user.update_attributes(user_params)
       flash[:success] = "Обновление прошло успешно!"
-      sign_in @user 
+      sign_in @user
       redirect_to @user
     else
       render 'edit'
@@ -95,16 +106,16 @@ before_filter :admin_user, only: :destroy
             if @user.save
                 UserMailer.send_pass(@user).deliver
                 flash.now[:success] = "Пароль изменен"
-                render  action: "change_pass"   
+                render  action: "change_pass"
             end
         else     
             flash.now[:danger] = "Не верно введен електронный адресс"
             render "send_pass"
         end    
-  end  
-  
+  end
+
   def call_back
-  end 
+  end
 
   def send_call_back
     @user = User.find_by(admin: true)
@@ -115,7 +126,8 @@ before_filter :admin_user, only: :destroy
     @mail[1] = params[:name]
     @url = "citymix.com.ua"
     UserMailer.send_call_back(@mail).deliver
-    flash[:info] = "Запрос об обратной связи направлен менеджерам сайта citymix.com.ua. В ближайшее время ожидайте звонка."
+    flash[:info] = "Запрос об обратной связи направлен менеджерам сайта 
+    citymix.com.ua. В ближайшее время ожидайте звонка."
     redirect_to root_path
   end
  
@@ -129,5 +141,12 @@ before_filter :admin_user, only: :destroy
     def user_params
         params.require(:user).permit(:name, :city, :last_name, :email, :phone,
                                     :password, :password_confirmation, :adress)
+    end
+
+    def signed_in_user
+        unless signed_in?
+            store_location
+            redirect_to signin_path, notice: "Пройдите, пожалуйста, авторизацию" 
+        end
     end
 end  
