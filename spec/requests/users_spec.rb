@@ -32,16 +32,23 @@ describe "User pages", type: "feature" do
             end
         end
     end
+<<<<<<< HEAD
     describe "users profile" do
         before do
             sign_in user
             visit user_path(user)
         end
+=======
+    describe " with users profile" do
+        let(:user) { FactoryGirl.create(:user) }
+        before { visit user_path(user) }
+>>>>>>> c032c9592f972110687d7223cab4e9b0ebbec208
 
         it { should have_title("Профиль пользователя: " + user.name) }
         it { should have_content("Профиль") }
     end
     describe "edit" do
+<<<<<<< HEAD
        let(:new_name) { "Steav" }
        let(:new_email) { "mynew@example.com" }
         before do
@@ -102,4 +109,15 @@ describe "User pages", type: "feature" do
             end
        end
     end
+=======
+        let(:user) { FactoryGirl.create(:user) }
+        before { visit edit_user_path(user) }
+
+        describe "page" do
+            it { should have_title("Редагування профілю") }
+            it { should have_content("Редактирование профиля") }
+            it { should have_submit("Сохранить") }
+        end
+    end
+>>>>>>> c032c9592f972110687d7223cab4e9b0ebbec208
 end

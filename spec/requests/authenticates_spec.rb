@@ -10,7 +10,11 @@ describe "Authenticate Page",  type: "feature" do
     let(:enter) { "Вход в кабинет" }
     subject { page }
 
+<<<<<<< HEAD
     describe "with valid data non admin users" do
+=======
+    describe "with valid data simple users" do
+>>>>>>> c032c9592f972110687d7223cab4e9b0ebbec208
         before do
             fill_in "session[email]",    with: user.email
             fill_in "session[password]", with: user.password
